@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('purpose')->nullable();
              // Calculated fields
             $table->decimal('total_repayment', 12, 2);
-            $table->decimal('amount_paid', 12, 2)->default(0)->after('total_repayment');
+            $table->decimal('amount_paid', 12, 2)->default(0);
             $table->decimal('outstanding_loan', 12, 2);
             $table->decimal('monthly_installment', 12, 2)->nullable();
 

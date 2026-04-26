@@ -16,6 +16,11 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\HighChartController;
 use App\Http\Controllers\UserPermissionController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\GroupLoanController;
+use App\Http\Controllers\GroupLoanRepayment;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -266,6 +271,20 @@ Route::prefix('admin')->middleware(['auth', 'role:super-admin'])->group(function
     Route::get('/audit-logs', [AuditLogController::class, 'index'])->name('admin.audit.index');
 });
 
+
+//Group Loans Routes
+Route::prefix('groups')->group(function () {
+    Route::get('/', [GroupController::class, 'index'])->name('groups.index');
+    Route::get('/create', [GroupController::class, 'create'])->name('groups.create');
+    Route::post('/store', [GroupController::class, 'store'])->name('groups.store');
+});
+
+Route::prefix('group-loans')->group(function () {
+    Route::get('/create', [GroupLoanController::class, 'create'])->name('grouploans.create');
+    Route::post('/store', [GroupLoanController::class, 'store'])->name('grouploans.store');
+});
+
+Route::post('/repayments/store', [GroupRepaymentController::class, 'store'])->name('repayments.store');
 
 //Used for AuTH
 require __DIR__.'/auth.php';

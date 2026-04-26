@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layoutsGroup.groupdashboard')
 
 @section('content')
 

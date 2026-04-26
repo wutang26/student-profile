@@ -23,6 +23,7 @@ class RolePermissionSeeder extends Seeder
             'view reports',
             'view applications',
             'print reports',
+            'apply loan',
         ];
 
         foreach ($permissions as $perm) {
