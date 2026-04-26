@@ -1,170 +1,157 @@
 @extends('layoutsGroup.groupdashboard')
 
 @section('content')
-    <h1 class="text-2xl font-bold mb-4">Members Summary</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="row">
 
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-gray-500">Total Members</h2>
-            <p class="text-3xl font-bold">{{ $members->count() }}</p>
-        </div>
-
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-gray-500">Active Loans</h2>
-            <p class="text-3xl font-bold">{{ $members->count() }}</p>
-        </div>
-
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-gray-500">Total Disbursed</h2>
-            <p class="text-3xl font-bold">{{ $members->count() }}</p>
-        </div>
-
+    <!-- ===== STATS ===== -->
+    <div class="card col-4">
+        <h3>Total Members</h3>
+        <h2>{{ $members->count() }}</h2>
     </div>
 
-    <!---Message to show success--->
+    <div class="card col-4">
+        <h3>Active Loans</h3>
+        <h2>{{ $members->count() }}</h2>
+    </div>
+
+    <div class="card col-4">
+        <h3>Total Disbursed</h3>
+        <h2>{{ $members->count() }}</h2>
+    </div>
+
+    <!-- ===== SUCCESS MESSAGE ===== -->
     @if (session('success'))
-        <div class="bg-green-100 text-green-800 p-2 rounded mb-4">
+        <div class="card col-12" style="background:#dcfce7; color:#166534;">
             {{ session('success') }}
         </div>
     @endif
 
-    <div class="grid grid-cols-1 md:grid-cols-1 gap-6>
+    <!-- ===== ACTIONS ===== -->
+    @auth
+    @role('super-admin|admin')
+    <div class="card col-12" style="display:flex; justify-content:space-between; align-items:center;">
+        
+        <h3>Members Management</h3>
 
-        <div g-white p-4 rounded shadow overflow-x-auto">
+        <div style="display:flex; gap:10px;">
+            <a href="{{ route('members.create') }}" class="btn">
+                <i class="fas fa-user-plus"></i> Register Member
+            </a>
 
-   @auth
-@role('super-admin|admin')
-<div style="display:flex; align-items:center; justify-content:space-between;">
+            <a href="{{ route('groups.create') }}" class="btn" style="background:#334155;">
+                <i class="fas fa-users"></i> Create Group
+            </a>
+        </div>
 
-    <!-- Register Member (left) -->
-    <a href="{{ route('members.create') }}"
-       style="
-            background-color:#bbf7d0;
-            color:#000;
-            padding:10px 14px;
-            border-radius:20px;
-            font-size:17px;
-            text-decoration:none;
-            white-space:nowrap;">
-        Register Member
-    </a>
+    </div>
+    @endrole
+    @endauth
 
-    <!-- Register Group (right) -->
-    <a href="{{ route('members.create') }}"
-       style="
-            background-color:#bbf7d0;
-            color:#000;
-            padding:10px 14px;
-            border-radius:20px;
-            font-size:17px;
-            text-decoration:none;
-            white-space:nowrap;">
-        Register Group
-    </a>
+    <!-- ===== TABLE ===== -->
+    <div class="card col-12">
 
-</div>
-@endrole
-@endauth
+        <h3 style="margin-bottom:15px;">Members List</h3>
 
-        <!---Define veriable for extra usage--->
-        @php
-            $i = 0;
-        @endphp
-        <!--- End Define veriable for extra usage--->
+        <div style="overflow-x:auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Reg No</th>
+                        <th>First Name</th>
+                        <th>Middle</th>
+                        <th>Last Name</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Region</th>
+                        <th>District</th>
+                        <th>Date Joined</th>
+                        <th>Status</th>
+                        @auth
+                        @role('super-admin|admin')
+                        <th style="text-align:right;">Actions</th>
+                        @endrole
+                        @endauth
+                    </tr>
+                </thead>
 
-        <table class="w-full border border-gray-300 text-sm">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="border px-3 py-2 text-left">Id</th>
-                    <th class="border px-3 py-2 text-left">Member Reg Number</th>
-                    <th class="border px-3 py-2 text-left">First Name</th>
-                    <th class="border px-3 py-2 text-left">Middle Name</th>
-                    <th class="border px-3 py-2 text-left">Last Name</th>
-                    <th class="border px-3 py-2 text-left">Phone Number</th>
-                    <th class="border px-3 py-2 text-left">Home Address</th>
-                    <th class="border px-3 py-2 text-left">Region</th>
-                    <th class="border px-3 py-2 text-left">District</th>
-                    <th class="border px-3 py-2 text-left">Date Joined</th>
-                    <th class="border px-3 py-2 text-left"">Status</th>
+                <tbody>
+                    @forelse ($members as $index => $member)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $member->member_number }}</td>
+                        <td>{{ $member->first_name }}</td>
+                        <td>{{ $member->middle_name }}</td>
+                        <td>{{ $member->last_name }}</td>
+                        <td>{{ $member->phone }}</td>
+                        <td>{{ $member->address }}</td>
+                        <td>{{ $member->region->name }}</td>
+                        <td>{{ $member->district->name }}</td>
+                        <td>{{ $member->date_joined }}</td>
 
-                       @auth
-                            @role('super-admin|admin')
-                        <th class="border px-3 py-2 text-left">Actions</th>
-                    @endrole
-                @endauth
-                
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach ($members as $member)
-                    <tr class="bg-white hover:bg-gray-100">
-                        <td class="border px-3 py-2">{{ ++$i }}</td>
-                        <td class="border px-3 py-2">{{ $member->member_number }}</td>
-                        <td class="border px-3 py-2">{{ $member->first_name }}</td>
-                        <td class="border px-3 py-2">{{ $member->middle_name }}</td>
-                        <td class="border px-3 py-2">{{ $member->last_name }}</td>
-                        <td class="border px-3 py-2">{{ $member->phone }}</td>
-                        <td class="border px-3 py-2">{{ $member->address }}</td>
-                        <td class="border px-3 py-2">{{ $member->region->name }}</td>
-                        <td class="border px-3 py-2">{{ $member->district->name }}</td>
-                        <td class="border px-3 py-2">{{ $member->date_joined }}</td>
-                        <td class="border px-3 py-2">
-                            <span
-                                class="inline-flex items-center justify-center min-w-[90px] px-3 py-1 rounded-full
-                             text-sm font-semibold text-center
-                             {{ $member->status === 'active'
-                                 ? 'bg-green-100 text-green-700'
-                                 : ($member->status === 'pending'
-                                     ? 'bg-yellow-100 text-yellow-700'
-                                     : 'bg-red-100 text-red-700') }}">
+                        <!-- STATUS -->
+                        <td>
+                            <span style="
+                                padding:5px 10px;
+                                border-radius:20px;
+                                font-size:12px;
+                                font-weight:600;
+                                background:
+                                {{ $member->status === 'active' ? '#dcfce7' :
+                                   ($member->status === 'pending' ? '#fef9c3' : '#fee2e2') }};
+                                color:
+                                {{ $member->status === 'active' ? '#166534' :
+                                   ($member->status === 'pending' ? '#854d0e' : '#991b1b') }};
+                            ">
                                 {{ ucfirst($member->status) }}
                             </span>
-
                         </td>
 
+                        <!-- ACTIONS -->
                         @auth
-                            @role('super-admin|admin')
-                                <td class="border px-3 py-2">
-                                    <a href="{{ route('admin.members.edit', $member->id) }}"
-                                        class="inline-flex items-center justify-center
-              min-w-[70px] px-3 py-1
-              rounded-full text-sm font-semibold
-              bg-blue-500 text-white
-              hover:bg-blue-600 transition">
-                                        Edit
-                                    </a>
+                        @role('super-admin|admin')
+                        <td style="text-align:right;">
+                            
+                            <a href="{{ route('admin.members.edit', $member->id) }}"
+                               class="btn"
+                               style="padding:6px 10px; font-size:12px;">
+                                Edit
+                            </a>
 
-                                    <br><br>
-                                    <!-- Delete Button -->
-                                    <form action="{{ route('admin.members.deleteMember', $member->id) }}" method="POST"
-                                        onsubmit="return confirm('Are you sure you want to delete this member?');">
-                                        @csrf
-                                        @method('DELETE')
+                            <form action="{{ route('admin.members.deleteMember', $member->id) }}"
+                                  method="POST"
+                                  style="display:inline;"
+                                  onsubmit="return confirm('Delete this member?');">
+                                @csrf
+                                @method('DELETE')
 
-                                        <button type="submit"
-                                            class="inline-flex items-center justify-center
-                       px-3 py-1 min-w-[70px]
-                       rounded-full text-sm font-semibold
-                       bg-red-500 text-white
-                       hover:bg-red-600 transition">
-                                            Delete
-                                        </button>
-                                    </form>
+                                <button class="btn"
+                                        style="background:#e11d48; padding:6px 10px; font-size:12px;">
+                                    Delete
+                                </button>
+                            </form>
 
-                                </td>
-                            @endrole
+                        </td>
+                        @endrole
                         @endauth
 
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+
+                    @empty
+                    <tr>
+                        <td colspan="12" style="text-align:center; padding:20px; color:#94a3b8;">
+                            No members found
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+
+            </table>
+        </div>
 
     </div>
 
+</div>
 
-
-    </div>
 @endsection
