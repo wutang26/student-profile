@@ -29,12 +29,12 @@ class RolePermissionController extends Controller
 
         $role->syncPermissions($permissions);
 
-        AuditLog::create([
-    'performed_by' => auth()->id(),
-    'action' => 'update_permissions',
-    'target_type' => 'Role',
-    'target_id' => $role->id,
-    'description' => 'Updated permissions for role '.$role->name,
+            AuditLog::create([
+        'performed_by' => auth()->id(),
+        'action' => 'update_permissions',
+        'target_type' => 'Role',
+        'target_id' => $role->id,
+        'description' => 'Updated permissions for role '.$role->name,
 ]);
 
         return back()->with('success', 'Permissions updated successfully');
