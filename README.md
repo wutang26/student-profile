@@ -1,6 +1,6 @@
-# Loan Management System
+# Student Management System
 
-A web-based system for managing loans, repayments, and user roles.
+A web-based system for managing Students, repayments, and user roles.
 
 ## Technologies Used
 - Laravel 12
