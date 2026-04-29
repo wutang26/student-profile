@@ -19,7 +19,7 @@
         <!-- SIDEBAR -->
         <aside class="w-64 bg-gray-900 text-white">
             <div class="p-4 text-xl font-bold border-b border-gray-700">
-                Loan Admin
+                Admin Panel
             </div>
 
             <nav class="mt-4 space-y-1 text-sm">
@@ -29,24 +29,22 @@
                     Dashboard
                 </a>
 
-                <a href="{{ route('groups.index') }}"
+              
+                <a href="#"   
                     class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                     <i class="bi bi-people"></i>
-                    Group Loans
+                    Students
                 </a>
 
 
-                <a href="{{ route('admin.members.index') }}"
+                <a href="#"
                     class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                     <i class="bi bi-people"></i>
-                    Members
+                    Company Staffs
                 </a>
 
 
-                {{-- <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
-                    <i class="bi bi-file-earmark-text"></i>
-                    Loan Applications
-                </a> --}}
+            
 
                 <!---- Loan Application---->
                 <div class="dropdown">
@@ -61,22 +59,14 @@
 
                     <div class="dropdown-menu hidden ml-8 mt-1 space-y-1 text-sm">
                         @can('apply loan')
-                            <a href="{{ route('loans.show_loans') }}"
+                            <a href="#"
                                 class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                                 <i class="bi bi-eye"></i>
                                 Show Loans
                             </a>
                         @endcan
 
-                        @can('apply loan')
-                            @if (!auth()->user()->hasActiveLoan())
-                                <a href="{{ route('loans.apply_loan') }}"
-                                    class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
-                                    <i class="bi bi-cash-stack"></i>
-                                    Apply Loan
-                                </a>
-                            @endif
-                        @endcan
+                      
 
 
                         {{-- @can('manage pdf')
@@ -92,7 +82,7 @@
                 </div>
 
                 @role('super-admin')
-                    <a href="{{ route('loans.approved_loans') }}"
+                    <a href="#"
                         class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                         <i class="bi bi-check-circle"></i>
                         Loan Approvals
@@ -112,7 +102,7 @@
                 <div class="dropdown-menu hidden ml-8 mt-1 space-y-1 text-sm">
 
                         {{-- Approved Loans --}}
-                        <a href="{{ route('loans.approved_loans') }}"
+                        <a href="#"
                         class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                             <i class="bi bi-check-circle text-green-500"></i>
                             Approved Loans
@@ -126,7 +116,7 @@
                         </a>
 
                         {{-- Disbursed History --}}
-                        <a href="{{route('loans.disbursed')}}"
+                        <a href="#"
                         class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                             <i class="bi bi-clock-history text-blue-400"></i>
                             Disbursement History
@@ -137,7 +127,7 @@
                 @endrole
 
                 @role('super-admin|admin')
-                <a href="{{route('loans.active_loans')}}" class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
+                <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                     <i class="bi bi-briefcase"></i>
                     Active Loans
                 </a>
@@ -145,16 +135,7 @@
 
                 <!---- Repayments ---->
               <div class="dropdown">
-            @php
-                $hasDisbursedLoan = auth()->user()->loans()
-                    ->where('application_status', 'disbursed')
-                    ->exists();
-
-                $disbursedLoan = auth()->user()->loans()
-                    ->where('application_status', 'disbursed')
-                    ->first();
-            @endphp
-
+         
             <button
                 class="dropdown-toggle w-full flex items-center justify-between gap-3 px-4 py-2 hover:bg-gray-700">
                 <div class="flex items-center gap-3">
@@ -167,25 +148,25 @@
     {{--SINGLE dropdown menu --}}
     <div class="dropdown-menu hidden ml-8 mt-1 space-y-1 text-sm">
 
-        @if ($hasDisbursedLoan)
+      
 
-            <a href="{{ route('loans.repayments', $disbursedLoan->id )}}"
+            <a href="#"
                 class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                 <i class="bi bi-calendar"></i>
                 Repayment Schedule
             </a>
 
-            <a href="{{ route('loans.repayment_schedule', $disbursedLoan->id) }}"
+            <a href="#"
                 class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                 <i class="bi bi-clock-history"></i>
                 Repayment History
             </a>
 
-                @else
+               
                     <span class="block px-4 py-2 text-gray-400">
                         No Repayment Available
                     </span>
-                @endif
+            
 
             </div>
         </div>

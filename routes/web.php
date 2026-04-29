@@ -6,9 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
-//use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\AuditLogController;
-use App\Http\Controllers\Admin\LoanApprovalController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\PdfController;
@@ -16,9 +14,6 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\HighChartController;
 use App\Http\Controllers\UserPermissionController;
-use App\Http\Controllers\GroupController;
-use App\Http\Controllers\GroupLoanController;
-use App\Http\Controllers\GroupLoanRepayment;
 
 
 
@@ -69,12 +64,6 @@ Route::get('/pdf/generate', [PdfController::class, 'generatePdf'])
      ->name('pdf.generate');
 
 
-//Change Password Routes
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/profile', [PasswordController::class, 'edit'])->name('profile.show'); // renamed
-//     Route::get('/password/change', [PasswordController::class, 'edit'])->name('password.change');
-//     Route::patch('/password/change', [PasswordController::class, 'update']);
-// });
 
 
 // Profile page
@@ -212,58 +201,6 @@ Route::get('/regions', [SettingController::class, 'regions'])
 //Histogram Popup
 Route::get('/highcharts', [HighChartController::class, 'index']);
 
-//Loan Approval
-Route::middleware(['auth', 'permission:view reports|apply loan|view loans'])->group(function () {
-    Route::get('loans', [LoanApprovalController::class,'index'])->name('loans.show_loans');
-    Route::get('/applyLoan', [LoanApprovalController::class, 'create'])->name('loans.apply_loan');
-    Route::post('/loans/store', [LoanApprovalController::class, 'store'])->name('loans.store');
-    Route::post('/admin/loans/{loan}/approve', [LoanApprovalController::class,'approve']);
-    Route::post('/admin/loans/{loan}/reject', [LoanApprovalController::class,'reject']);
-    Route::post('/users/{user}/assign-permissions', [UserPermissionController::class, 'assignPermissions'])->name('users.assign_permissions');
-    
-   // Approved Loans - list all approved loans (GET)
-Route::get('/approvedLoans', [LoanApprovalController::class,'approvedLoans'])
-    ->name('loans.approved_loans');
-
-// All loans filtered by status (optional)
-Route::get('loans/status/{status?}', [LoanApprovalController::class,'loansByStatus'])
-    ->name('loans.by_status'); // status is optional, defaults to pending
-
-// Approve a loan (POST)
-Route::post('/admin/loans/{loan}/approve', [LoanApprovalController::class,'approve'])
-    ->name('loans.approve')
-    ->middleware('auth');
-
-// Reject a loan (POST)
-Route::post('/admin/loans/{loan}/reject', [LoanApprovalController::class,'reject'])
-    ->name('loans.reject');
-
-// Disburse a loan (POST)
-Route::post('/admin/loans/{loan}/disburse', [LoanApprovalController::class,'disburseLoan'])
-    ->name('loans.disburse');
-
-// Update loan status (PUT)
-Route::put('/loans/{loan}/status', [LoanApprovalController::class, 'updateStatus'])
-    ->name('loans.updateStatus');
-
-// Pay a repayment installment (POST)
-Route::post('/repayments/{id}/pay', [LoanApprovalController::class, 'payInstallment'])
-    ->name('repayments.pay');
-
-// View repayments for a loan (GET)
-Route::get('/loans/{loan}/repayments', [LoanApprovalController::class, 'repayments'])
-    ->name('loans.repayments');
-
-Route::get('/disbursements', [LoanApprovalController::class, 'disbursedList'])
-    ->name('loans.disbursed');
-
-// Route::get('/test', [LoanApprovalController::class, 'test']);
-Route::get('/loans/{loan}/repayment-schedule', [LoanApprovalController::class, 'repaymentSchedule'])
-    ->name('loans.repayment_schedule');
-    
-Route::get('/activeLoans', [LoanApprovalController::class, 'activeLoans'])
-    ->name('loans.active_loans');
-});
 
 
 // List audit logs
@@ -271,23 +208,6 @@ Route::prefix('admin')->middleware(['auth', 'role:super-admin'])->group(function
     Route::get('/audit-logs', [AuditLogController::class, 'index'])->name('admin.audit.index');
 });
 
-
-//Group Loans Routes
-Route::prefix('groups')->group(function () {
-    Route::get('/', [GroupController::class, 'index'])->name('groups.index');
-    Route::get('/create', [GroupController::class, 'create'])->name('groups.create');
-    Route::post('/store', [GroupController::class, 'store'])->name('groups.store');
-    // Show single group (IMPORTANT for "View" button)
-    Route::get('/groups/{group}', [GroupController::class, 'show'])->name('groups.show');
-
-});
-
-Route::prefix('group-loans')->group(function () {
-    Route::get('/create', [GroupLoanController::class, 'create'])->name('grouploans.create');
-    Route::post('/store', [GroupLoanController::class, 'store'])->name('grouploans.store');
-});
-
-Route::post('/repayments/store', [GroupRepaymentController::class, 'store'])->name('repayments.store');
 
 //Used for AuTH
 require __DIR__.'/auth.php';
