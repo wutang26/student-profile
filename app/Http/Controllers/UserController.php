@@ -129,5 +129,18 @@ public function updateUser(Request $request, string $id)
         ->with('success', 'User deleted successfully');
     }
 
+//user asign method
+    public function assignPermissions($id)
+{
+    $user = User::findOrFail($id);
+
+    // Example: assign default permissions
+    $user->syncPermissions([
+        'view dashboard',
+        'edit profile'
+    ]);
+
+    return back()->with('success', 'Permissions assigned successfully');
+}
 
 }

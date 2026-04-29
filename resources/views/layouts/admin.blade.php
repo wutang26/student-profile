@@ -213,6 +213,15 @@
                     </button>
 
                     <div class="dropdown-menu hidden ml-8 mt-1 space-y-1 text-sm">
+
+                      @role('super-admin')
+                            <a href="{{ route('admin.audit.index') }}"
+                                class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
+                                <i class="bi bi-clock-history"></i>
+                                Audit Logs
+                            </a>
+                        @endrole
+
                         @can('manage users')
                             <a href="{{ route('settings.users.index') }}"
                                 class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
@@ -229,13 +238,6 @@
                             </a>
                         @endcan
 
-                        @role('super-admin')
-                            <a href="{{ route('admin.audit.index') }}"
-                                class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
-                                <i class="bi bi-clock-history"></i>
-                                Audit Logs
-                            </a>
-                        @endrole
 
                         @can('manage permissions')
                             <a href="{{ route('settings.permissions.index') }}"

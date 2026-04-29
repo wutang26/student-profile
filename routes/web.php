@@ -102,34 +102,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-//Home page 
-Route::get('/home', [HomeController::class, 'home'])->name('layout');
-
-//About Routes
-Route::get('/about_external', [HomeController::class, 'aboutExternal'])->name('about_external');
-
-Route::get('/about', [AdminController::class, 'about'])->name('about');
-
-//Course Routes
-Route::get('/course_external', [HomeController::class, 'courseExternal'])->name('course_external');
-
-//Trainer Routes
-Route::get('/trainer_external', [HomeController::class, 'trainerExternal'])->name('trainer_external');
-
-Route::get('/trainer', [HomeController::class, 'trainer'])->name('trainer');
-
-
-//event Routes
-Route::get('/event', [HomeController::class, 'events'])->name('event');
-
-//pricing Routes
-Route::get('/pricing', [HomeController::class, 'pricing'])->name('pricing');
-
-//pricing Routes
-Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-
-//pricing Routes
-Route::get('/course', [HomeController::class, 'course'])->name('course');
 
 //pricing Routes
 // Route::get('/dark', [AdminController::class, 'index'])->name('admin.index');
@@ -142,6 +114,9 @@ Route::get('/users/{id}/edit', [UserController::class, 'editUser'])->name('setti
 Route::put('/users/{id}/update', [UserController::class, 'updateUser'])->name('settings.users.updateUser');
 Route::delete('/users/{id}/delete',[UserController::class, 'deleteUser'])->name('settings.users.deleteUser');
 
+//User assigment route
+Route::post('/users/{id}/assign-permissions', [UserController::class, 'assignPermissions'])
+    ->name('users.assign_permissions');
 
 
 //Access Users(use member controllers)
