@@ -50,7 +50,7 @@
                     <td style="color:#64748b;">{{ $group->description }}</td>
 
                     <td style="text-align:right;">
-                        <a href="#" class="btn" style="padding:6px 10px; font-size:12px;">
+                        <a href="{{ route('groups.show', $group->id) }}" class="btn" style="padding:6px 10px; font-size:12px;">
                             View
                         </a>
 

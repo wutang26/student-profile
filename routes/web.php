@@ -277,6 +277,9 @@ Route::prefix('groups')->group(function () {
     Route::get('/', [GroupController::class, 'index'])->name('groups.index');
     Route::get('/create', [GroupController::class, 'create'])->name('groups.create');
     Route::post('/store', [GroupController::class, 'store'])->name('groups.store');
+    // Show single group (IMPORTANT for "View" button)
+    Route::get('/groups/{group}', [GroupController::class, 'show'])->name('groups.show');
+
 });
 
 Route::prefix('group-loans')->group(function () {
