@@ -47,7 +47,7 @@
             
 
                 <!---- Loan Application---->
-                <div class="dropdown">
+                <!-- <div class="dropdown">
                     <button
                         class="dropdown-toggle w-full flex items-center justify-between gap-3 px-4 py-2 hover:bg-gray-700">
                         <div class="flex items-center gap-3">
@@ -79,17 +79,17 @@
                         @endcan --}}
 
                     </div>
-                </div>
+                </div> -->
 
-                @role('super-admin')
+                <!-- @role('super-admin')
                     <a href="#"
                         class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                         <i class="bi bi-check-circle"></i>
                         Loan Approvals
                     </a>
-                @endrole
+                @endrole -->
 
-                    @role('super-admin')
+                    <!-- @role('super-admin')
             <div class="dropdown">
                 <button class="dropdown-toggle w-full flex items-center justify-between gap-3 px-4 py-2 hover:bg-gray-700">
                     <div class="flex items-center gap-3">
@@ -124,48 +124,48 @@
 
                     </div>
                 </div>
-                @endrole
+                @endrole -->
 
-                @role('super-admin|admin')
+                <!-- @role('super-admin|admin')
                 <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                     <i class="bi bi-briefcase"></i>
                     Active Loans
                 </a>
-                @endrole
+                @endrole -->
 
                 <!---- Repayments ---->
               <div class="dropdown">
          
-            <button
+            <!-- <button
                 class="dropdown-toggle w-full flex items-center justify-between gap-3 px-4 py-2 hover:bg-gray-700">
                 <div class="flex items-center gap-3">
                     <i class="bi bi-credit-card"></i>
                     Repayments
                 </div>
                 <i class="bi bi-chevron-down text-xs"></i>
-            </button>
+            </button> -->
 
     {{--SINGLE dropdown menu --}}
     <div class="dropdown-menu hidden ml-8 mt-1 space-y-1 text-sm">
 
       
-
+<!-- 
             <a href="#"
                 class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                 <i class="bi bi-calendar"></i>
                 Repayment Schedule
-            </a>
+            </a> -->
 
-            <a href="#"
+            <!-- <a href="#"
                 class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                 <i class="bi bi-clock-history"></i>
                 Repayment History
-            </a>
+            </a> -->
 
                
-                    <span class="block px-4 py-2 text-gray-400">
+                    <!-- <span class="block px-4 py-2 text-gray-400">
                         No Repayment Available
-                    </span>
+                    </span> -->
             
 
             </div>
@@ -188,26 +188,11 @@
                             <a href="{{ route('pdf.preview') }}"
                                 class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
                                 <i class="bi bi-people"></i>
-                                Members Preview Report
+                                Student Report
                             </a>
                         @endcan
 
-                        @can('manage pdf')
-                            <a href="{{ route('pdf.download') }}"
-                                class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700">
-                                <i class="bi bi-cash-stack"></i>
-                                Print Loans Report
-                            </a>
-                        @endcan
-
-                        @can('manage pdf')
-                            <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700"> <i
-                                    class="bi bi-credit-card"></i> Repayments Report </a>
-                            @endcan @can('manage pdf')
-                            <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-gray-700"> <i
-                                    class="bi bi-arrow-left-right">
-                                </i> Disbursement Report </a>
-                        @endcan
+                     
 
                     </div>
                 </div>
@@ -215,7 +200,7 @@
 
                 <hr class="my-2 border-gray-700">
 
-                <!-- SETTINGS DROPDOWN -->
+            
                 <!-- SETTINGS DROPDOWN -->
                 <div class="dropdown">
                     <button

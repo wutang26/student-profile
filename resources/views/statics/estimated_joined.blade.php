@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Member Statics</title>
+  <title>Students Statics</title>
 
   <!-- Optional CSS -->
   <style>
@@ -33,7 +33,7 @@
   <figure class="highcharts-figure">
     <div id="container"></div>
     <p class="highcharts-description">
-      A basic column chart comparing estimating Number of Joined Members
+      A basic column chart comparing estimating Number of Joined Students
     </p>
   </figure>
 
@@ -44,9 +44,9 @@
   <script>
     Highcharts.chart('container', {
       chart: { type: 'column' },
-      title: { text: 'Joined Members in 2026' },
+      title: { text: 'Joined Students in 2026' },
       subtitle: {
-        text: 'Company: <a target="_blank" href="#">Tukashira</a>'
+        text: 'Company: <a target="_blank" href="#">TPS Moshi</a>'
       },
       xAxis: {
         categories: ['Temeke', 'Mufindi', 'Mvomero', 'Lindi', 'Nyegezi', 'Nzega'],
