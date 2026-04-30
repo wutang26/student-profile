@@ -186,5 +186,9 @@ Route::post('/students/store', [StudentController::class, 'store'])->name('stude
 
 Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
 
+//Audit handling
+Route::get('/audit', [AuditLogController::class, 'index'])
+    ->name('admin.audit.index');
+    
 //Used for AuTH
 require __DIR__.'/auth.php';

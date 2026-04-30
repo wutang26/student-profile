@@ -34,6 +34,9 @@
             <a href="#" class="menu-item">
                 <i class="bi bi-people"></i> Company Staffs
             </a>
+             <a href="{{route('admin.audit.index') }}" class="menu-item">
+              <i class="bi bi-journal-text"></i> Audits
+            </a>
 
             <!-- Reports -->
             <div class="dropdown">

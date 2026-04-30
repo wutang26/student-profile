@@ -1,31 +1,102 @@
 @extends('layouts.admin')
 
 @section('content')
-<h2 class="text-xl font-bold mb-4">Audit Logs</h2>
 
-<table class="w-full bg-white rounded shadow text-sm">
-    <thead>
-        <tr class="border-b">
-            <th class="p-2">Performed By</th>
-            <th class="p-2">Action</th>
-            <th class="p-2">Description</th>
-            <th class="p-2">Time</th>
-        </tr>
-    </thead>
+<style>
+    /* PAGE TITLE */
+    .page-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
 
-    <tbody>
-        @foreach($logs as $log)
-        <tr class="border-b">
-            <td class="p-2">{{ $log->user->name }}</td>
-            <td class="p-2">{{ $log->action }}</td>
-            <td class="p-2">{{ $log->description }}</td>
-            <td class="p-2">{{ $log->created_at->diffForHumans() }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+    /* CARD */
+    .card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        overflow-x: auto;
+    }
 
-<div class="mt-4">
+    /* TABLE */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+
+    .table thead {
+        background: #f3f4f6;
+    }
+
+    .table th,
+    .table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .table tbody tr:hover {
+        background: #f9fafb;
+    }
+
+    /* PAGINATION */
+    .pagination {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .pagination a,
+    .pagination span {
+        padding: 6px 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #111827;
+        font-size: 13px;
+    }
+
+    .pagination .active {
+        background: #2563eb;
+        color: #fff;
+        border-color: #2563eb;
+    }
+</style>
+
+<h2 class="page-title">Audit Logs</h2>
+
+<div class="card">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Performed By</th>
+                <th>Action</th>
+                <th>Description</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach($logs as $log)
+                <tr>
+                    <td>{{ $log->user->name }}</td>
+                    <td>{{ $log->action }}</td>
+                    <td>{{ $log->description }}</td>
+                    <td>{{ $log->created_at->diffForHumans() }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+
+    </table>
+
+</div>
+
+<!-- PAGINATION -->
+<div class="pagination">
     {{ $logs->links() }}
 </div>
+
 @endsection
