@@ -69,6 +69,13 @@
                     <a href="{{ route('settings.permissions.index') }}" class="menu-item small">
                         Permissions
                     </a>
+                    <a href="{{ route('settings.regions.region') }}" class="menu-item small">
+                        Regions
+                    </a>
+                    <a href="{{ route('settings.district') }}" class="menu-item small">
+                        Districtss
+                    </a>
+                     
 
                 </div>
             </div>

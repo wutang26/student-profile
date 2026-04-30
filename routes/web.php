@@ -185,5 +185,6 @@ Route::get('/students/create', [StudentController::class, 'create'])->name('stud
 Route::post('/students/store', [StudentController::class, 'store'])->name('students.store');
 
 Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
+
 //Used for AuTH
 require __DIR__.'/auth.php';

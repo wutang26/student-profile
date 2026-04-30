@@ -1,104 +1,205 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1 class="text-2xl font-bold mb-4">Districts Summary</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<style>
+    /* PAGE TITLE */
+    .page-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
 
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-gray-500">Total Districts</h2>
-             <p class="text-3xl font-bold">{{ $districts->count() }}</p>
-        </div>
+    /* GRID */
+    .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
 
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-gray-500">Active Districts</h2>
-            <p class="text-3xl font-bold">{{ $districts->count() }}</p>
-        </div>
+    @media (max-width: 768px) {
+        .grid-3 {
+            grid-template-columns: 1fr;
+        }
+    }
 
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-gray-500">Total Disbursed</h2>
-            <p class="text-3xl font-bold">{{ $districts->count() }}</p>
-        </div>
+    /* CARD */
+    .card {
+        background: #fff;
+        padding: 16px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
 
+    .card h2 {
+        color: #6b7280;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .card p {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    /* SUCCESS MESSAGE */
+    .success {
+        background: #d1fae5;
+        color: #065f46;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+    }
+
+    /* BUTTON */
+    .btn {
+        background: #bbf7d0;
+        color: #000;
+        padding: 10px 14px;
+        border-radius: 20px;
+        font-size: 16px;
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    .btn:hover {
+        background: #86efac;
+    }
+
+    /* TABLE */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        background: #fff;
+    }
+
+    .table th, .table td {
+        border: 1px solid #d1d5db;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .table thead {
+        background: #f3f4f6;
+    }
+
+    .table tr:hover {
+        background: #f9fafb;
+    }
+
+    /* ACTION BUTTONS */
+    .btn-edit {
+        background: #3b82f6;
+        color: #fff;
+        padding: 6px 12px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 13px;
+    }
+
+    .btn-edit:hover {
+        background: #2563eb;
+    }
+
+    .btn-delete {
+        background: #ef4444;
+        color: #fff;
+        padding: 6px 12px;
+        border-radius: 20px;
+        border: none;
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+    .btn-delete:hover {
+        background: #dc2626;
+    }
+
+    .actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+</style>
+
+<h1 class="page-title">Districts Summary</h1>
+
+<div class="grid-3">
+
+    <div class="card">
+        <h2>Total Districts</h2>
+        <p>{{ $districts->count() }}</p>
     </div>
 
-    <br><br>
-    @php
-       $i = 0;
-    @endphp
+    <div class="card">
+        <h2>Active Districts</h2>
+        <p>{{ $districts->count() }}</p>
+    </div>
 
-<!---Message to show success--->
-        @if(session('success'))
-            <div class="bg-green-100 text-green-800 p-2 rounded mb-4">
-                {{ session('success') }}
-            </div>
-        @endif
+    <div class="card">
+        <h2>Total Disbursed</h2>
+        <p>{{ $districts->count() }}</p>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-1 gap-6>
+</div>
 
-        <div g-white p-4 rounded shadow overflow-x-auto">
+<br><br>
 
-        <!-- Link to create Member -->
-         @auth
-            @role('super-admin|admin')
-        <a href="{{ route('settings.districts.create_district') }}"
-            style="
-      background-color:#bbf7d0;
-      color:#000;
-      padding:10px 10px;
-      border-radius:20px;
-      font-size:17px;
-      text-decoration:none;
-      display:inline-block;
-      width:fit-content;
-      white-space:nowrap;">
-            Register Districts
-        </a>
-      @endrole
+@if(session('success'))
+    <div class="success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@php $i = 0; @endphp
+
+<div class="card">
+
+    @auth
+        @role('super-admin|admin')
+            <a href="{{ route('settings.districts.create_district') }}" class="btn">
+                Register Districts
+            </a>
+        @endrole
     @endauth
 
-        <table class="w-full border border-gray-300 text-sm">
-            <thead class="bg-gray-100">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>District Name</th>
+                @auth
+                    @role('super-admin|admin')
+                        <th>Actions</th>
+                    @endrole
+                @endauth
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach ($districts as $district)
                 <tr>
-                    <th class="border px-3 py-2 text-left">Id</th>
-                    <th class="border px-3 py-2 text-left">District Name</th>
-                </tr>
-            </thead>
+                    <td>{{ ++$i }}</td>
+                    <td>{{ $district->name }}</td>
 
-            <tbody>
-                @foreach ($districts as $district)
-                    <tr class="bg-white hover:bg-gray-100">
-                        <td class="border px-3 py-2">{{ ++$i }}</td>
-                        <td class="border px-3 py-2">{{ $district->name }}</td>
+                    @auth
+                        @role('super-admin|admin')
+                        <td>
+                            <div class="actions">
 
-                          
-                        @auth
-                            @role('super-admin|admin')
-                        <td class="border px-3 py-2">
-                            <div class="flex items-center gap-2">
-
-                                <!-- Edit Button -->
                                 <a href="{{ route('settings.districts.edit_district', $district->id) }}"
-                                    class="inline-flex items-center justify-center
-                          px-3 py-1 min-w-[70px]
-                           rounded-full text-sm font-semibold
-                          bg-blue-500 text-white
-                          hover:bg-blue-600 transition">
+                                   class="btn-edit">
                                     Edit
                                 </a>
 
-                                <!-- Delete Button -->
                                 <form action="{{ route('settings.districts.deleteDistrict', $district->id) }}" method="POST"
-                                    onsubmit="return confirm('Are you sure you want to delete this district?');">
+                                      onsubmit="return confirm('Are you sure you want to delete this district?');">
                                     @csrf
                                     @method('DELETE')
 
-                                    <button type="submit"
-                                        class="inline-flex items-center justify-center
-                                        px-3 py-1 min-w-[70px]
-                                         rounded-full text-sm font-semibold
-                                         bg-red-500 text-white
-                                         hover:bg-red-600 transition">
+                                    <button type="submit" class="btn-delete">
                                         Delete
                                     </button>
                                 </form>
@@ -108,12 +209,11 @@
                         @endrole
                     @endauth
 
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 
-    </div>
+</div>
 
-    </div>
 @endsection

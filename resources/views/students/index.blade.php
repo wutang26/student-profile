@@ -2,7 +2,26 @@
 
 @section('content')
 
-<h1 class="page-title">Students List</h1>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+    
+    <h1 class="page-title" style="margin:0;">Students List</h1>
+
+    <!-- Search Form (Top Right) -->
+    <form method="GET" action="{{ route('students.index') }}" style="display:flex; gap:5px;">
+        <input 
+            type="text" 
+            name="search" 
+            placeholder="Search student..." 
+            value="{{ request('search') }}"
+            style="padding:6px 10px; border:1px solid #ccc; border-radius:5px;"
+        >
+
+        <button type="submit" class="btn-primary">
+            Search
+        </button>
+    </form>
+
+</div>
 
 @if(session('success'))
     <div class="alert-success">
@@ -11,8 +30,9 @@
 @endif
 
 <a href="{{ route('students.create') }}" class="btn-primary">
-    + Register Student
-</a>  <br><br>
+    <i class="bi bi-person"></i> Register Student
+</a>  
+<br><br>
 
 <div class="table-container">
 <table class="table">

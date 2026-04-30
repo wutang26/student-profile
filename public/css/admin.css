@@ -1505,6 +1505,7 @@ textarea:focus {
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
+    text-decoration: none;
 }
 
 .btn-primary:hover {
@@ -1516,4 +1517,65 @@ textarea:focus {
     .form-grid {
         grid-template-columns: 1fr;
     }
+}
+
+
+/*Student create form*/
+
+.form-card{
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.form-section{
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.section-title{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #334155;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+input, select{
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.2s;
+}
+
+input:focus, select:focus{
+    border-color: #6B8F99;
+    box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+}
+
+.form-actions{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.btn-primary{
+    background: #6B8F99;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-primary:hover{
+    background: #6B8F99;
 }
