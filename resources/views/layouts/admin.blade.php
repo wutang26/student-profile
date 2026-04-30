@@ -27,7 +27,7 @@
                 <i class="bi bi-speedometer2"></i> Dashboard
             </a>
 
-            <a href="#" class="menu-item">
+            <a href="{{route('students.index') }}" class="menu-item">
                 <i class="bi bi-people"></i> Students
             </a>
 

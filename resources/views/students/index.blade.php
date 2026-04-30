@@ -1,43 +1,53 @@
-@extends('layoutsGroup.groupdashboard')
+@extends('layouts.admin')
 
 @section('content')
 
-<div class="page-header">
-    <h1>Students</h1>
+<h1 class="page-title">Students List</h1>
 
-    <!-- Search -->
-    <form method="GET" class="search-box">
-        <input type="text" name="search" placeholder="Search student...">
-        <button type="submit">Search</button>
-    </form>
-</div>
-
-<!-- GRID -->
-<div class="student-grid">
-
-    @foreach($students as $student)
-    <div class="student-card">
-
-        <img src="{{ $student->photo ?? 'https://via.placeholder.com/100' }}" class="avatar">
-
-        <h2>{{ $student->full_name }}</h2>
-        <p class="force">{{ $student->force_number }}</p>
-
-        <span class="status {{ $student->status }}">
-            {{ $student->status }}
-        </span>
-
-        <a href="{{ route('students.show', $student->id) }}" class="view-btn">
-            View Profile
-        </a>
-
+@if(session('success'))
+    <div class="alert-success">
+        {{ session('success') }}
     </div>
-    @endforeach
+@endif
 
-</div>
+<a href="{{ route('students.create') }}" class="btn-primary">
+    + Register Student
+</a>  <br><br>
 
-<div class="pagination">
-    {{ $students->links() }}
+<div class="table-container">
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Force No</th>
+            <th>NIDA</th>
+            <th>Company</th>
+            <th>Platoon</th>
+            <th>Phone</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach($students as $key => $student)
+        <tr>
+            <td>{{ $key + 1 }}</td>
+            <td>{{ $student->first_name }} {{ $student->last_name }}</td>
+            <td>{{ $student->force_number }}</td>
+            <td>{{ $student->nida }}</td>
+            <td>{{ $student->company }}</td>
+            <td>{{ $student->platoon }}</td>
+            <td>{{ $student->phone }}</td>
+            <td>
+                <span class="status {{ $student->status }}">
+                    {{ $student->status }}
+                </span>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 </div>
 
 @endsection

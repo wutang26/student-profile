@@ -10,14 +10,34 @@ class Student extends Model
     use HasFactory;
     
     protected $fillable = [
-        'full_name',
+         'first_name',
+        'middle_name',
+        'last_name',
         'force_number',
+        'nida',
+        'date_of_birth',
+        'gender',
+
         'phone',
-        'next_of_kin',
+        'email',
+        'address',
+
         'origin_region',
+        'origin_district',
         'entry_region',
-        'comment',
-        'status',
+
+        'course',
+        'company',
+        'platoon',
+        'year_of_study',
+
+        'next_of_kin_name',
+        'next_of_kin_phone',
+        'next_of_kin_relationship',
+        'next_of_kin_address',
+
         'photo',
+        'status',
+        'comment',
     ];
 }

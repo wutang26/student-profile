@@ -177,16 +177,13 @@ Route::get('/regions', [SettingController::class, 'regions'])
 //Histogram Popup
 Route::get('/highcharts', [HighChartController::class, 'index']);
 
-
-
-// List audit logs
-Route::prefix('admin')->middleware(['auth', 'role:super-admin'])->group(function () {
-    Route::get('/audit-logs', [AuditLogController::class, 'index'])->name('admin.audit.index');
-});
-
-//Student
+//Studnets Routes
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
-Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
 
+Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
+
+Route::post('/students/store', [StudentController::class, 'store'])->name('students.store');
+
+Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
 //Used for AuTH
 require __DIR__.'/auth.php';

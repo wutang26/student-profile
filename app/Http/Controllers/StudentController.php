@@ -12,6 +12,8 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
+        $students = Student::latest()->paginate(10);
+
         $search = $request->search;
 
         $students = Student::when($search, function ($query) use ($search) {
@@ -27,17 +29,26 @@ class StudentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+     public function create()
     {
-        //
+        return view('students.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'force_number' => 'required|unique:students',
+            'nida' => 'required|unique:students',
+            'company' => 'required',
+            'platoon' => 'required',
+        ]);
+
+        Student::create($request->all());
+
+        return redirect()->route('students.index')
+            ->with('success', 'Student created successfully');
     }
 
     /**

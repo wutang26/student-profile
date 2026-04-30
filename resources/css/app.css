@@ -142,3 +142,72 @@
 .comment {
     margin-top: 20px;
 }
+
+
+
+/*Students Index Page*/
+.page-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.form-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+input, select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.btn-primary {
+    background: #6B8F99;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.status.active {
+    background: green;
+    color: white;
+    padding: 3px 6px;
+    border-radius: 5px;
+}
+
+.status.inactive {
+    background: orange;
+    color: white;
+}
+
+.status.dismissed {
+    background: red;
+    color: white;
+}
