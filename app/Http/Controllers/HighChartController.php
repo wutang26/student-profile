@@ -81,4 +81,50 @@ class HighChartController extends Controller
     {
         //
     }
+
+    use App\Models\Student;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
+public function analytics()
+{
+    // 1. Most disciplined company
+    $disciplinedCompany = Student::select('company', DB::raw('COUNT(*) as total'))
+        ->where('status', 'active')
+        ->groupBy('company')
+        ->orderByDesc('total')
+        ->first();
+
+    // 2. Most problematic platoon
+    $problematicPlatoon = Student::select('platoon', DB::raw('COUNT(*) as total'))
+        ->where('status', 'inactive')
+        ->groupBy('platoon')
+        ->orderByDesc('total')
+        ->first();
+
+    // 3. Monthly behavior trends
+    $monthlyTrends = Student::select(
+            DB::raw('MONTH(created_at) as month'),
+            DB::raw("SUM(CASE WHEN status='active' THEN 1 ELSE 0 END) as good"),
+            DB::raw("SUM(CASE WHEN status='inactive' THEN 1 ELSE 0 END) as bad")
+        )
+        ->groupBy('month')
+        ->orderBy('month')
+        ->get();
+
+    // 4. Attendance vs discipline (example logic)
+    $attendanceDiscipline = Student::select(
+            DB::raw("SUM(CASE WHEN attendance_status='present' THEN 1 ELSE 0 END) as present"),
+            DB::raw("SUM(CASE WHEN attendance_status='absent' THEN 1 ELSE 0 END) as absent"),
+            DB::raw("SUM(CASE WHEN status='inactive' THEN 1 ELSE 0 END) as disciplined")
+        )
+        ->first();
+
+    return view('analytics.dashboard', compact(
+        'disciplinedCompany',
+        'problematicPlatoon',
+        'monthlyTrends',
+        'attendanceDiscipline'
+    ));
+}
 }

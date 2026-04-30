@@ -2,70 +2,88 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Students Statics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Students Statistics</title>
 
-  <!-- Optional CSS -->
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 20px;
+      background:#f3f4f6;
+      padding:20px;
     }
-    .highcharts-figure {
-      width: 80%;
-      max-width: 800px;
-      margin: 0 auto;
+
+    .card {
+      background:#fff;
+      max-width:900px;
+      margin:auto;
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.08);
     }
+
+    .title {
+      font-size:20px;
+      font-weight:bold;
+      margin-bottom:10px;
+    }
+
+    .subtitle {
+      font-size:13px;
+      color:#666;
+      margin-bottom:20px;
+    }
+
     #container {
-      height: 400px;
-    }
-    .highcharts-description {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 14px;
-      color: #555;
+      height:400px;
     }
   </style>
 </head>
+
 <body>
 
-  <figure class="highcharts-figure">
-    <div id="container"></div>
-    <p class="highcharts-description">
-      A basic column chart comparing estimating Number of Joined Students
-    </p>
-  </figure>
+<div class="card">
 
-  <!-- Highcharts Library -->
-  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <div class="title">Joined Students Overview</div>
+  <div class="subtitle">TPS Moshi - Company Performance by Region</div>
 
-  <!-- Chart Script -->
-  <script>
-    Highcharts.chart('container', {
-      chart: { type: 'column' },
-      title: { text: 'Joined Students in 2026' },
-      subtitle: {
-        text: 'Company: <a target="_blank" href="#">TPS Moshi</a>'
-      },
-      xAxis: {
-        categories: ['Temeke', 'Mufindi', 'Mvomero', 'Lindi', 'Nyegezi', 'Nzega'],
-        crosshair: true
-      },
-      yAxis: {
-        min: 0,
-        title: { text: 'Population: 1,000 People' }
-      },
-      tooltip: { valueSuffix: ' (1000 MT)' },
-      plotOptions: {
-        column: { pointPadding: 0.2, borderWidth: 0 }
-      },
-      series: [
-        { name: 'Region', data: [387749, 280000, 129000, 64300, 54000, 34300] },
-        { name: 'District', data: [45321, 140000, 10000, 140500, 19500, 113500] }
-      ]
-    });
-  </script>
+  <div id="container"></div>
+
+</div>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+<script>
+Highcharts.chart('container', {
+    chart: {
+        type: 'column',
+        backgroundColor: 'transparent'
+    },
+
+    title: {
+        text: ''
+    },
+
+    xAxis: {
+        categories: ['HQ', 'A-Coy', 'B-Coy', 'C-coy', 'D-Coy', 'E-Coy']
+    },
+
+    yAxis: {
+        title: {
+            text: 'Number of Students'
+        }
+    },
+
+    legend: {
+        enabled: false
+    },
+
+    series: [{
+        name: 'Students',
+        data: [120, 200, 150, 80, 60, 90],
+        color: '#2563eb'
+    }]
+});
+</script>
 
 </body>
 </html>

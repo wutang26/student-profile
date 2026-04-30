@@ -15,6 +15,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\HighChartController;
 use App\Http\Controllers\UserPermissionController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentDocumentController;
 
 
 
@@ -186,9 +187,23 @@ Route::post('/students/store', [StudentController::class, 'store'])->name('stude
 
 Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
 
+
+Route::post('/students/import', [StudentController::class, 'import'])
+    ->name('students.import');
+
 //Audit handling
 Route::get('/audit', [AuditLogController::class, 'index'])
     ->name('admin.audit.index');
-    
+
+    //Barua ya maelezo na Zingine
+Route::post('/students/{id}/documents', [StudentDocumentController::class, 'store'])
+    ->name('students.documents.store');
+
+Route::delete('/documents/{id}', [StudentDocumentController::class, 'destroy'])
+    ->name('students.documents.delete');
+
+Route::get('/documents/{id}/view', [StudentDocumentController::class, 'view'])
+    ->name('students.documents.view');
+
 //Used for AuTH
 require __DIR__.'/auth.php';

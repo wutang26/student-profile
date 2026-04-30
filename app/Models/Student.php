@@ -40,4 +40,10 @@ class Student extends Model
         'status',
         'comment',
     ];
+
+    //Relation to Student Document
+    public function documents()
+{
+    return $this->hasMany(StudentDocument::class);
+}
 }
