@@ -2,164 +2,140 @@
 
 @section('content')
 
-<!---Message to show success--->
 @if(session('success'))
-    <div class="bg-green-100 text-green-800 p-2 rounded mb-4">
+    <div class="alert-success">
         {{ session('success') }}
     </div>
 @endif
 
-<h1 class="text-2xl font-bold mb-4">Dashboard</h1>
+<h1 class="page-title">Users Dashboard</h1>
 
+<!-- SUMMARY CARDS -->
+<div class="card-grid">
 
-<!-- Summary Cards -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-    <div class="bg-white p-4 rounded shadow">
-        <h2 class="text-gray-500">Total users</h2>
-        <p class="text-3xl font-bold">{{ $users->count() }}</p>
+    <div class="card">
+        <h2>Total Users</h2>
+        <p>{{ $users->count() }}</p>
     </div>
 
-    <div class="bg-white p-4 rounded shadow">
-        <h2 class="text-gray-500">Active Loans</h2>
-        <p class="text-3xl font-bold">{{ $users->count() }}</p>
+    <div class="card">
+        <h2>Active Loans</h2>
+        <p>{{ $users->count() }}</p>
     </div>
 
-    <div class="bg-white p-4 rounded shadow">
-        <h2 class="text-gray-500">Total Disbursed</h2>
-        <p class="text-3xl font-bold">{{ $users->count() }}</p>
+    <div class="card">
+        <h2>Total Disbursed</h2>
+        <p>{{ $users->count() }}</p>
     </div>
+
 </div>
 
-<!-- Users Section -->
-<div class="grid grid-cols-1 gap-6">
-    <div class="bg-white p-4 rounded shadow overflow-x-auto">
+<br>
 
-        <!-- Register Button -->
-         @auth
-            @role('super-admin|admin')
-        <a href="{{ route('settings.users.create') }}"
-           class="inline-block mb-4 px-4 py-2 rounded-full
-                  bg-green-200 text-black text-sm font-semibold">
-            Register User
-        </a>
+<!-- USERS TABLE -->
+<div class="table-wrapper">
+
+    @auth
+    @role('super-admin|admin')
+    <a href="{{ route('settings.users.create') }}" class="btn-create">
+        Register User
+    </a>
     @endrole
-  @endauth
+    @endauth
 
-          
+    @php $i = 0; @endphp
 
-        @php $i = 0; @endphp
+    <table class="table">
 
-        <!-- Users Table -->
-        <table class="w-full border border-gray-300 text-sm">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="border px-3 py-2 text-left">Id</th>
-                    <th class="border px-3 py-2 text-left">User Name</th>
-                    <th class="border px-3 py-2 text-left">Email</th>
-                    <th class="border px-3 py-2 text-left">User Type (Role)</th>
-                    <th class="border px-3 py-2">Permissions</th>
-                    <th class="border px-3 py-2">Assign Permissions</th>
-                    <th class="border px-3 py-2 text-left">Date Joined</th>
-                    <th class="border px-3 py-2 text-left">Status</th>
-
-                    @auth
-                            @role('super-admin|admin')
-                    <th class="border px-3 py-2 text-left">Actions</th>
-                    @endrole
-                @endauth
-
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach ($users as $user)
-                <tr class="bg-white hover:bg-gray-100">
-                    <td class="border px-3 py-2">{{ ++$i }}</td>
-                    <td class="border px-3 py-2">{{ $user->name }}</td>
-                    <td class="border px-3 py-2">{{ $user->email }}</td>
-
-                  <td class="border px-3 py-2 space-x-1">
-                        @foreach($user->roles as $role)
-                            <span class="inline-block bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">
-                                {{ $role->name }}
-                            </span>
-                        @endforeach
-                    </td>
-
-                <td class="border px-3 py-2">
-                    {{ $user->getAllPermissions()->pluck('name')->join(', ') ?: 'None' }}
-                </td>
-                 
-                <td class="border px-3 py-2">
-                         <form method="POST" action="{{ route('users.assign_permissions', $user->id) }}">
-                        @csrf
-                        <button type="submit"
-                                class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
-                            Assign Default Permissions
-                        </button>
-                    </form>
-                </td>
-
-                    <td class="border px-3 py-2">
-                        {{ $user->created_at->format('d M Y') }}
-                    </td>
-
-                    <!-- Status -->
-                    <td class="border px-3 py-2">
-                        <span class="inline-flex items-center justify-center
-                                     min-w-[90px] px-3 py-1 rounded-full
-                                     text-sm font-semibold
-                            {{ $user->status === 'active'
-                                ? 'bg-green-100 text-green-700'
-                                : ($user->status === 'pending'
-                                    ? 'bg-yellow-100 text-yellow-700'
-                                    : 'bg-red-100 text-red-700') }}">
-                            {{ ucfirst($user->status) }}
-
-                        </span>
-
-
-                      
-                 
-                
-                    </td>
-
-                    <!-- Actions -->
-                          
-                        @auth
-                            @role('super-admin|admin')
-                    <td class="border px-3 py-2 space-y-2">
-                        <a href="{{ route('settings.users.editUser', $user->id) }}"
-                           class="inline-flex items-center justify-center
-                                  min-w-[70px] px-3 py-1 rounded-full
-                                  text-sm font-semibold
-                                  bg-blue-500 text-white hover:bg-blue-600">
-                            Edit
-                        </a>
-
-                        <form action="{{ route('settings.users.deleteUser', $user->id) }}"
-                              method="POST"
-                              onsubmit="return confirm('Are you sure you want to delete this user?');">
-                            @csrf
-                            @method('DELETE')
-
-                            <button type="submit"
-                                class="inline-flex items-center justify-center
-                                       min-w-[70px] px-3 py-1 rounded-full
-                                       text-sm font-semibold
-                                       bg-red-500 text-white hover:bg-red-600">
-                                Delete
-                            </button>
-                        </form>
-                    </td>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Permissions</th>
+                <th>Assign Permissions</th>
+                <th>Date Joined</th>
+                <th>Status</th>
+                @auth
+                @role('super-admin|admin')
+                <th>Actions</th>
                 @endrole
-            @endauth
-            
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                @endauth
+            </tr>
+        </thead>
 
-    </div>
+        <tbody>
+
+        @foreach ($users as $user)
+        <tr>
+
+            <td>{{ ++$i }}</td>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->email }}</td>
+
+            <!-- Roles -->
+            <td>
+                @foreach($user->roles as $role)
+                    <span class="badge-role">{{ $role->name }}</span>
+                @endforeach
+            </td>
+
+            <!-- Permissions -->
+            <td class="small-text">
+                {{ $user->getAllPermissions()->pluck('name')->join(', ') ?: 'None' }}
+            </td>
+
+            <!-- Assign -->
+            <td>
+                <form method="POST" action="{{ route('users.assign_permissions', $user->id) }}">
+                    @csrf
+                    <button type="submit" class="btn-small">
+                        Assign Permissions
+                    </button>
+                </form>
+            </td>
+
+            <td>{{ $user->created_at->format('d M Y') }}</td>
+
+            <!-- STATUS -->
+            <td>
+                <span class="status {{ $user->status }}">
+                    {{ ucfirst($user->status) }}
+                </span>
+            </td>
+
+            <!-- ACTIONS -->
+            @auth
+            @role('super-admin|admin')
+            <td class="action-col">
+
+                <a href="{{ route('settings.users.editUser', $user->id) }}" class="btn-edit">
+                    Edit
+                </a>
+
+                <form action="{{ route('settings.users.deleteUser', $user->id) }}"
+                      method="POST"
+                      onsubmit="return confirm('Delete this user?');"
+                      class="inline-form">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="btn-delete">
+                        Delete
+                    </button>
+                </form>
+
+            </td>
+            @endrole
+            @endauth
+
+        </tr>
+        @endforeach
+
+        </tbody>
+    </table>
+
 </div>
+
 @endsection

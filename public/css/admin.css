@@ -1,0 +1,1125 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f4f6;
+}
+
+/* LAYOUT */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 250px;
+    background: #6B8F99;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar-title {
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 15px;
+}
+
+/* MENU */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-item {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.menu-item:hover {
+    background: rgba(0,0,0,0.2);
+}
+
+/* SMALL ITEMS */
+.menu-item.small {
+    padding-left: 25px;
+    font-size: 14px;
+}
+
+/* DROPDOWN */
+.dropdown-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* NAVBAR */
+.navbar {
+    background: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* USER MENU */
+.user-menu {
+    position: relative;
+}
+
+.user-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+/* DROPDOWN */
+.user-dropdown {
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background: white;
+    width: 180px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.user-dropdown a,
+.user-dropdown button {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+}
+
+.user-dropdown a:hover,
+.user-dropdown button:hover {
+    background: #f0f0f0;
+}
+
+.logout {
+    color: red;
+}
+
+/* CONTENT */
+.content {
+    padding: 20px;
+}
+
+
+/*Footer Css Section For Admin Panel*/
+/* FOOTER */
+.footer {
+    background: #6B8F99;
+    color: white;
+    padding: 20px 0;
+    margin-top: auto;
+}
+
+/* container */
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* brand */
+.footer-brand {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* links */
+.footer-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    color: #000;
+}
+
+/* copyright */
+.footer-copy {
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/*Roles Index Page*/
+/* PAGE TITLE */
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* SUCCESS ALERT */
+.alert-success {
+    background: #d1fae5;
+    color: #065f46;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+/* CARDS */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+    color: #666;
+    font-size: 14px;
+}
+
+.card p {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* TABLE WRAPPER */
+.table-wrapper {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* CREATE BUTTON */
+.btn-create {
+    display: inline-block;
+    background: #bbf7d0;
+    color: #000;
+    padding: 10px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.btn-create:hover {
+    background: #a7f3d0;
+}
+
+/* TABLE */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.table thead {
+    background: #f3f4f6;
+}
+
+.table tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* BADGES */
+.badge-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.badge {
+    background: #e0e7ff;
+    color: #3730a3;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+}
+
+/* STATUS */
+.status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status.active {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status.pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status.inactive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* BUTTONS */
+.btn-edit {
+    background: #3b82f6;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.btn-edit:hover {
+    background: #2563eb;
+}
+
+.btn-delete {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btn-delete:hover {
+    background: #dc2626;
+}
+
+.inline-form {
+    display: inline;
+}
+
+/* MUTED TEXT */
+.text-muted {
+    color: #9ca3af;
+    font-style: italic;
+}
+
+/*Role admin edit page*/
+/* PAGE TITLE */
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* BACK LINK */
+.back-link a {
+    color: #2563eb;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+/* CARD */
+.form-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* TITLE */
+.form-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* FORM */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* SECTION */
+.section-title {
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* GRID */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+/* FULL WIDTH */
+.form-group.full {
+    grid-column: span 2;
+}
+
+/* INPUTS */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+input,
+select,
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #6B8F99;
+    box-shadow: 0 0 5px rgba(107,143,153,0.4);
+}
+
+/* PERMISSIONS BOX */
+.permission-box {
+    margin-top: 10px;
+}
+
+.module-title {
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* PERMISSION GRID */
+.permission-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+/* CHECKBOX */
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.checkbox-item input {
+    width: 16px;
+    height: 16px;
+    accent-color: #6B8F99;
+}
+
+/* ACTIONS */
+.form-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* BUTTON */
+.btn-primary {
+    background: #6B8F99;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #56757d;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .form-grid,
+    .permission-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/*Create Roles admin */
+/* PAGE TITLE */
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* BACK LINK */
+.back-link a {
+    color: #2563eb;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+/* CARD */
+.form-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* TITLE */
+.form-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* FORM */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* SECTION */
+.section-title {
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* GRID */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+/* FORM GROUP */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* INPUTS */
+label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+input,
+select,
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #6B8F99;
+    box-shadow: 0 0 5px rgba(107,143,153,0.4);
+}
+
+/* PERMISSIONS */
+.permission-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.module-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+/* MODULE TITLE */
+.module-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* PERMISSION GRID */
+.permission-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+/* CHECKBOX */
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.checkbox-item input {
+    width: 16px;
+    height: 16px;
+    accent-color: #6B8F99;
+}
+
+/* BUTTON */
+.form-actions {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background: #6B8F99;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #56757d;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .form-grid,
+    .permission-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/*Users Section here*/
+/* PAGE TITLE */
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* ALERT */
+.alert-success {
+    background: #d1fae5;
+    color: #065f46;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+/* CARD GRID */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+    font-size: 14px;
+    color: #666;
+}
+
+.card p {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* TABLE WRAPPER */
+.table-wrapper {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* CREATE BUTTON */
+.btn-create {
+    display: inline-block;
+    background: #bbf7d0;
+    color: #000;
+    padding: 10px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.btn-create:hover {
+    background: #a7f3d0;
+}
+
+/* TABLE */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.table thead {
+    background: #f3f4f6;
+}
+
+.table tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* ROLE BADGE */
+.badge-role {
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    margin-right: 3px;
+}
+
+/* SMALL TEXT */
+.small-text {
+    font-size: 12px;
+    color: #555;
+}
+
+/* BUTTONS */
+.btn-small {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.btn-small:hover {
+    background: #2563eb;
+}
+
+/* STATUS */
+.status {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.status.active {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status.pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status.inactive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ACTIONS */
+.action-col {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.btn-edit {
+    background: #3b82f6;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.btn-edit:hover {
+    background: #2563eb;
+}
+
+.btn-delete {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.btn-delete:hover {
+    background: #dc2626;
+}
+
+.inline-form {
+    display: inline;
+}
+
+
+/*User-edit Page In Admin Panel */
+/* PAGE TITLE */
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* BACK LINK */
+.back-link a {
+    color: #2563eb;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+/* ERROR BOX */
+.alert-danger {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.alert-danger ul {
+    margin-left: 20px;
+}
+
+/* CARD */
+.form-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* TITLE */
+.form-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* FORM */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* SECTION */
+.section-title {
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* GRID */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+/* INPUT GROUP */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* INPUTS */
+input,
+select,
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #6B8F99;
+    box-shadow: 0 0 5px rgba(107,143,153,0.4);
+}
+
+/* BUTTON */
+.form-actions {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background: #6B8F99;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #56757d;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/*Create User Admin Panel*/
+/* PAGE TITLE */
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* BACK LINK */
+.back-link a {
+    color: #2563eb;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+/* CARD */
+.form-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* TITLE */
+.form-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* FORM */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* SECTION */
+.section-title {
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* GRID */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+/* FORM GROUP */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* INPUTS */
+input,
+select,
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #6B8F99;
+    box-shadow: 0 0 5px rgba(107,143,153,0.4);
+}
+
+/* BUTTON */
+.form-actions {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background: #6B8F99;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #56757d;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}

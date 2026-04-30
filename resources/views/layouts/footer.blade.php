@@ -1,21 +1,23 @@
-<footer class="bg-gray-900 text-gray-300 py-6">
-  <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4">
-    <!-- Logo / Brand -->
-    <div class="text-lg font-bold text-white mb-4 md:mb-0">
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Logo -->
+    <div class="footer-brand">
       Nac Technologies
     </div>
 
     <!-- Links -->
-    <div class="flex space-x-6 mb-4 md:mb-0">
-      <a href="#" class="hover:text-white transition-colors">Home</a>
-      <a href="#" class="hover:text-white transition-colors">About</a>
-      <a href="#" class="hover:text-white transition-colors">Services</a>
-      <a href="#" class="hover:text-white transition-colors">Contact</a>
+    <div class="footer-links">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
     </div>
 
     <!-- Copyright -->
-    <div class="text-sm">
+    <div class="footer-copy">
       &copy; 2026 Nac Technologies. All rights reserved.
     </div>
+
   </div>
 </footer>

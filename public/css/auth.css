@@ -1,0 +1,232 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Figtree', sans-serif;
+}
+
+/* FULL PAGE BACKGROUND */
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+
+    padding: 20px;
+}
+
+/* LOGO */
+.logo {
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 80px;
+    height: 80px;
+}
+
+/* AUTH CARD */
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/*Login Section  */
+/* FORM */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* GROUP */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* INPUTS */
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #6B8F99;
+    box-shadow: 0 0 5px rgba(107,143,153,0.4);
+}
+
+/* ERROR */
+.error {
+    font-size: 12px;
+    color: red;
+}
+
+/* SUCCESS */
+.alert-success {
+    background: #d1fae5;
+    color: #065f46;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+/* REMEMBER */
+/* REMEMBER CHECKBOX FIX */
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #444;
+}
+
+.remember label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.remember input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #6B8F99;
+    cursor: pointer;
+}
+
+/* ACTIONS */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* FORGOT LINK */
+.forgot {
+    font-size: 13px;
+    color: #6B8F99;
+    text-decoration: none;
+}
+
+.forgot:hover {
+    text-decoration: underline;
+}
+
+/* BUTTON */
+.btn-primary {
+    background: #6B8F99;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #56757d;
+}
+
+/* FORM (same as login) */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* INPUT GROUP */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* INPUTS */
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #6B8F99;
+    box-shadow: 0 0 5px rgba(107,143,153,0.4);
+}
+
+/* ERROR */
+.error {
+    font-size: 12px;
+    color: red;
+}
+
+/* ACTION AREA */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* LINK */
+.link {
+    font-size: 13px;
+    color: #6B8F99;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+/* BUTTON */
+.btn-primary {
+    background: #6B8F99;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #56757d;
+}

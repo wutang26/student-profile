@@ -14,6 +14,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\HighChartController;
 use App\Http\Controllers\UserPermissionController;
+use App\Http\Controllers\StudentController;
 
 
 
@@ -183,6 +184,9 @@ Route::prefix('admin')->middleware(['auth', 'role:super-admin'])->group(function
     Route::get('/audit-logs', [AuditLogController::class, 'index'])->name('admin.audit.index');
 });
 
+//Student
+Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
 
 //Used for AuTH
 require __DIR__.'/auth.php';

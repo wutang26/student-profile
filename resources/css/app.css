@@ -1,3 +1,144 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
+
+/* FOOTER BASE */
+.footer {
+    background: linear-gradient(180deg, #6B8F99, #4F6D7A); /* matches sidebar tone */
+    color: #f1f5f9;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* LINKS */
+.footer-link {
+    color: #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+/* HOVER EFFECT */
+.footer-link:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+
+/* PAGE HEADER */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-box button {
+    padding: 8px 12px;
+    background: #4F6D7A;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* GRID */
+.student-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* CARD */
+.student-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.student-card:hover {
+    transform: translateY(-5px);
+}
+
+/* AVATAR */
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/* TEXT */
+.force {
+    color: gray;
+    font-size: 14px;
+}
+
+/* STATUS */
+.status {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.status.active {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status.inactive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* BUTTON */
+.view-btn {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #4F6D7A;
+    font-size: 14px;
+}
+
+/* PROFILE */
+.profile-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* PROFILE HEADER */
+.profile-header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+/* GRID */
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* COMMENT */
+.comment {
+    margin-top: 20px;
+}
