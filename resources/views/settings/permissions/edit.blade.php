@@ -1,74 +1,97 @@
 @extends('layouts.admin')
 
 @section('content')
-<h1 class="text-2xl font-bold mb-4">Edit Permission</h1>
 
-<div class="grid grid-cols-1 gap-6">
+<h1 class="page-title">Edit Permission</h1>
 
-    <!-- Back Button -->
-    <div>
-        <a href="{{ route('settings.permissions.index') }}" class="text-blue-600 hover:underline">&larr; Back</a>
-    </div>
+<!-- BACK -->
+<div class="back-link">
+    <a href="{{ route('settings.permissions.index') }}">&larr; Back</a>
+</div>
 
-    <!-- Form Card -->
-    <div class="bg-white p-6 rounded-xl shadow-lg w-full mx-auto overflow-x-auto">
+<!-- CARD -->
+<div class="form-card">
 
-        <h2 class="text-2xl font-bold mb-6 text-center">Edit Permission</h2>
+    <h2 class="form-title">Edit Permission</h2>
 
-        <form method="POST" action="{{ route('settings.permissions.updatePermission', $permission->id) }}" class="space-y-6">
-            @csrf
-            @method('PUT')
+    <form method="POST" action="{{ route('settings.permissions.updatePermission', $permission->id) }}" class="form">
+        @csrf
+        @method('PUT')
 
-            <h3 class="text-lg font-semibold mb-3 border-b pb-1">Basic Information</h3>
+        <h3 class="section-title">Basic Information</h3>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="form-grid">
 
-                <!-- Module -->
-                <div class="flex flex-col">
-                    <label class="form-label">Module Name</label>
-                    <select name="module" class="form-input max-w-md" required>
-                        <option value="">-- Select Module --</option>
-                        <option value="loan_officer" {{ old('module', $permission->module) == 'loan_officer' ? 'selected' : '' }}>Loan Officer</option>
-                        <option value="accountant" {{ old('module', $permission->module) == 'accountant' ? 'selected' : '' }}>Accountant</option>
-                        <option value="users" {{ old('module', $permission->module) == 'users' ? 'selected' : '' }}>Users</option>
-                        <option value="roles" {{ old('module', $permission->module) == 'roles' ? 'selected' : '' }}>Roles</option>
-                    </select>
-                </div>
+            <!-- MODULE -->
+            <div class="form-group">
+                <label>Module Name</label>
+                <select name="module" required>
+                    <option value="">-- Select Module --</option>
 
-                <!-- Permission Label -->
-                <div class="flex flex-col">
-                    <label class="form-label">Permission Label</label>
-                    <input type="text" name="lable" class="form-input max-w-md" required
-                           value="{{ old('lable', $permission->lable) }}">
-                </div>
+                    <option value="loan_officer"
+                        {{ old('module', $permission->module) == 'loan_officer' ? 'selected' : '' }}>
+                        Loan Officer
+                    </option>
 
-                <!-- Description -->
-                <div class="flex flex-col md:col-span-2">
-                    <label class="form-label">Description</label>
-                    <textarea name="description" class="form-input max-w-md" rows="4">{{ old('description', $permission->description) }}</textarea>
-                </div>
+                    <option value="accountant"
+                        {{ old('module', $permission->module) == 'accountant' ? 'selected' : '' }}>
+                        Accountant
+                    </option>
 
+                    <option value="users"
+                        {{ old('module', $permission->module) == 'users' ? 'selected' : '' }}>
+                        Users
+                    </option>
+
+                    <option value="roles"
+                        {{ old('module', $permission->module) == 'roles' ? 'selected' : '' }}>
+                        Roles
+                    </option>
+
+                </select>
             </div>
 
-            <h3 class="text-lg font-semibold mt-8 mb-3 border-b pb-1">Status</h3>
+            <!-- LABEL -->
+            <div class="form-group">
+                <label>Permission Label</label>
+                <input type="text"
+                       name="lable"
+                       value="{{ old('lable', $permission->lable) }}"
+                       required>
+            </div>
 
-            <div class="flex flex-col">
-                <label class="form-label">Status</label>
-                <select name="is_active" class="form-input max-w-md" required>
+            <!-- DESCRIPTION -->
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" rows="4">{{ old('description', $permission->description) }}</textarea>
+            </div>
+
+        </div>
+
+        <!-- STATUS -->
+        <h3 class="section-title">Status</h3>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Status</label>
+                <select name="is_active" required>
                     <option value="1" {{ old('is_active', $permission->is_active) == 1 ? 'selected' : '' }}>Active</option>
                     <option value="0" {{ old('is_active', $permission->is_active) == 0 ? 'selected' : '' }}>Inactive</option>
                 </select>
             </div>
 
-            <!-- BUTTON -->
-            <div class="mt-10 text-center">
-                <button type="submit"
-                        class="bg-blue-600 text-white px-10 py-3 rounded-lg text-lg hover:bg-blue-700 transition">
-                    Update Permission
-                </button>
-            </div>
-        </form>
+        </div>
 
-    </div>
+        <!-- BUTTON -->
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">
+                Update Permission
+            </button>
+        </div>
+
+    </form>
+
 </div>
+
 @endsection
