@@ -19,7 +19,7 @@ class UserPermissionController extends Controller
     public function assignPermissions(Request $request, User $user)
     {
         // Example permissions to assign
-        $permissions = ['apply loan', 'view loans'];
+        $permissions = ['create student', 'edit student', 'view student'];
 
         $user->givePermissionTo($permissions);
 

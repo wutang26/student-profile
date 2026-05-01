@@ -170,8 +170,8 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Name</th>
             <th>Force No</th>
+            <th>Name</th>
             <th>NIDA</th>
             <th>Company</th>
             <th>Platoon</th>
@@ -185,8 +185,8 @@
         @foreach($students as $key => $student)
         <tr>
             <td>{{ $key + 1 }}</td>
-            <td>{{ $student->first_name }} {{ $student->last_name }}</td>
             <td>{{ $student->force_number }}</td>
+            <td>{{ $student->first_name }} {{ $student->last_name }}</td>
             <td>{{ $student->nida }}</td>
             <td>{{ $student->company }}</td>
             <td>{{ $student->platoon }}</td>

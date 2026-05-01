@@ -42,14 +42,6 @@
                 <a href="{{ route('students.documents.index') }}" class="menu-item small">
                     <i class="bi bi-folder"></i> Attachments
                 </a>
-<!-- 
-                <a href="{{ route('students.documents.create') }}" class="menu-item small">
-                    <i class="bi bi-upload"></i> Upload Document
-                </a> -->
-
-                  <!-- <a href="{{ route('students.create') }}" class="menu-item small">
-                    <i class="bi bi-person-plus"></i> Register Student
-                </a> -->
 
             </div>
         </div>

@@ -47,7 +47,7 @@ class PermissionSeeder extends Seeder
                 'description' => 'User can view full student details',
             ],
             [
-                'name' => 'edit student',
+                'name' => 'edit profile',
                 'module' => 'student',
                 'lable' => 'Edit Student',
                 'description' => 'User can edit student information',
