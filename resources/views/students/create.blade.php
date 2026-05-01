@@ -4,7 +4,7 @@
 
 <h1 class="page-title">Register Student</h1>
 
-<form method="POST" action="{{ route('students.store') }}" class="form-card">
+<form method="POST" action="{{ route('students.store') }}" class="form-card" enctype="multipart/form-data">
 @csrf
 
 <!-- ================= BASIC INFO ================= -->
@@ -73,7 +73,40 @@
         <input type="text" name="next_of_kin_address" placeholder="Address">
     </div>
 </div>
+<!-- ================= LOCATION ================= -->
+<div class="form-section">
+    <h3 class="section-title">Location Information</h3>
 
+    <div class="grid">
+        <!-- Origin Region -->
+       <select name="origin_region" required>
+        <option value="">Select Origin Region</option>
+        @foreach($regions as $region)
+            <option value="{{ $region->name }}">{{ $region->name }}</option>
+        @endforeach
+    </select>
+
+         <!-- District -->
+        <select name="origin_district" required>
+            <option value="">Select District</option>
+            @foreach($districts as $district)
+                <option value="{{ $district->name }}">{{ $district->name }}</option>
+            @endforeach
+        </select>
+
+        <!-- Entry Region (text input) -->
+        <input type="text" name="entry_region" placeholder="Entry Region">
+    </div>
+</div>
+
+<!-- ================= PHOTO ================= -->
+<div class="form-section">
+    <h3 class="section-title">Student Photo</h3>
+
+    <div class="grid">
+        <input type="file" name="photo" accept="image/*">
+    </div>
+</div>
 <!-- SUBMIT -->
 <div class="form-actions">
     <button type="submit" class="btn-primary">

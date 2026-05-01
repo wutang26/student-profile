@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+Use App\Models\Region;
+Use App\Models\District;
 
 class StudentController extends Controller
 {
@@ -53,26 +55,37 @@ class StudentController extends Controller
      */
      public function create()
     {
-        return view('students.create');
+        $regions = Region::all();
+        $districts = District::all();
+        return view('students.create', compact('regions','districts'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'force_number' => 'required|unique:students',
-            'nida' => 'required|unique:students',
-            'company' => 'required',
-            'platoon' => 'required',
-        ]);
+   public function store(Request $request)
+{
+    $request->validate([
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'force_number' => 'required|unique:students',
+        'nida' => 'required|unique:students',
+        'company' => 'required',
+        'platoon' => 'required',
+        'origin_region' => 'required',
+        'origin_district' => 'required',
+        'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
 
-        Student::create($request->all());
+    $data = $request->all();
 
-        return redirect()->route('students.index')
-            ->with('success', 'Student created successfully');
+    // HANDLE PHOTO UPLOAD
+    if ($request->hasFile('photo')) {
+        $data['photo'] = $request->file('photo')->store('students', 'public');
     }
 
+    Student::create($data);
+
+    return redirect()->route('students.index')
+        ->with('success', 'Student created successfully');
+}
     /**
      * Display the specified resource.
      */

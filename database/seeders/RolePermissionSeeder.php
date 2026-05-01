@@ -12,18 +12,29 @@ class RolePermissionSeeder extends Seeder
     public function run()
     {
         // -------------------------
-        // Define Permissions
+        // STUDENT SYSTEM PERMISSIONS
         // -------------------------
         $permissions = [
+            // Dashboard
             'view dashboard',
+
+            // Student management
+            'create student',
+            'view students',
+            'view student profile',
+            'edit student',
+            'delete student',
+
+            // Documents
+            'upload student document',
+            'view student documents',
+
+            // Status
+            'update student status',
+
+            // System management
             'manage users',
             'manage roles',
-            'approve loans',
-            'disburse loans',
-            'view reports',
-            'view applications',
-            'print reports',
-            'apply loan',
         ];
 
         foreach ($permissions as $perm) {
@@ -31,14 +42,59 @@ class RolePermissionSeeder extends Seeder
         }
 
         // -------------------------
-        // Define Roles and Assign Permissions
+        // ROLES & PERMISSIONS
         // -------------------------
         $rolesPermissions = [
-            'super-admin'  => Permission::all()->pluck('name')->toArray(), // all permissions
-            'admin'       => ['view dashboard', 'manage users', 'manage roles', 'view reports'],
-            'accountant'  => ['view dashboard', 'view reports', 'view applications', 'print reports'],
-            'mwenyekiti'  => ['view dashboard', 'view reports', 'approve loans'],
-            'katibu'      => ['view dashboard', 'view reports'],
+
+            // FULL ACCESS
+            'super-admin' => Permission::all()->pluck('name')->toArray(),
+
+            // SYSTEM ADMIN
+            'admin' => [
+                'view dashboard',
+                'create student',
+                'view students',
+                'view student profile',
+                'edit student',
+                'delete student',
+                'upload student document',
+                'view student documents',
+                'update student status',
+                'manage users',
+                'manage roles',
+            ],
+
+            // COMPANY LEVEL (limited management)
+            'company-surmajor' => [
+                'view dashboard',
+                'view students',
+                'view student profile',
+                'upload student document',
+                'view student documents',
+                'update student status',
+            ],
+
+            // CLERK (data entry)
+            'karani' => [
+                'view dashboard',
+                'create student',
+                'view students',
+                'view student profile',
+                'upload student document',
+            ],
+
+            // OPTIONAL SUPPORT ROLE
+            'katibu' => [
+                'view dashboard',
+                'view students',
+                'view student profile',
+            ],
+
+            // STUDENT ROLE (SELF ACCESS ONLY)
+            'student' => [
+                'view dashboard',
+                'view student profile',
+            ],
         ];
 
         foreach ($rolesPermissions as $roleName => $perms) {
@@ -47,10 +103,10 @@ class RolePermissionSeeder extends Seeder
         }
 
         // -------------------------
-        // Optional: Assign Default Roles to Users
+        // Assign default role
         // -------------------------
-        // For example, assign 'superadmin' to the first user
         $firstUser = User::first();
+
         if ($firstUser && !$firstUser->hasAnyRole(array_keys($rolesPermissions))) {
             $firstUser->assignRole('super-admin');
         }

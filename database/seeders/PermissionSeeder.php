@@ -28,53 +28,71 @@ class PermissionSeeder extends Seeder
         public function run()
 {
     $permissions = [
-        [
-            'name' => 'apply loan',
-            'module' => 'loan',
-            'lable' => 'Apply Loan',
-            'description' => 'User can apply for loan',
-        ],
-        [
-            'name' => 'view loans',
-            'module' => 'loan',
-            'lable' => 'View Loans',
-            'description' => 'User can view loans',
-        ],
-        [
-            'name' => 'approve loan',
-            'module' => 'loan',
-            'lable' => 'Approve Loan',
-            'description' => 'Admin can approve loans',
-        ],
-        [
-            'name' => 'reject loan',
-            'module' => 'loan',
-            'lable' => 'Reject Loan',
-            'description' => 'Admin can reject loans',
-        ],
-        [
-            'name' => 'disburse loan',
-            'module' => 'loan',
-            'lable' => 'Disburse Loan',
-            'description' => 'Admin can disburse loans',
-        ],
-    ];
-
-    foreach ($permissions as $perm) {
-        Permission::firstOrCreate(
             [
-                'name' => $perm['name'],
-                'guard_name' => 'web',
+                'name' => 'create student',
+                'module' => 'student',
+                'lable' => 'Create Student',
+                'description' => 'User can register a new student',
             ],
             [
-                'module' => $perm['module'],
-                'lable' => $perm['lable'],
-                'is_active' => 1,
-                'description' => $perm['description'],
-            ]
-        );
+                'name' => 'view students',
+                'module' => 'student',
+                'lable' => 'View Students',
+                'description' => 'User can view student list',
+            ],
+            [
+                'name' => 'view student profile',
+                'module' => 'student',
+                'lable' => 'View Student Profile',
+                'description' => 'User can view full student details',
+            ],
+            [
+                'name' => 'edit student',
+                'module' => 'student',
+                'lable' => 'Edit Student',
+                'description' => 'User can edit student information',
+            ],
+            [
+                'name' => 'delete student',
+                'module' => 'student',
+                'lable' => 'Delete Student',
+                'description' => 'User can delete student records',
+            ],
+            [
+                'name' => 'upload student document',
+                'module' => 'student',
+                'lable' => 'Upload Document',
+                'description' => 'User can upload student documents',
+            ],
+            [
+                'name' => 'view student documents',
+                'module' => 'student',
+                'lable' => 'View Documents',
+                'description' => 'User can view student documents',
+            ],
+            [
+                'name' => 'update student status',
+                'module' => 'student',
+                'lable' => 'Update Status',
+                'description' => 'User can update student status (active/inactive)',
+            ],
+        ];
+
+        foreach ($permissions as $perm) {
+            Permission::firstOrCreate(
+                [
+                    'name' => $perm['name'],
+                    'guard_name' => 'web',
+                ],
+                [
+                    'module' => $perm['module'],
+                    'lable' => $perm['lable'],
+                    'is_active' => 1,
+                    'description' => $perm['description'],
+                ]
+            );
+        }
     }
-}
 
 
 }

@@ -10,7 +10,7 @@ class Student extends Model
     use HasFactory;
     
     protected $fillable = [
-         'first_name',
+        'first_name',
         'middle_name',
         'last_name',
         'force_number',
@@ -45,5 +45,10 @@ class Student extends Model
     public function documents()
 {
     return $this->hasMany(StudentDocument::class);
+}
+
+public function originRegion()
+{
+    return $this->belongsTo(Region::class, 'origin_region_id');
 }
 }

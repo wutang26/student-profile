@@ -108,12 +108,14 @@
     <!-- HEADER -->
     <div class="profile-header">
 
-        <img src="{{ $student->photo ?? 'https://via.placeholder.com/120' }}" class="profile-img">
+   <img 
+    src="{{ $student->photo ? asset('storage/'.$student->photo) : asset('images/default-avatar.png') }}" 
+    class="profile-img">
 
         <div>
          <p>
     <strong>Full Name:</strong>
-    {{ $student->first_name }} {{ $student->middle_name }} {{ $student->last_name }}
+    {{ $student->first_name }} {{ $student->last_name }}
 </p>
             <p><strong>Force No:</strong> {{ $student->force_number }}</p>
             <p><strong>NIDA:</strong> {{ $student->nida }}</p>
@@ -135,7 +137,7 @@
 
         <div>
             <h4>Next of Kin</h4>
-            <p>{{ $student->next_of_kin }}</p>
+            <p>{{ $student->next_of_kin_name }}</p>
         </div>
 
         <div>
@@ -156,6 +158,11 @@
         <div>
             <h4>Entry Region</h4>
             <p>{{ $student->entry_region }}</p>
+        </div>
+
+            <div>
+            <h4>Behaviour Trend</h4>
+            <p>Good or Bad it Depend</p>
         </div>
 
     </div>
