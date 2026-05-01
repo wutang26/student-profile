@@ -9,106 +9,109 @@ use Spatie\Permission\Models\Permission;
 
 class RolePermissionSeeder extends Seeder
 {
-    public function run()
-    {
-        // -------------------------
-        // STUDENT SYSTEM PERMISSIONS
-        // -------------------------
-        $permissions = [
-            // Dashboard
-            'view dashboard',
+   public function run()
+{
+    // =========================
+    // 1. CREATE ALL PERMISSIONS
+    // =========================
+    $permissions = [
+        'view dashboard',
 
-            // Student management
-            'create student',
-            'view students',
-            'view student profile',
-            'edit student',
-            'delete student',
+        'create student',
+        'view students',
+        'view student profile',
+        'edit student',
+        'delete student',
 
-            // Documents
-            'upload student document',
-            'view student documents',
+        'upload student document',
+        'view student documents',
 
-            // Status
-            'update student status',
+        'update student status',
 
-            // System management
-            'manage users',
-            'manage roles',
-        ];
+        'manage users',
+        'manage roles',
+    ];
 
-        foreach ($permissions as $perm) {
-            Permission::firstOrCreate(['name' => $perm]);
-        }
+    foreach ($permissions as $permission) {
+        Permission::firstOrCreate([
+            'name' => $permission,
+            'guard_name' => 'web',
+        ]);
+    }
 
-        // -------------------------
-        // ROLES & PERMISSIONS
-        // -------------------------
-        $rolesPermissions = [
+    // =========================
+    // 2. DEFINE ROLES CLEARLY
+    // =========================
 
-            // FULL ACCESS
-            'super-admin' => Permission::all()->pluck('name')->toArray(),
+    // SUPER ADMIN → EVERYTHING
+    $superAdminPermissions = $permissions;
 
-            // SYSTEM ADMIN
-            'admin' => [
-                'view dashboard',
-                'create student',
-                'view students',
-                'view student profile',
-                'edit student',
-                'delete student',
-                'upload student document',
-                'view student documents',
-                'update student status',
-                'manage users',
-                'manage roles',
-            ],
+    // ADMIN → FULL SYSTEM ACCESS (same as super-admin here)
+    $adminPermissions = $permissions;
 
-            // COMPANY LEVEL (limited management)
-            'company-surmajor' => [
-                'view dashboard',
-                'view students',
-                'view student profile',
-                'upload student document',
-                'view student documents',
-                'update student status',
-            ],
+    // COMPANY SURMAJOR → LIMITED MANAGEMENT
+    $companyPermissions = [
+        'view dashboard',
+        'view students',
+        'view student profile',
+        'upload student document',
+        'view student documents',
+        'update student status',
+    ];
 
-            // CLERK (data entry)
-            'karani' => [
-                'view dashboard',
-                'create student',
-                'view students',
-                'view student profile',
-                'upload student document',
-            ],
+    // KARANI → DATA ENTRY ONLY
+    $karaniPermissions = [
+        'view dashboard',
+        'create student',
+        'view students',
+        'view student profile',
+        'upload student document',
+    ];
 
-            // OPTIONAL SUPPORT ROLE
-            'katibu' => [
-                'view dashboard',
-                'view students',
-                'view student profile',
-            ],
+    // KATIBU → VIEW ONLY
+    $katibuPermissions = [
+        'view dashboard',
+        'view students',
+        'view student profile',
+    ];
 
-            // STUDENT ROLE (SELF ACCESS ONLY)
-            'student' => [
-                'view dashboard',
-                'view student profile',
-            ],
-        ];
+    // STUDENT → OWN DATA ONLY
+    $studentPermissions = [
+        'view dashboard',
+        'view student profile',
+    ];
 
-        foreach ($rolesPermissions as $roleName => $perms) {
-            $role = Role::firstOrCreate(['name' => $roleName]);
-            $role->syncPermissions($perms);
-        }
+    // =========================
+    // 3. ASSIGN ROLES (IF ROLE IS...)
+    // =========================
 
-        // -------------------------
-        // Assign default role
-        // -------------------------
-        $firstUser = User::first();
+    $roles = [
+        'super-admin' => $superAdminPermissions,
+        'admin' => $adminPermissions,
+        'company-surmajor' => $companyPermissions,
+        'karani' => $karaniPermissions,
+        'katibu' => $katibuPermissions,
+        'student' => $studentPermissions,
+    ];
 
-        if ($firstUser && !$firstUser->hasAnyRole(array_keys($rolesPermissions))) {
-            $firstUser->assignRole('super-admin');
-        }
+    foreach ($roles as $roleName => $perms) {
+        $role = Role::firstOrCreate([
+            'name' => $roleName,
+            'guard_name' => 'web',
+        ]);
+
+        $role->syncPermissions($perms);
+    }
+
+    // =========================
+    // 4. DEFAULT USER
+    // =========================
+    $user = User::first();
+
+    if ($user && !$user->hasAnyRole(['super-admin', 'admin', 'karani', 'katibu'])) {
+        $user->assignRole('super-admin');
     }
 }
+    
+}
+

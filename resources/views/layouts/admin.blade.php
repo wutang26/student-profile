@@ -20,85 +20,121 @@
         <div class="sidebar-title">
             Admin Panel
         </div>
+        
+<nav class="menu">
 
-        <nav class="menu">
+    <!-- DASHBOARD -->
+    <a href="{{ route('dashboard') }}" class="menu-item">
+        <i class="bi bi-speedometer2"></i> Dashboard
+    </a>
 
-            <a href="{{ route('dashboard') }}" class="menu-item">
-                <i class="bi bi-speedometer2"></i> Dashboard
+    {{-- ================= STUDENTS ================= --}}
+    @can('view students')
+    <div class="dropdown">
+        <button class="dropdown-toggle">
+            <span><i class="bi bi-people"></i> Students</span>
+            <i class="bi bi-chevron-down"></i>
+        </button>
+
+        <div class="dropdown-menu hidden">
+
+            <a href="{{ route('students.index') }}" class="menu-item small">
+                <i class="bi bi-list"></i> All Students
             </a>
 
-            <div class="dropdown">
-            <button class="dropdown-toggle">
-                <span><i class="bi bi-people"></i> Students</span>
-                <i class="bi bi-chevron-down"></i>
-            </button>
+            @can('view student documents')
+            <a href="{{ route('students.documents.index') }}" class="menu-item small">
+                <i class="bi bi-folder"></i> Attachments
+            </a>
+            @endcan
 
-            <div class="dropdown-menu hidden">
-
-                <a href="{{ route('students.index') }}" class="menu-item small">
-                    <i class="bi bi-list"></i> All Students
-                </a>
-
-                <a href="{{ route('students.documents.index') }}" class="menu-item small">
-                    <i class="bi bi-folder"></i> Attachments
-                </a>
-
-            </div>
         </div>
+    </div>
+    @endcan
+ <div class="dropdown">
+        <button class="dropdown-toggle">
+            <span><i class="bi bi-people"></i> Staff</span>
+            <i class="bi bi-chevron-down"></i>
+        </button>
 
-            <a href="#" class="menu-item">
-                <i class="bi bi-people"></i> Company Staffs
+        <div class="dropdown-menu hidden">
+
+            <a href="{{ route('students.index') }}" class="menu-item small">
+                <i class="bi bi-list"></i> All Staff
             </a>
-             <a href="{{route('admin.audit.index') }}" class="menu-item">
-              <i class="bi bi-journal-text"></i> Audits
+
+            @can('view student documents')
+            <a href="{{ route('students.documents.index') }}" class="menu-item small">
+                <i class="bi bi-folder"></i> All staff
+            </a>
+            @endcan
+
+        </div>
+    </div>
+
+ 
+
+    {{-- ================= AUDITS (REMOVE FAKE PERMISSION) ================= --}}
+ 
+    <a href="{{ route('admin.audit.index') }}" class="menu-item">
+        <i class="bi bi-journal-text"></i> Audits
+    </a>
+
+
+    {{-- ================= REPORTS (FIXED) ================= --}}
+    @can('view students')
+    <div class="dropdown">
+        <button class="dropdown-toggle">
+            <span><i class="bi bi-bar-chart"></i> Reports</span>
+            <i class="bi bi-chevron-down"></i>
+        </button>
+
+        <div class="dropdown-menu hidden">
+            <a href="{{ route('pdf.preview') }}" class="menu-item small">
+                <i class="bi bi-file-earmark-pdf"></i> Student Report
+            </a>
+        </div>
+    </div>
+    @endcan
+
+
+    {{-- ================= SETTINGS (ONLY FOR MANAGE USERS/ROLES) ================= --}}
+    @can('manage users')
+    <div class="dropdown">
+        <button class="dropdown-toggle">
+            <span><i class="bi bi-gear"></i> Settings</span>
+            <i class="bi bi-chevron-down"></i>
+        </button>
+
+        <div class="dropdown-menu hidden">
+
+            <a href="{{ route('settings.users.index') }}" class="menu-item small">
+                Users
             </a>
 
-            <!-- Reports -->
-            <div class="dropdown">
-                <button class="dropdown-toggle">
-                    <span><i class="bi bi-bar-chart"></i> Reports</span>
-                    <i class="bi bi-chevron-down"></i>
-                </button>
+            @can('manage roles')
+            <a href="{{ route('settings.roles.index') }}" class="menu-item small">
+                Roles
+            </a>
+            @endcan
 
-                <div class="dropdown-menu hidden">
-                    <a href="{{ route('pdf.preview') }}" class="menu-item small">
-                        <i class="bi bi-people"></i> Student Report
-                    </a>
-                </div>
-            </div>
+            <a href="{{ route('settings.permissions.index') }}" class="menu-item small">
+                Permissions
+            </a>
 
-            <!-- Settings -->
-            <div class="dropdown">
-                <button class="dropdown-toggle">
-                    <span><i class="bi bi-gear"></i> Settings</span>
-                    <i class="bi bi-chevron-down"></i>
-                </button>
+            <a href="{{ route('settings.regions.region') }}" class="menu-item small">
+                Regions
+            </a>
 
-                <div class="dropdown-menu hidden">
+            <a href="{{ route('settings.district') }}" class="menu-item small">
+                Districts
+            </a>
 
-                    <a href="{{ route('settings.users.index') }}" class="menu-item small">
-                        Users
-                    </a>
+        </div>
+    </div>
+    @endcan
 
-                    <a href="{{ route('settings.roles.index') }}" class="menu-item small">
-                        Roles
-                    </a>
-
-                    <a href="{{ route('settings.permissions.index') }}" class="menu-item small">
-                        Permissions
-                    </a>
-                    <a href="{{ route('settings.regions.region') }}" class="menu-item small">
-                        Regions
-                    </a>
-                    <a href="{{ route('settings.district') }}" class="menu-item small">
-                        Districtss
-                    </a>
-                     
-
-                </div>
-            </div>
-
-        </nav>
+</nav>
     </aside>
 
     <!-- MAIN -->

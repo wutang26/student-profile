@@ -136,9 +136,9 @@ public function updateUser(Request $request, string $id)
 
     // Example: assign default permissions
     $user->syncPermissions([
-        'view dashboard',
-        'edit profile'
-    ]);
+    'view dashboard',
+    'view student profile'
+]);
 
     return back()->with('success', 'Permissions assigned successfully');
 }

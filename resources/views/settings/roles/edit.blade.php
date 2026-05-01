@@ -27,7 +27,7 @@
                 <label>Module Name</label>
                 <select name="module" required>
                     <option value="">-- Select Module --</option>
-                    <option value="loan_officer" {{ old('module', $role->module) == 'loan_officer' ? 'selected' : '' }}>Loan Officer</option>
+                    <option value="loan_officer" {{ old('module', $role->module) == 'loan_officer' ? 'selected' : '' }}>Karani</option>
                     <option value="accountant" {{ old('module', $role->module) == 'accountant' ? 'selected' : '' }}>Accountant</option>
                     <option value="users" {{ old('module', $role->module) == 'users' ? 'selected' : '' }}>Users</option>
                     <option value="roles" {{ old('module', $role->module) == 'roles' ? 'selected' : '' }}>Roles</option>

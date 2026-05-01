@@ -21,13 +21,5 @@ class DatabaseSeeder extends Seeder
             SuperAdminSeeder::class,
         ]);
 
-//     User::factory()->create([
-//     'name' => 'Super Admin',
-//     'email' => 'superadmin@outlook.com',
-//     'password' => Hash::make('password123'),
-// ]);
-
-//  $this->command->info('Super Adimin seeded successfully.');
-//     }
 }
 }
