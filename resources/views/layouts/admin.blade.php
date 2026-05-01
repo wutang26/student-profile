@@ -27,9 +27,32 @@
                 <i class="bi bi-speedometer2"></i> Dashboard
             </a>
 
-            <a href="{{route('students.index') }}" class="menu-item">
-                <i class="bi bi-people"></i> Students
-            </a>
+            <div class="dropdown">
+            <button class="dropdown-toggle">
+                <span><i class="bi bi-people"></i> Students</span>
+                <i class="bi bi-chevron-down"></i>
+            </button>
+
+            <div class="dropdown-menu hidden">
+
+                <a href="{{ route('students.index') }}" class="menu-item small">
+                    <i class="bi bi-list"></i> All Students
+                </a>
+
+                <a href="{{ route('students.documents.index') }}" class="menu-item small">
+                    <i class="bi bi-folder"></i> Attachments
+                </a>
+<!-- 
+                <a href="{{ route('students.documents.create') }}" class="menu-item small">
+                    <i class="bi bi-upload"></i> Upload Document
+                </a> -->
+
+                  <!-- <a href="{{ route('students.create') }}" class="menu-item small">
+                    <i class="bi bi-person-plus"></i> Register Student
+                </a> -->
+
+            </div>
+        </div>
 
             <a href="#" class="menu-item">
                 <i class="bi bi-people"></i> Company Staffs

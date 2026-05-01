@@ -9,44 +9,62 @@ use Illuminate\Support\Facades\Storage;
 
 class StudentDocumentController extends Controller
 {
-    // STORE DOCUMENT
-    public function store(Request $request, $studentId)
+    // 📄 LIST ALL DOCUMENTS
+    public function index()
     {
-        $request->validate([
-            'type' => 'required',
-            'file' => 'required|file|mimes:pdf,jpg,png,docx',
-        ]);
+        $documents = StudentDocument::with('student')->latest()->get();
 
-        $path = $request->file('file')->store('students/documents', 'public');
-
-        StudentDocument::create([
-            'student_id' => $studentId,
-            'type' => $request->type,
-            'title' => $request->title,
-            'file_path' => $path,
-            'remarks' => $request->remarks,
-        ]);
-
-        return back()->with('success', 'Document uploaded successfully');
+        return view('students.documents.index', compact('documents'));
     }
 
-    // DELETE DOCUMENT
+    // ➕ SHOW CREATE FORM
+    public function create()
+    {
+        $students = Student::all();
+
+        return view('students.documents.create', compact('students'));
+    }
+
+    // 💾 STORE DOCUMENT
+  public function store(Request $request)
+{
+    $request->validate([
+        'student_id' => 'required|exists:students,id',
+        'type' => 'required|string',
+        'title' => 'nullable|string',
+        'file' => 'required|file|mimes:pdf,jpg,png,doc,docx|max:2048',
+        'remarks' => 'nullable|string'
+    ]);
+
+    // Upload file
+    $path = $request->file('file')->store('student_documents', 'public');
+
+    // Save to database
+    StudentDocument::create([
+        'student_id' => $request->student_id,
+        'type' => $request->type,
+        'title' => $request->title,
+        'file_path' => $path,
+        'remarks' => $request->remarks,
+    ]);
+
+    return redirect()
+        ->route('students.documents.index')
+        ->with('success', 'Document uploaded successfully');
+}
+
+    // 🗑 DELETE DOCUMENT
     public function destroy($id)
     {
         $doc = StudentDocument::findOrFail($id);
 
-        Storage::disk('public')->delete($doc->file_path);
+        // Delete file from storage
+        if (Storage::disk('public')->exists($doc->file_path)) {
+            Storage::disk('public')->delete($doc->file_path);
+        }
 
         $doc->delete();
 
-        return back()->with('success', 'Document deleted');
-    }
-
-    // VIEW SINGLE FILE (optional route)
-    public function view($id)
-    {
-        $doc = StudentDocument::findOrFail($id);
-
-        return response()->file(storage_path("app/public/{$doc->file_path}"));
+        return back()->with('success', 'Document deleted successfully');
     }
 }

@@ -196,14 +196,22 @@ Route::get('/audit', [AuditLogController::class, 'index'])
     ->name('admin.audit.index');
 
     //Barua ya maelezo na Zingine
-Route::post('/students/{id}/documents', [StudentDocumentController::class, 'store'])
-    ->name('students.documents.store');
+Route::get('/documents', [StudentDocumentController::class, 'index'])->name('students.documents.index');
 
-Route::delete('/documents/{id}', [StudentDocumentController::class, 'destroy'])
-    ->name('students.documents.delete');
+Route::get('/documents/create', [StudentDocumentController::class, 'create'])->name('students.documents.create');
 
-Route::get('/documents/{id}/view', [StudentDocumentController::class, 'view'])
-    ->name('students.documents.view');
+Route::post('/documents', [StudentDocumentController::class, 'store'])->name('students.documents.store');
+
+Route::delete('/documents/{id}', [StudentDocumentController::class, 'destroy'])->name('students.documents.destroy');
+
+// Route::post('/students/{id}/documents', [StudentDocumentController::class, 'store'])
+//     ->name('students.documents.store');
+
+// Route::delete('/documents/{id}', [StudentDocumentController::class, 'destroy'])
+//     ->name('students.documents.delete');
+
+// Route::get('/documents/{id}/view', [StudentDocumentController::class, 'view'])
+//     ->name('students.documents.view');
 
 //Used for AuTH
 require __DIR__.'/auth.php';

@@ -6,36 +6,47 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function index()
     {
-        Schema::create('student_documents', function (Blueprint $table) {
-             $table->id();
-
-            $table->foreignId('student_id')
-                ->constrained()
-                ->onDelete('cascade');
-
-            $table->string('type');
-            // warning, transfer, medical, discipline, description_letter
-
-            $table->string('title')->nullable();
-
-            $table->string('file_path');
-
-            $table->text('remarks')->nullable();
-
-            $table->timestamps();
-        });
+        $documents = StudentDocument::with('student')->latest()->get();
+        return view('students.documents.index', compact('documents'));
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function create()
     {
-        Schema::dropIfExists('student_documents');
+        $students = Student::all();
+        return view('students.documents.create', compact('students'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'type' => 'required|string',
+            'title' => 'nullable|string',
+            'file' => 'required|file|mimes:pdf,jpg,png,doc,docx',
+            'remarks' => 'nullable|string'
+        ]);
+
+        // upload file
+        $path = $request->file('file')->store('student_documents', 'public');
+
+        StudentDocument::create([
+            'student_id' => $request->student_id,
+            'type' => $request->type,
+            'title' => $request->title,
+            'file_path' => $path,
+            'remarks' => $request->remarks,
+        ]);
+
+        return redirect()->route('students.documents.index')->with('success', 'Document uploaded successfully');
+    }
+
+    public function destroy($id)
+    {
+        $doc = StudentDocument::findOrFail($id);
+        $doc->delete();
+
+        return back()->with('success', 'Document deleted');
     }
 };

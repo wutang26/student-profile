@@ -164,7 +164,11 @@
             <h4>Behaviour Trend</h4>
             <p>Good or Bad it Depend</p>
         </div>
-
+        
+           <div>
+            <h4>Next Of Kin Phone</h4>
+            <p>{{ $student->next_of_kin_phone }}</p>
+        </div>
     </div>
 
     <!-- COMMENT -->
