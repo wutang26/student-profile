@@ -47,6 +47,7 @@
 
         </div>
     </div>
+
     
  <div class="dropdown">
         <button class="dropdown-toggle">
@@ -56,15 +57,15 @@
 
         <div class="dropdown-menu hidden">
 
-            <a href="{{ route('students.index') }}" class="menu-item small">
+            <a href="{{ route('staff.index') }}" class="menu-item small">
                 <i class="bi bi-list"></i> All Staff
             </a>
 
-            @can('view student documents')
-            <a href="{{ route('students.documents.index') }}" class="menu-item small">
+            <!-- @can('view student documents')
+            <a href="#" class="menu-item small">
                 <i class="bi bi-folder"></i> All staff
             </a>
-            @endcan
+            @endcan -->
 
         </div>
     </div>
@@ -73,11 +74,26 @@
 
     {{-- ================= AUDITS (REMOVE FAKE PERMISSION) ================= --}}
  
-    @can('view students')
     <a href="{{ route('admin.audit.index') }}" class="menu-item">
         <i class="bi bi-journal-text"></i> Audits
     </a>
-   @endcan
+
+        {{-- ================= Items Store Management ================= --}}
+       @can('view students')
+    <div class="dropdown">
+        <button class="dropdown-toggle">
+            <span><i class="bi bi-boxes"></i>   Store Management</span>
+            <i class="bi bi-chevron-down"></i>
+        </button>
+
+        <div class="dropdown-menu hidden">
+            <a href="#" class="menu-item small">
+                <i class="bi bi-archive"></i> Registered Items
+            </a>
+        </div>
+    </div>
+    @endcan
+
 
     {{-- ================= REPORTS (FIXED) ================= --}}
     @can('view students')
@@ -90,6 +106,9 @@
         <div class="dropdown-menu hidden">
             <a href="{{ route('pdf.preview') }}" class="menu-item small">
                 <i class="bi bi-file-earmark-pdf"></i> Student Report
+            </a>
+             <a href="#" class="menu-item small">
+                <i class="bi bi-file-earmark-pdf"></i> Borrowed Items
             </a>
         </div>
     </div>

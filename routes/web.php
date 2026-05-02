@@ -17,6 +17,7 @@ use App\Http\Controllers\UserPermissionController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentDocumentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StaffController;
 
 
 
@@ -176,6 +177,13 @@ Route::get('/regions', [SettingController::class, 'regions'])
 //Histogram Popup
 Route::get('/charts', [HighChartController::class, 'index']);
 
+
+//Staff Management
+Route::get('/staffs', [StaffController::class, 'index'])->name('staff.index');
+Route::get('/staffs/create', [StaffController::class, 'create'])->name('staff.create');
+Route::post('/staffs/store', [StaffController::class, 'store'])->name('staff.store');
+
+
 //Studnets Routes
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 
@@ -202,14 +210,7 @@ Route::post('/documents', [StudentDocumentController::class, 'store'])->name('st
 
 Route::delete('/documents/{id}', [StudentDocumentController::class, 'destroy'])->name('students.documents.destroy');
 
-// Route::post('/students/{id}/documents', [StudentDocumentController::class, 'store'])
-//     ->name('students.documents.store');
 
-// Route::delete('/documents/{id}', [StudentDocumentController::class, 'destroy'])
-//     ->name('students.documents.delete');
-
-// Route::get('/documents/{id}/view', [StudentDocumentController::class, 'view'])
-//     ->name('students.documents.view');
 
 //Used for AuTH
 require __DIR__.'/auth.php';
