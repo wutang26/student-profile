@@ -13,9 +13,10 @@ class StudentDocument extends Model
         'type',
         'title',
         'file_path',
-        'remarks'
+        'remarks' //Comments
     ];
 
+    //Relationship to Student Model
     public function student()
     {
         return $this->belongsTo(Student::class);

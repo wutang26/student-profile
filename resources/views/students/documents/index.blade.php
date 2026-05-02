@@ -6,9 +6,12 @@
     <i class="bi bi-folder2-open"></i> Student Documents Type
 </h2>
 
+@can('view students')
+
 <a href="{{ route('students.documents.create') }}" class="btn-primary">
     <i class="bi bi-cloud-arrow-up"></i> Upload Document
 </a>
+@endcan
 
 <br><br>
 

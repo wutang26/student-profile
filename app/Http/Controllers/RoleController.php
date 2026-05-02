@@ -82,7 +82,7 @@ return redirect()->back()->with('error', 'Role(s) do not  created successfully')
 // Edit Permission
 public function editRole(Role $role)
 {
-    $permissions = Permission::orderBy('module')
+  $permissions = Permission::orderBy('module')
         ->get()
         ->groupBy('module');
 

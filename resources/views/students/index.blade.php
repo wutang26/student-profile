@@ -120,12 +120,17 @@
     </div>
 @endif
 
+@can('view students')
 <a href="{{ route('students.create') }}" class="btn-primary">
     <i class="bi bi-person"></i> Register Student
 </a>  
+@endcan
+
 <div class="upload-box" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
 
     <!-- LEFT: UPLOAD FORM -->
+     
+@can('view students')
     <form method="POST" action="{{ route('students.import') }}" enctype="multipart/form-data"
           style="display:flex; align-items:center; gap:10px;">
         @csrf
@@ -138,6 +143,7 @@
             Upload Students
         </button>
     </form>
+@endcan
 
     <!-- RIGHT: TOTAL COUNT -->
     <div style="

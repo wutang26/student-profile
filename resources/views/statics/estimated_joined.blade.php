@@ -186,7 +186,7 @@ Highcharts.chart('container', {
     yAxis: {
         min: 0,
         title: {
-            text: 'Total Documents'
+            text: 'Student Documents'
         }
     },
 

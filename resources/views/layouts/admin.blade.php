@@ -29,7 +29,6 @@
     </a>
 
     {{-- ================= STUDENTS ================= --}}
-    @can('view students')
     <div class="dropdown">
         <button class="dropdown-toggle">
             <span><i class="bi bi-people"></i> Students</span>
@@ -42,15 +41,12 @@
                 <i class="bi bi-list"></i> All Students
             </a>
 
-            @can('view student documents')
             <a href="{{ route('students.documents.index') }}" class="menu-item small">
                 <i class="bi bi-folder"></i> Attachments
             </a>
-            @endcan
 
         </div>
     </div>
-    @endcan
     
  <div class="dropdown">
         <button class="dropdown-toggle">
@@ -77,10 +73,11 @@
 
     {{-- ================= AUDITS (REMOVE FAKE PERMISSION) ================= --}}
  
+    @can('view students')
     <a href="{{ route('admin.audit.index') }}" class="menu-item">
         <i class="bi bi-journal-text"></i> Audits
     </a>
-
+   @endcan
 
     {{-- ================= REPORTS (FIXED) ================= --}}
     @can('view students')
