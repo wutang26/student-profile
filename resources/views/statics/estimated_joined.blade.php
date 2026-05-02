@@ -200,7 +200,7 @@ Highcharts.chart('container', {
     },
 
     series: [{
-        name: 'Documents',
+        name: 'Students',
         data: [
             { y: @json($chartData[0]), color: '#ef4444' }, // Warning
             { y: @json($chartData[1]), color: '#8b5cf6' }, // Transfer
