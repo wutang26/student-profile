@@ -179,10 +179,22 @@ Route::get('/charts', [HighChartController::class, 'index']);
 
 
 //Staff Management
-Route::get('/staffs', [StaffController::class, 'index'])->name('staff.index');
-Route::get('/staffs/create', [StaffController::class, 'create'])->name('staff.create');
-Route::post('/staffs/store', [StaffController::class, 'store'])->name('staff.store');
 
+Route::prefix('staff')->name('staff.')->group(function () {
+    Route::get('/', [StaffController::class, 'index'])->name('index');
+    Route::get('/create', [StaffController::class, 'create'])->name('create');
+    Route::post('/store', [StaffController::class, 'store'])->name('store');
+
+    // SHOW
+    Route::get('/{id}', [StaffController::class, 'show'])->name('show');
+
+    // EDIT
+    Route::get('/{id}/edit', [StaffController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [StaffController::class, 'update'])->name('update');
+
+    // DELETE
+    Route::delete('/{id}', [StaffController::class, 'destroy'])->name('destroy');
+});
 
 //Studnets Routes
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');

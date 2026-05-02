@@ -105,6 +105,22 @@
     border-radius: 8px;
     text-decoration: none;
 }
+.search-btn {
+    background: #3b82f6;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.search-btn:hover {
+    background: #2563eb;
+}
 </style>
 
 <div class="page-header">
@@ -114,11 +130,27 @@
 
 <!-- TOP BAR -->
 <div class="top-bar">
-    <input type="text" placeholder="Search staff..." class="search-box">
+
+    <form method="GET" action="{{ route('staff.index') }}" style="display:flex; gap:10px;">
+
+        <input 
+            type="text" 
+            name="search" 
+            value="{{ request('search') }}"
+            placeholder="Search by name, service no, email..." 
+            class="search-box"
+        >
+
+        <button type="submit" class="btn-primary">
+            <i class="bi bi-search"></i> Search
+        </button>
+
+    </form>
 
     <a href="{{ route('staff.create') }}" class="btn-primary">
         <i class="bi bi-plus-circle"></i> Add Staff
     </a>
+
 </div>
 
 <!-- TABLE CARD -->
@@ -147,7 +179,7 @@
                     <small>{{ $staff->email }}</small>
                 </td>
 
-                <td>{{ $staff->service_number }}</td>
+                <td>{{ $staff->force_number }}</td>
                 <td>{{ $staff->rank }}</td>
                 <td>{{ $staff->department }}</td>
 
@@ -162,14 +194,18 @@
                 </td>
 
                 <td class="actions">
-                    <a href="#" class="btn-view"><i class="bi bi-eye"></i></a>
-                    <a href="#" class="btn-edit"><i class="bi bi-pencil"></i></a>
+                    <a href="{{ route('staff.show', $staff->id) }}" class="btn-view"><i class="bi bi-eye"></i></a>
+                    <a href="{{ route('staff.edit', $staff->id) }}" class="btn-edit"><i class="bi bi-pencil"></i></a>
 
-                    <form action="#" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn-delete"><i class="bi bi-trash"></i></button>
-                    </form>
+                     <form action="{{ route('staff.destroy', $staff->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="btn-delete"
+                        onclick="return confirm('Are you sure you want to delete this staff?')">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </form>
                 </td>
             </tr>
             @empty
