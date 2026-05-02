@@ -102,51 +102,7 @@
     padding:20px;
     color:#94a3b8;
 }
-/* DOCUMENT GRID */
-.doc-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:15px;
-    margin-top:15px;
-}
 
-@media(max-width:992px){
-    .doc-grid{
-        grid-template-columns:repeat(2, 1fr);
-    }
-}
-
-@media(max-width:600px){
-    .doc-grid{
-        grid-template-columns:1fr;
-    }
-}
-
-/* DOCUMENT CARD */
-.doc-card{
-    background:#ffffff;
-    border:1px solid #e5e7eb;
-    border-radius:10px;
-    padding:12px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.05);
-    transition:0.2s;
-}
-
-.doc-card:hover{
-    transform:translateY(-3px);
-}
-
-/* BUTTON */
-.doc-btn{
-    display:inline-block;
-    margin-top:8px;
-    background:#2563eb;
-    color:#fff;
-    padding:5px 10px;
-    border-radius:6px;
-    font-size:12px;
-    text-decoration:none;
-}
 </style>
 
 <!-- HEADER -->

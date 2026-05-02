@@ -19,7 +19,7 @@ body {
 /* SIDEBAR */
 .sidebar {
     width: 250px;
-    background: #6B8F99;
+     background: linear-gradient(135deg, #2563eb, #06b6d4);
     color: white;
     padding: 20px;
 }
@@ -162,7 +162,7 @@ body {
 /*Footer Css Section For Admin Panel*/
 /* FOOTER */
 .footer {
-    background: #6B8F99;
+     background: linear-gradient(135deg, #2563eb, #06b6d4,  #5c878a );
     color: white;
     padding: 20px 0;
     margin-top: auto;
