@@ -196,7 +196,7 @@ Route::prefix('staff')->name('staff.')->group(function () {
     Route::delete('/{id}', [StaffController::class, 'destroy'])->name('destroy');
 });
 
-//Studnets Routes
+// Students Routes
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 
 Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
@@ -205,7 +205,13 @@ Route::post('/students/store', [StudentController::class, 'store'])->name('stude
 
 Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
 
+Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name('students.edit');
 
+Route::put('/students/{student}', [StudentController::class, 'update'])->name('students.update');
+
+Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
+
+//Students Upload excel
 Route::post('/students/import', [StudentController::class, 'import'])
     ->name('students.import');
 

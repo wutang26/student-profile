@@ -202,16 +202,35 @@
                     {{ $student->status }}
                 </span>
             </td>
-            <td>
-            <div class="action-btns">
+        <td>
+<div class="action-btns">
 
-                <!-- VIEW DETAILS -->
-                <a href="{{ route('students.show', $student->id) }}" class="btn-view">
-                    View
-                </a>
+    <!-- VIEW -->
+    <a href="{{ route('students.show', $student->id) }}" class="btn-view">
+        View
+    </a>
 
-            </div>
-        </td>
+    <!-- EDIT -->
+    <a href="{{ route('students.edit', $student->id) }}" 
+       class="btn-view" 
+       style="background:#f59e0b;">
+        Edit
+    </a>
+
+    <!-- DELETE -->
+    <form action="{{ route('students.destroy', $student->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+
+        <button type="submit" 
+            style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:6px;"
+            onclick="return confirm('Delete this student?')">
+            Delete
+        </button>
+    </form>
+
+</div>
+</td>
         </tr>
         @endforeach
     </tbody>

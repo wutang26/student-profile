@@ -10,12 +10,34 @@ use Illuminate\Support\Facades\Storage;
 class StudentDocumentController extends Controller
 {
     // 📄 LIST ALL DOCUMENTS
-    public function index()
-    {
-        $documents = StudentDocument::with('student')->latest()->get();
+    public function index(Request $request)
+{
+    $query = StudentDocument::with('student');
 
-        return view('students.documents.index', compact('documents'));
+    if ($request->filled('search')) {
+
+        $search = $request->search;
+
+        $query->where(function ($q) use ($search) {
+
+            $q->where('title', 'like', "%$search%")
+              ->orWhere('type', 'like', "%$search%")
+              ->orWhere('remarks', 'like', "%$search%")
+
+              // search inside student
+              ->orWhereHas('student', function ($s) use ($search) {
+                  $s->where('first_name', 'like', "%$search%")
+                    ->orWhere('last_name', 'like', "%$search%")
+                    ->orWhere('force_number', 'like', "%$search%");
+              });
+
+        });
     }
+
+    $documents = $query->latest()->get();
+
+    return view('students.documents.index', compact('documents'));
+}
 
     // ➕ SHOW CREATE FORM
     public function create()

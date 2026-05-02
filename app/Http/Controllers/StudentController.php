@@ -97,24 +97,59 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+   public function edit($id)
+{
+    $student = Student::findOrFail($id);
+
+    $regions = Region::all();
+
+    $districts = District::all();
+
+    return view('students.edit', compact('student','regions','districts'));
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request, $id)
+{
+    $student = Student::findOrFail($id);
+
+    $request->validate([
+        'first_name' => 'required',
+        'force_number' => 'required|unique:students,force_number,' . $id,
+        'nida' => 'required',
+    ]);
+
+    $data = $request->all();
+
+    // Handle photo update
+    if ($request->hasFile('photo')) {
+        $file = $request->file('photo');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('uploads'), $filename);
+        $data['photo'] = $filename;
     }
+
+    $student->update($data);
+
+    return redirect()->route('students.index')->with('success', 'Student updated successfully');
+}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy($id)
+{
+    $student = Student::findOrFail($id);
+
+    // delete photo if exists
+    if ($student->photo && file_exists(public_path('uploads/'.$student->photo))) {
+        unlink(public_path('uploads/'.$student->photo));
     }
+
+    $student->delete();
+
+    return redirect()->route('students.index')->with('success', 'Student deleted successfully');
+}
 }
