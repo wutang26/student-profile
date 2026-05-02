@@ -117,6 +117,7 @@ textarea {
             <option value="transfer">🔄 Transfer</option>
             <option value="medical">🏥 Medical</option>
             <option value="discipline">📋 Discipline</option>
+            <option value="safari">🚌 Safari</option>
             <option value="description_letter">📝 Description Letter</option>
         </select>
     </div>
@@ -133,11 +134,11 @@ textarea {
         <input type="file" name="file" required>
     </div>
 
-</div>
+</div> <br>
 
 <!-- Remarks -->
 <div class="form-group">
-    <label>Remarks</label>
+    <label>Remarks or Comment</label>
     <textarea name="remarks" rows="4" placeholder="Remarks (optional)"></textarea>
 </div>
 

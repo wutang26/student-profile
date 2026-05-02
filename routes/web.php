@@ -16,6 +16,7 @@ use App\Http\Controllers\HighChartController;
 use App\Http\Controllers\UserPermissionController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentDocumentController;
+use App\Http\Controllers\DashboardController;
 
 
 
@@ -92,10 +93,11 @@ Route::get('/', function () {  return redirect()->route('register'); });
 // });
 
 
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -103,10 +105,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-
-//pricing Routes
-// Route::get('/dark', [AdminController::class, 'index'])->name('admin.index');
 
 //Access Users(use users controllers)
 Route::get('/users', [UserController::class, 'index'])->name('settings.users.index');
@@ -176,7 +174,7 @@ Route::get('/regions', [SettingController::class, 'regions'])
 });
 
 //Histogram Popup
-Route::get('/highcharts', [HighChartController::class, 'index']);
+Route::get('/charts', [HighChartController::class, 'index']);
 
 //Studnets Routes
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
