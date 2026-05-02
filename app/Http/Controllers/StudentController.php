@@ -90,10 +90,13 @@ class StudentController extends Controller
      * Display the specified resource.
      */
     public function show(Student $student)
-    {
-        return view('students.show', compact('student'));
-    }
+{
+     $documents = $student->documents()
+        ->latest()
+        ->paginate(8); // 4 per row → 2 rows per page
 
+    return view('students.show', compact('student', 'documents'));
+}
     /**
      * Show the form for editing the specified resource.
      */
@@ -152,4 +155,5 @@ class StudentController extends Controller
 
     return redirect()->route('students.index')->with('success', 'Student deleted successfully');
 }
+
 }
