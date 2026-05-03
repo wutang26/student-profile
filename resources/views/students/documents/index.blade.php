@@ -155,7 +155,7 @@
         <tr>
             <th>Force Number</th>
             <th>Student</th>
-            <th>Type</th>
+            <th>Document / Letter</th>
             <th>Title</th>
             <th>View</th>
             <th>Comments</th>

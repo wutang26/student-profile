@@ -39,6 +39,8 @@ class Student extends Model
         'photo',
         'status',
         'comment',
+          // ⭐ NEW FIELD
+       'intake',
     ];
 
     //Relation to Student Document
@@ -51,4 +53,10 @@ public function originRegion()
 {
     return $this->belongsTo(Region::class, 'origin_region_id');
 }
+
+//Filter students By Intake
+// public function scopeIntake($query, $intake)
+// {
+//     return $query->where('intake', $intake);
+// }
 }

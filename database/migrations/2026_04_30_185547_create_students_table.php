@@ -38,6 +38,10 @@ return new class extends Migration
             $table->string('platoon')->nullable();
             $table->string('year_of_study')->nullable();
 
+             // Intake Year
+            // ✅ Intake Year
+            $table->string('intake')->nullable();
+
             // Family
             $table->string('next_of_kin_name')->nullable();
             $table->string('next_of_kin_phone')->nullable();
@@ -47,8 +51,8 @@ return new class extends Migration
             // System
             $table->string('photo')->nullable();
             $table->enum('status', ['active', 'inactive', 'graduated', 'dismissed'])->default('active');
-
             $table->text('comment')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
                 });

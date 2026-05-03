@@ -9,6 +9,7 @@ Use App\Models\District;
 use Maatwebsite\Excel\Concerns\ToModel;
 use App\Imports\StudentsImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class StudentController extends Controller
 {
@@ -16,32 +17,38 @@ class StudentController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        $students = Student::latest()->paginate(10);
-        
-         $query = Student::query();
+{
+    $query = Student::query();
 
-    if ($request->search) {
-        $query->where('first_name', 'like', '%' . $request->search . '%')
-              ->orWhere('last_name', 'like', '%' . $request->search . '%')
-              ->orWhere('force_number', 'like', '%' . $request->search . '%')
-              ->orWhere('nida', 'like', '%' . $request->search . '%');
+    // FILTER BY SESSION INTAKE
+    if (session()->has('intake')) {
+        $query->where('intake', session('intake'));
     }
 
-    $students = $query->get();
+    // SEARCH
+    if ($request->search) {
+        $query->where(function ($q) use ($request) {
+            $q->where('first_name', 'like', "%{$request->search}%")
+              ->orWhere('last_name', 'like', "%{$request->search}%")
+              ->orWhere('force_number', 'like', "%{$request->search}%")
+              ->orWhere('nida', 'like', "%{$request->search}%");
+        });
+    }
 
-    // cards data
-    $totalStudents = Student::count();
+    $students = $query->latest()->get();
+
+    // Stats (based on filtered intake)
+    $totalStudents = $students->count();
 
     $companyCounts = [
-        'HQ-Coy' => Student::where('company', 'HQ-Coy')->count(),
-        'A-Coy' => Student::where('company', 'A-Coy')->count(),
-        'B-Coy' => Student::where('company', 'B-Coy')->count(),
-        'C-Coy' => Student::where('company', 'C-Coy')->count(),
-        'D-Coy' => Student::where('company', 'D-Coy')->count(),
+        'HQ-Coy' => $students->where('company', 'HQ-Coy')->count(),
+        'A-Coy' => $students->where('company', 'A-Coy')->count(),
+        'B-Coy' => $students->where('company', 'B-Coy')->count(),
+        'C-Coy' => $students->where('company', 'C-Coy')->count(),
+        'D-Coy' => $students->where('company', 'D-Coy')->count(),
     ];
 
-    $totalPlatoons = Student::distinct('platoon')->count('platoon');
+    $totalPlatoons = $students->pluck('platoon')->unique()->count();
 
     return view('students.index', compact(
         'students',
@@ -49,9 +56,44 @@ class StudentController extends Controller
         'companyCounts',
         'totalPlatoons'
     ));
+}
+    // public function index(Request $request)
+    // {
+    //     $students = Student::latest()->paginate(10);
+        
+    //      $query = Student::query();
+
+    // if ($request->search) {
+    //     $query->where('first_name', 'like', '%' . $request->search . '%')
+    //           ->orWhere('last_name', 'like', '%' . $request->search . '%')
+    //           ->orWhere('force_number', 'like', '%' . $request->search . '%')
+    //           ->orWhere('nida', 'like', '%' . $request->search . '%');
+    // }
+
+    // $students = $query->get();
+
+    // // cards data
+    // $totalStudents = Student::count();
+
+    // $companyCounts = [
+    //     'HQ-Coy' => Student::where('company', 'HQ-Coy')->count(),
+    //     'A-Coy' => Student::where('company', 'A-Coy')->count(),
+    //     'B-Coy' => Student::where('company', 'B-Coy')->count(),
+    //     'C-Coy' => Student::where('company', 'C-Coy')->count(),
+    //     'D-Coy' => Student::where('company', 'D-Coy')->count(),
+    // ];
+
+    // $totalPlatoons = Student::distinct('platoon')->count('platoon');
+
+    // return view('students.index', compact(
+    //     'students',
+    //     'totalStudents',
+    //     'companyCounts',
+    //     'totalPlatoons'
+    // ));
      
-        return view('students.index', compact('students'));
-    }
+    //     return view('students.index', compact('students'));
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -75,9 +117,13 @@ class StudentController extends Controller
         'origin_region' => 'required',
         'origin_district' => 'required',
         'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        'intake' => session('intake'), // OR selected intake
     ]);
 
     $data = $request->all();
+
+    // FORCE intake from session
+    $data['intake'] = session('intake', '2025/2026');
 
     // HANDLE PHOTO UPLOAD
     if ($request->hasFile('photo')) {
@@ -182,11 +228,14 @@ public function import(Request $request)
                 'last_name' => $row[2] ?? null,
                 'force_number' => $row[3] ?? null,
                 'nida' => $row[4] ?? null,
-                'date_of_birth' => $row[5] ?? null,
+                'date_of_birth' => !empty($row[5]) 
+                    ? Carbon::createFromFormat('n/j/Y', $row[5])->format('Y-m-d') 
+                    : null,
+                // 'date_of_birth' => $row[5] ?? null,
                 'gender' => $row[6] ?? null,
                 'company' => $row[7] ?? null,
                 'platoon' => $row[8] ?? null,
-                'phone' => $row[9] ?? null,
+                'phone' => isset($row[9]) ? (string)$row[9] : null,
                 'email' => $row[10] ?? null,
                 'address' => $row[11] ?? null,
                 'next_of_kin_name' => $row[12] ?? null,
@@ -196,6 +245,9 @@ public function import(Request $request)
                 'origin_region' => $row[16] ?? null,
                 'origin_district' => $row[17] ?? null,
                 'entry_region' => $row[18] ?? null,
+
+                // Support CSV upload names  to session
+                'intake' => session('intake', '2025/2026'),
             ]);
 }
 

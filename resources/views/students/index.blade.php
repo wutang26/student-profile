@@ -112,6 +112,40 @@
         </button>
     </form>
 
+    <div style="text-align:center; margin-bottom:15px;">
+
+    <form method="POST" action="{{ route('set.intake') }}">
+        @csrf
+
+        <select name="intake" onchange="this.form.submit()"
+            style="padding:6px 12px; border-radius:6px; border:1px solid #ccc;">
+            
+            <option value="2025/2026" {{ session('intake') == '2025/2026' ? 'selected' : '' }}>
+                2025/2026
+            </option>
+
+            <option value="2026/2027" {{ session('intake') == '2026/2027' ? 'selected' : '' }}>
+                2026/2027
+            </option>
+        </select>
+    </form>
+
+    <!-- Active Badge -->
+    <div style="margin-top:5px;">
+        <span style="
+            background:#2563eb;
+            color:white;
+            padding:4px 12px;
+            border-radius:20px;
+            font-size:12px;
+            font-weight:600;
+        ">
+            Active Intake: {{ session('intake', '2025/2026') }}
+        </span>
+    </div>
+
+</div>
+
 </div>
 
 @if(session('success'))

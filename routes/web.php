@@ -20,6 +20,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StoreItemController;
 use App\Http\Controllers\BorrowRecordController;
+use Illuminate\Http\Request;
 
 
 
@@ -280,6 +281,13 @@ Route::post('/borrow/bulk-return', [BorrowRecordController::class, 'bulkReturn']
 
 Route::get('/borrow/{borrowRecord}/return', [BorrowRecordController::class, 'showReturnForm'])
     ->name('borrowItems.return_form');
+
+//Session Handling
+Route::post('/set-intake', function (Illuminate\Http\Request $request) {
+    session(['intake' => $request->intake]);
+    return back();
+})->name('set.intake');
+
 
 //Used for AuTH
 require __DIR__.'/auth.php';
