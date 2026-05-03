@@ -80,8 +80,20 @@
         </button>
 
         <div class="dropdown-menu hidden">
-            <a href="#" class="menu-item small">
+            <a href="{{ route('storeItems.index') }}" class="menu-item small">
                 <i class="bi bi-archive"></i> Registered Items
+            </a>
+             <a href="{{ route('borrowItems.index') }}" class="menu-item small">
+                <i class="bi bi-archive"></i> Borrow Items
+            </a>
+             <!-- RECEIVE (redirect to borrow list) -->
+            <a href="{{ route('borrowItems.index') }}" class="menu-item small">
+                <i class="bi bi-arrow-down-circle"></i> Receive Items
+            </a>
+
+            <!-- RETURNED -->
+            <a href="{{ route('borrowItems.returned') }}" class="menu-item small">
+                <i class="bi bi-check-circle"></i> Returned Items
             </a>
         </div>
     </div>

@@ -18,6 +18,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentDocumentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\StoreItemController;
+use App\Http\Controllers\BorrowRecordController;
 
 
 
@@ -227,7 +229,57 @@ Route::post('/documents', [StudentDocumentController::class, 'store'])->name('st
 
 Route::delete('/documents/{id}', [StudentDocumentController::class, 'destroy'])->name('students.documents.destroy');
 
+//Store Items
+Route::get('/store-items', [StoreItemController::class, 'index'])
+    ->name('storeItems.index');
 
+Route::get('/storeItems/create', [StoreItemController::class, 'create'])
+    ->name('storeItems.create');
+
+Route::post('/storeItems', [StoreItemController::class, 'store'])
+    ->name('storeItems.store');
+
+Route::get('/storeItems/{storeItem}/edit', [StoreItemController::class, 'edit'])
+    ->name('storeItems.edit');
+
+Route::put('/storeItems/{storeItem}', [StoreItemController::class, 'update'])
+    ->name('storeItems.update');
+
+Route::delete('/storeItems/{storeItem}', [StoreItemController::class, 'destroy'])
+    ->name('storeItems.destroy');
+
+//Borrow Items
+Route::get('/borrow-records', [BorrowRecordController::class, 'index'])
+    ->name('borrowItems.index');
+
+Route::get('/borrow-records/create', [BorrowRecordController::class, 'create'])
+    ->name('borrowItems.create');
+
+Route::post('/borrow-records', [BorrowRecordController::class, 'store'])
+    ->name('borrowItems.store');
+
+    //RETURN ITEM ROUTE
+// LIST ALL BORROWED ITEMS
+Route::get('/borrow-items', [BorrowRecordController::class, 'index'])
+    ->name('borrowItems.index');
+
+// SHOW RETURN FORM (needs ID)
+Route::get('/borrow/{borrowRecord}/return', [BorrowRecordController::class, 'showReturnForm']
+)->name('borrowItems.receive_items');
+
+// PROCESS RETURN (needs ID)
+Route::patch('/borrow/{borrowRecord}/return', [BorrowRecordController::class, 'updateStatus']
+)->name('borrowItems.return');
+
+// RETURNED ITEMS LIST (NO ID)
+Route::get('/borrow-returned', [BorrowRecordController::class, 'returnedItems']
+)->name('borrowItems.returned');
+
+Route::post('/borrow/bulk-return', [BorrowRecordController::class, 'bulkReturn'])
+    ->name('borrowItems.bulkReturn');
+
+Route::get('/borrow/{borrowRecord}/return', [BorrowRecordController::class, 'showReturnForm'])
+    ->name('borrowItems.return_form');
 
 //Used for AuTH
 require __DIR__.'/auth.php';

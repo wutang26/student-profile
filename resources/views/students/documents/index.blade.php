@@ -166,7 +166,7 @@
     <tbody>
         @forelse($documents as $doc)
         <tr>
-            <td>K.{{ $doc->student->force_number ?? '-' }}</td>
+            <td>{{ $doc->student->force_number ?? '-' }}</td>
             <td>{{ $doc->student->first_name ?? '-' }}</td>
             <td>{{ ucfirst($doc->type) }}</td>
             <td>{{ $doc->title }}</td>

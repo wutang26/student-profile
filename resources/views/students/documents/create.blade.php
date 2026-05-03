@@ -88,7 +88,29 @@ textarea {
 }
 </style>
 
-<h2 class="page-title">📄 Upload Student Document</h2>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+
+    <h2 class="page-title" style="margin:0;">
+        📄 Upload Student Document
+    </h2>
+
+    <form method="GET" action="{{ route('students.documents.create') }}"
+          style="display:flex; gap:8px; align-items:center;">
+
+        <input type="text"
+               name="search"
+               value="{{ request('search') }}"
+               placeholder="Search student..."
+               style="padding:8px 12px; border:1px solid #e2e8f0; border-radius:8px; outline:none;">
+
+        <button type="submit"
+                style="background:#2563eb; color:white; border:none; padding:8px 12px; border-radius:8px; cursor:pointer;">
+            🔍
+        </button>
+
+    </form>
+
+</div>
 
 <form action="{{ route('students.documents.store') }}" method="POST" enctype="multipart/form-data" class="form-box">
 @csrf

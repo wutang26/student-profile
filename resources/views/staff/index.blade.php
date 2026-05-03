@@ -147,9 +147,11 @@
 
     </form>
 
+ @can('view students')
     <a href="{{ route('staff.create') }}" class="btn-primary">
         <i class="bi bi-plus-circle"></i> Add Staff
     </a>
+@endcan
 
 </div>
 
@@ -195,9 +197,12 @@
 
                 <td class="actions">
                     <a href="{{ route('staff.show', $staff->id) }}" class="btn-view"><i class="bi bi-eye"></i></a>
+
+               @can('view students')
                     <a href="{{ route('staff.edit', $staff->id) }}" class="btn-edit"><i class="bi bi-pencil"></i></a>
 
-                     <form action="{{ route('staff.destroy', $staff->id) }}" method="POST" style="display:inline;">
+         
+                <form action="{{ route('staff.destroy', $staff->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
 
@@ -206,6 +211,7 @@
                         <i class="bi bi-trash"></i>
                     </button>
                 </form>
+            @endcan
                 </td>
             </tr>
             @empty

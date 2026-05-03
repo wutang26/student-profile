@@ -210,13 +210,16 @@
         View
     </a>
 
+     @can('view students')
     <!-- EDIT -->
-    <a href="{{ route('students.edit', $student->id) }}" 
-       class="btn-view" 
-       style="background:#f59e0b;">
-        Edit
-    </a>
+        <a href="{{ route('students.edit', $student->id) }}" 
+        class="btn-view" 
+        style="background:#f59e0b;">
+            Edit
+        </a>
+    @endcan
 
+ @can('view students')
     <!-- DELETE -->
     <form action="{{ route('students.destroy', $student->id) }}" method="POST">
         @csrf
@@ -228,6 +231,7 @@
             Delete
         </button>
     </form>
+@endcan
 
 </div>
 </td>

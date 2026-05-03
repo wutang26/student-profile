@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class StudentDocumentController extends Controller
 {
-    // 📄 LIST ALL DOCUMENTS
+    // LIST ALL DOCUMENTS
     public function index(Request $request)
 {
     $query = StudentDocument::with('student');
@@ -39,15 +39,23 @@ class StudentDocumentController extends Controller
     return view('students.documents.index', compact('documents'));
 }
 
-    // ➕ SHOW CREATE FORM
-    public function create()
-    {
-        $students = Student::all();
+    // SHOW CREATE FORM
+    public function create(Request $request)
+{
+    $query = Student::query();
 
-        return view('students.documents.create', compact('students'));
+    if ($request->filled('search')) {
+        $query->where('first_name', 'like', "%{$request->search}%")
+              ->orWhere('last_name', 'like', "%{$request->search}%")
+              ->orWhere('force_number', 'like', "%{$request->search}%");
     }
 
-    // 💾 STORE DOCUMENT
+    $students = $query->orderBy('first_name')->get();
+
+    return view('students.documents.create', compact('students'));
+}
+
+    // STORE DOCUMENT
   public function store(Request $request)
 {
     $request->validate([

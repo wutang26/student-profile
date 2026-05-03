@@ -39,7 +39,6 @@
             <option>A-Coy</option>
             <option>B-Coy</option>
             <option>C-Coy</option>
-            <option>D-Coy</option>
         </select>
 
         <select name="platoon" required>
