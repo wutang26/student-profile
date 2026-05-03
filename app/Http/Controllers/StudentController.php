@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 Use App\Models\Region;
 Use App\Models\District;
+use Maatwebsite\Excel\Concerns\ToModel;
+use App\Imports\StudentsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -154,6 +157,51 @@ class StudentController extends Controller
     $student->delete();
 
     return redirect()->route('students.index')->with('success', 'Student deleted successfully');
+}
+
+//Excel Uploading 
+public function import(Request $request)
+{
+
+    $request->validate([
+        'file' => 'required|mimes:csv,xlsx,txt'
+    ]);
+
+   $file = fopen($request->file('file')->getRealPath(), 'r');
+
+    $header = fgetcsv($file); // skip header
+
+    while ($row = fgetcsv($file)) {
+            if (count($row) < 18) {
+                continue; // skip broken rows
+            }
+
+            Student::create([
+                'first_name' => $row[0] ?? null,
+                'middle_name' => $row[1] ?? null,
+                'last_name' => $row[2] ?? null,
+                'force_number' => $row[3] ?? null,
+                'nida' => $row[4] ?? null,
+                'date_of_birth' => $row[5] ?? null,
+                'gender' => $row[6] ?? null,
+                'company' => $row[7] ?? null,
+                'platoon' => $row[8] ?? null,
+                'phone' => $row[9] ?? null,
+                'email' => $row[10] ?? null,
+                'address' => $row[11] ?? null,
+                'next_of_kin_name' => $row[12] ?? null,
+                'next_of_kin_phone' => $row[13] ?? null,
+                'next_of_kin_relationship' => $row[14] ?? null,
+                'next_of_kin_address' => $row[15] ?? null,
+                'origin_region' => $row[16] ?? null,
+                'origin_district' => $row[17] ?? null,
+                'entry_region' => $row[18] ?? null,
+            ]);
+}
+
+    fclose($file);
+
+    return back()->with('success', 'Students imported via CSV!');
 }
 
 }

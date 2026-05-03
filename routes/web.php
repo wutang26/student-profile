@@ -212,8 +212,7 @@ Route::put('/students/{student}', [StudentController::class, 'update'])->name('s
 Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
 
 //Students Upload excel
-Route::post('/students/import', [StudentController::class, 'import'])
-    ->name('students.import');
+Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
 
 //Audit handling
 Route::get('/audit', [AuditLogController::class, 'index'])

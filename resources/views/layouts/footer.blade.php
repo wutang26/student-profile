@@ -3,7 +3,7 @@
 
     <!-- Logo -->
     <div class="footer-brand">
-      Nac Technologies
+      Tps Moshi
     </div>
 
     <!-- Links -->

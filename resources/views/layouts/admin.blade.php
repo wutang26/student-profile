@@ -70,13 +70,6 @@
         </div>
     </div>
 
- 
-
-    {{-- ================= AUDITS (REMOVE FAKE PERMISSION) ================= --}}
- 
-    <a href="{{ route('admin.audit.index') }}" class="menu-item">
-        <i class="bi bi-journal-text"></i> Audits
-    </a>
 
         {{-- ================= Items Store Management ================= --}}
        @can('view students')
@@ -124,27 +117,32 @@
         </button>
 
         <div class="dropdown-menu hidden">
+             {{-- ================= AUDITS (REMOVE FAKE PERMISSION) ================= --}}
+ 
+            <a href="{{ route('admin.audit.index') }}" class="menu-item">
+                <i class="bi bi-journal-text"></i> Audits
+            </a>
 
             <a href="{{ route('settings.users.index') }}" class="menu-item small">
-                Users
+                <i class="bi bi-people-fill"></i> Users
             </a>
 
             @can('manage roles')
             <a href="{{ route('settings.roles.index') }}" class="menu-item small">
-                Roles
+                 <i class="bi bi-shield-lock-fill"></i> Roles
             </a>
             @endcan
 
             <a href="{{ route('settings.permissions.index') }}" class="menu-item small">
-                Permissions
+                <i class="bi bi-key-fill"></i> Permissions
             </a>
 
             <a href="{{ route('settings.regions.region') }}" class="menu-item small">
-                Regions
+                 <i class="bi bi-geo-alt-fill"></i> Regions
             </a>
 
             <a href="{{ route('settings.district') }}" class="menu-item small">
-                Districts
+                <i class="bi bi-pin-map-fill"></i> Districts
             </a>
 
         </div>
