@@ -39,7 +39,7 @@ class Student extends Model
         'photo',
         'status',
         'comment',
-          // ⭐ NEW FIELD
+          // NEW FIELD
        'intake',
     ];
 

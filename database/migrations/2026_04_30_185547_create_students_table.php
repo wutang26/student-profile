@@ -39,7 +39,6 @@ return new class extends Migration
             $table->string('year_of_study')->nullable();
 
              // Intake Year
-            // ✅ Intake Year
             $table->string('intake')->nullable();
 
             // Family

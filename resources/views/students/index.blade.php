@@ -127,6 +127,9 @@
             <option value="2026/2027" {{ session('intake') == '2026/2027' ? 'selected' : '' }}>
                 2026/2027
             </option>
+            <option value="2027/2028" {{ session('intake') == '2027/2028' ? 'selected' : '' }}>
+                2027/2028
+            </option>
         </select>
     </form>
 
