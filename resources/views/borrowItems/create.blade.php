@@ -80,6 +80,16 @@ label {
 }
 </style>
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="page-wrapper">
 
     <!-- HEADER -->
@@ -122,6 +132,7 @@ label {
                         <option value="oc">OC</option>
                         <option value="company_sergeant_major">Company Sergeant Major</option>
                     </select>
+                                        
                 </div>
 
                 <!-- ITEM NAME -->

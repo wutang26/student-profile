@@ -52,25 +52,27 @@ class BorrowRecordController extends Controller
     {
     
         $data = $request->validate([
-            'force_number' => 'nullable|string',
-            'borrower_name' => 'required|string',
+                'force_number' => 'nullable|string',
+                'borrower_name' => 'required|string',
 
-            'position' => 'nullable',
+                'position' => 'nullable|in:platoon_leader,karani,oc,company_sergeant_major',
 
-            'store_item_id' => 'required|exists:store_items,id',
+                'store_item_id' => 'required|exists:store_items,id',
 
-            'category' => 'nullable|string',
-            'quantity' => 'required|integer|min:1',
+                'category' => 'nullable|string',
+                'quantity' => 'required|integer|min:1',
 
-            'borrow_date' => 'required|date',
-            'purpose' => 'nullable|string',
+                'borrow_date' => 'required|date',
+                'purpose' => 'nullable|string',
 
-            'issued_by' => 'nullable|string',
-            'issuer_role' => 'nullable',
-            'company' => 'nullable',
+                'issued_by' => 'nullable|string',
 
-            'note' => 'nullable|string',
-        ]);
+                'issuer_role' => 'nullable|in:karani,katibu,company_sergeant_major,instructor,adjutant,chiefinstructor,chiefmatron,commandant,admin',
+
+                'company' => 'nullable|in:hq-coy,a-coy,b-coy,c-coy',
+
+                'note' => 'nullable|string',
+            ]);
 
         // GET ITEM
         $item = StoreItem::findOrFail($data['store_item_id']);
@@ -120,9 +122,7 @@ class BorrowRecordController extends Controller
     //Return Form
     public function showReturnForm(BorrowRecord $borrowRecord)
 {
-    return view('borrowItems.receive_items', [
-        'record' => $borrowRecord
-    ]);
+    return view('borrowItems.receive_items', ['record' => $borrowRecord]);
 }
 
 //Borrow Items Controller
