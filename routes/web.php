@@ -218,10 +218,9 @@ Route::delete('/students/{student}', [StudentController::class, 'destroy'])->nam
 Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
 
 //Audit handling
-Route::get('/audit', [AuditLogController::class, 'index'])
-    ->name('admin.audit.index');
+Route::get('/audit', [AuditLogController::class, 'index'])->name('admin.audit.index');
 
-    //Barua ya maelezo na Zingine
+    //Barua ya maelezo na Cases, Doctor etc.
 Route::get('/documents', [StudentDocumentController::class, 'index'])->name('students.documents.index');
 
 Route::get('/documents/create', [StudentDocumentController::class, 'create'])->name('students.documents.create');
@@ -283,8 +282,7 @@ Route::get('/borrow/{borrowRecord}/return', [BorrowRecordController::class, 'sho
     ->name('borrowItems.return_form');
 
 //Session Handling
-Route::post('/set-intake', function (Illuminate\Http\Request $request) {
-    session(['intake' => $request->intake]);
+Route::post('/set-intake', function (Illuminate\Http\Request $request) { session(['intake' => $request->intake]);
     return back();
 })->name('set.intake');
 
