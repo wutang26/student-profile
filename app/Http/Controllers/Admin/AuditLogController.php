@@ -22,7 +22,7 @@ class AuditLogController extends Controller
 // ]);
 
     // Fetch logs correctly
-    $logs = AuditLog::with('user')->latest()->paginate(20);
+    $logs = AuditLog::with('user')->latest()->paginate(15);
 
         return view('admin.audit.index', compact('logs'));
     }
