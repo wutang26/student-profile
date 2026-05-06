@@ -132,7 +132,7 @@ textarea {
 
     <!-- Type -->
     <div class="form-group">
-        <label>Document Type</label>
+        <label>Document Type / Case</label>
         <select name="type" required>
             <option value="">Select Type</option>
             <option value="warning">⚠ Warning</option>
@@ -146,7 +146,7 @@ textarea {
 
     <!-- Title -->
     <div class="form-group">
-        <label>Title</label>
+        <label>Title / About</label>
         <input type="text" name="title" placeholder="Document Title (optional)">
     </div>
 

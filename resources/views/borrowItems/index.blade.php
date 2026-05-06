@@ -131,10 +131,12 @@ table tbody tr:hover {
         <!-- RIGHT -->
         <div class="header-actions">
 
+@can('view students')
     <button type="button" id="toggleReceive" class="btn btn-receive">
         <i class="bi bi-arrow-down-circle"></i>
         Receive Items
     </button>
+@endcan
 
     <a href="{{ route('borrowItems.create') }}" class="btn btn-borrow">
         <i class="bi bi-plus-circle"></i>
@@ -158,9 +160,9 @@ table tbody tr:hover {
                             <th class="receive-col">
                                 <input type="checkbox" onclick="toggleAll(this)">
                             </th>
-                            <th>Borrower</th>
                             <th>Force No</th>
-                            <th>Item</th>
+                            <th>Borrower</th>
+                            <th>Item(s) Name</th>
                             <th>Qty</th>
                             <th>Company</th>
                             <th>Date</th>
@@ -178,8 +180,8 @@ table tbody tr:hover {
                                 @endif
                             </td>
 
-                            <td>{{ $b->borrower_name }}</td>
                             <td>{{ $b->force_number }}</td>
+                            <td>{{ $b->borrower_name }}</td>
                             <td>{{ $b->item->name }}</td>
                             <td>{{ $b->quantity }}</td>
                             <td>{{ $b->company }}</td>

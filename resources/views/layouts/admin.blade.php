@@ -72,7 +72,7 @@
 
 
         {{-- ================= Items Store Management ================= --}}
-       @can('view students')
+       
     <div class="dropdown">
         <button class="dropdown-toggle">
             <span><i class="bi bi-boxes"></i>   Store Management</span>
@@ -86,6 +86,8 @@
              <a href="{{ route('borrowItems.index') }}" class="menu-item small">
                 <i class="bi bi-archive"></i> Borrow Items
             </a>
+
+            @can('view students')
              <!-- RECEIVE (redirect to borrow list) -->
             <a href="{{ route('borrowItems.index') }}" class="menu-item small">
                 <i class="bi bi-arrow-down-circle"></i> Receive Items
@@ -113,11 +115,15 @@
                 <i class="bi bi-file-earmark-pdf"></i> Student Report
             </a>
              <a href="#" class="menu-item small">
+                <i class="bi bi-file-earmark-pdf"></i> Dismissed Students
+            </a>
+             <a href="#" class="menu-item small">
                 <i class="bi bi-file-earmark-pdf"></i> Returned Items
             </a>
             <a href="#" class="menu-item small">
                 <i class="bi bi-file-earmark-pdf"></i> Company Report
             </a>
+            
         </div>
     </div>
     @endcan

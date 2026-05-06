@@ -265,7 +265,7 @@
         <button type="submit" 
             style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:6px;"
             onclick="return confirm('Delete this student?')">
-            Delete
+            Dismis
         </button>
     </form>
 @endcan
