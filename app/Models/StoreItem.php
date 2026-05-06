@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\LogsActivity;
 
 class StoreItem extends Model
 {
@@ -21,4 +22,6 @@ class StoreItem extends Model
     {
         return $this->hasMany(BorrowRecord::class);
     }
+
+    use LogsActivity;
 }

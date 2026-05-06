@@ -82,7 +82,7 @@
         <tbody>
             @foreach($logs as $log)
                 <tr>
-                    <td>{{ $log->user->name }}</td>
+                   <td>{{ $log->user->name ?? 'System' }}</td>
                     <td>{{ $log->action }}</td>
                     <td>{{ $log->description }}</td>
                     <td>{{ $log->created_at->diffForHumans() }}</td>

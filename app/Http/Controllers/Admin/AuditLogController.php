@@ -10,8 +10,23 @@ class AuditLogController extends Controller
 {
     //
     public function index()
-    {
-        $logs = AuditLog::latest()->paginate(20);
+    { 
+        // $logs = AuditLog::with('user')->latest()->paginate(20);
+
+//     AuditLog::create([
+//             'performed_by' => 1, // make sure user with ID 1 exists
+//             'action' => 'test_action',
+//             'target_type' => 'User',
+//             'target_id' => 1,
+//             'description' => 'Testing audit log'
+// ]);
+
+    // Fetch logs correctly
+    $logs = AuditLog::with('user')->latest()->paginate(20);
+
         return view('admin.audit.index', compact('logs'));
     }
+
+
+    
 }
