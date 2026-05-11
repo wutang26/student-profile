@@ -83,6 +83,17 @@ class StudentDocumentController extends Controller
         ->with('success', 'Document uploaded successfully');
 }
 
+    //Edit Documents
+    public function edit($id){
+
+        $document = StudentDocument::findOrFail($id);
+
+        $students = Student::all();
+
+        return view('students.documents.edit', compact('document','students'));
+
+}
+
     // 🗑 DELETE DOCUMENT
     public function destroy($id)
     {

@@ -227,6 +227,10 @@ Route::get('/documents/create', [StudentDocumentController::class, 'create'])->n
 
 Route::post('/documents', [StudentDocumentController::class, 'store'])->name('students.documents.store');
 
+Route::get('/documents/edit/{id}', [StudentDocumentController::class, 'edit'])->name('students.documents.edit');
+
+Route::put('/documents/{id}/update', [StudentDocumentController::class, 'update'])->name('students.documents.update');
+
 Route::delete('/documents/{id}', [StudentDocumentController::class, 'destroy'])->name('students.documents.destroy');
 
 //Store Items

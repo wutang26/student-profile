@@ -181,6 +181,12 @@
 
             @can('view students')
             <td>
+                 <a href="{{ route('students.documents.edit', $doc->id) }}" 
+                    class="btn-view" 
+                    style="background:#f59e0b;">
+                        Edit
+                </a>
+
                 <form method="POST" action="{{ route('students.documents.destroy', $doc->id) }}">
                     @csrf
                     @method('DELETE')
