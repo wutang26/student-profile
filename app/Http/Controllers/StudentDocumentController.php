@@ -93,7 +93,46 @@ class StudentDocumentController extends Controller
         return view('students.documents.edit', compact('document','students'));
 
 }
+public function update(Request $request, $id)
+{
+    $document = StudentDocument::findOrFail($id);
 
+    $request->validate([
+        'student_id' => 'required',
+        'title'      => 'nullable|string|max:255',
+        'type'       => 'required|string',
+        'remarks'    => 'nullable|string',
+        'file_path'       => 'nullable|file_path|mimes:pdf,jpg,jpeg,png,doc,docx'
+    ]);
+
+    // Update file
+    if ($request->hasFile('file_path')) {
+
+        // delete old file
+        if ($document->file_path && Storage::disk('public')->exists($document->file)) {
+
+            Storage::disk('public')->delete($document->file);
+        }
+
+        // store new file
+        $path = $request->file('file_path')
+                        ->store('student_documents', 'public');
+
+        $document->file_path = $path;
+    }
+
+    // update data
+    $document->student_id = $request->student_id;
+    $document->title      = $request->title;
+    $document->type       = $request->type;
+    $document->remarks    = $request->remarks;
+
+    $document->save();
+
+    return redirect()
+        ->route('students.documents.index')
+        ->with('success', 'Document updated successfully');
+}
     // 🗑 DELETE DOCUMENT
     public function destroy($id)
     {

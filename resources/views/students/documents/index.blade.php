@@ -49,6 +49,49 @@
     gap:5px;
 }
 
+/* ACTION WRAPPER */
+.action-buttons{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+/* EDIT BUTTON */
+.btn-edit{
+    background:#f59e0b;
+    color:#fff;
+    padding:5px 10px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.btn-edit:hover{
+    background:#d97706;
+}
+
+/* DELETE BUTTON */
+.btn-danger{
+    background:#ef4444;
+    color:#fff;
+    padding:5px 10px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.btn-danger:hover{
+    background:#dc2626;
+}
+
 .btn-primary:hover{
     background:#2563eb;
 }
@@ -181,22 +224,34 @@
 
             @can('view students')
             <td>
-                 <a href="{{ route('students.documents.edit', $doc->id) }}" 
-                    class="btn-view" 
-                    style="background:#f59e0b;">
-                        Edit
-                </a>
 
-                <form method="POST" action="{{ route('students.documents.destroy', $doc->id) }}">
-                    @csrf
-                    @method('DELETE')
+    <div class="action-buttons">
 
-                    <button type="submit" class="btn-danger"
-                        onclick="return confirm('Delete this document?')">
-                        Delete
-                    </button>
-                </form>
-            </td>
+        <!-- EDIT -->
+        <a href="{{ route('students.documents.edit', $doc->id) }}" 
+           class="btn-edit">
+            <i class="bi bi-pencil-square"></i>
+            Edit
+        </a>
+
+        <!-- DELETE -->
+        <form method="POST" 
+              action="{{ route('students.documents.destroy', $doc->id) }}"
+              onsubmit="return confirm('Delete this document?')">
+
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" class="btn-danger">
+                <i class="bi bi-trash"></i>
+                Delete
+            </button>
+
+        </form>
+
+    </div>
+
+</td>
             @endcan
         </tr>
         @empty

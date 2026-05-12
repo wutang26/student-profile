@@ -234,8 +234,7 @@ Route::put('/documents/{id}/update', [StudentDocumentController::class, 'update'
 Route::delete('/documents/{id}', [StudentDocumentController::class, 'destroy'])->name('students.documents.destroy');
 
 //Store Items
-Route::get('/store-items', [StoreItemController::class, 'index'])
-    ->name('storeItems.index');
+Route::get('/store-items', [StoreItemController::class, 'index'])->name('storeItems.index');
 
 Route::get('/storeItems/create', [StoreItemController::class, 'create'])
     ->name('storeItems.create');
