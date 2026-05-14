@@ -96,6 +96,7 @@
     background:#2563eb;
 }
 
+
 /* TABLE */
 .table-container{
     background:#fff;
@@ -158,7 +159,7 @@
         </h2>
 
         @can('view students')
-        <a href="{{ route('students.documents.create') }}" class="btn-primary">
+        <a href="{{ route('students.documents.create') }}" class="btn-primary"  style="text-decoration:none;">
             <i class="bi bi-cloud-arrow-up"></i> Upload
         </a>
         @endcan

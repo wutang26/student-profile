@@ -80,7 +80,8 @@ class StudentController extends Controller
         'origin_region' => 'required',
         'origin_district' => 'required',
         'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        'intake' => session('intake'), // OR selected intake
+        // 'intake' => 'required',
+        // 'intake' => session('intake'), // OR selected intake
     ]);
 
     $data = $request->all();
