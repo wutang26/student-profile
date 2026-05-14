@@ -50,7 +50,6 @@ class BorrowRecordController extends Controller
     // =========================
     public function store(Request $request)
     {
-    
         $data = $request->validate([
                 'force_number' => 'nullable|string',
                 'borrower_name' => 'required|string',
@@ -125,7 +124,7 @@ class BorrowRecordController extends Controller
     return view('borrowItems.receive_items', ['record' => $borrowRecord]);
 }
 
-//Borrow Items Controller
+//Who returned Items
 public function returnedItems()
 {
     $records = BorrowRecord::with('item')
@@ -164,4 +163,16 @@ public function bulkReturn(Request $request)
 
     return back()->with('success', 'Items returned successfully');
 }
+
+//Who not retuned items
+public function notReturnedItems()
+{
+    $unreturned_items = BorrowRecord::with('item')
+        ->where('status', 'borrowed')
+        ->latest()
+        ->get();
+
+    return view('pdf.not_returned', compact('unreturned_items'));
+}
+
 }

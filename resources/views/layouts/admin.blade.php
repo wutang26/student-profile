@@ -91,8 +91,9 @@
             </button>
 
             <div class="menu-content">
-                <a href="#" class="menu-item small">Dismissed Students</a>
-                <a href="#" class="menu-item small">Returned Items</a>
+                <a href="{{ route('pdf.dismissedPreview') }}" class="menu-item small">Dismissed Students</a>
+                <a href="{{route('pdf.returnedPreview')}}" class="menu-item small">Returned Items</a>
+                <a href="{{route('pdf.notReturned')}}" class="menu-item small">Un Returned Items</a>
             </div>
         </div>
 
@@ -124,7 +125,7 @@
         <!-- NAVBAR -->
         <header class="navbar">
             <div>
-                Welcome, <strong>{{ auth()->user()->name }}</strong>
+                &nbsp;&nbsp;&nbsp;  Welcome, <strong>{{ auth()->user()->name }}</strong>
             </div>
 
             <div class="user-menu">

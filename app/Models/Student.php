@@ -38,6 +38,8 @@ class Student extends Model
 
         'photo',
         'status',
+        'dismiss_reason',
+        'dismissed_at',
         'comment',
           // NEW FIELD
        'intake',

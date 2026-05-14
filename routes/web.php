@@ -61,8 +61,8 @@ Route::get('/reports', function () {
     return view('reports.index');})->name('reports.index');
 
 //Genenerate Pdf Preview and Download
-Route::get('/pdf/preview', [PdfController::class, 'preview'])
-     ->name('pdf.preview');
+Route::get('/pdf/preview', [PdfController::class, 'dismissedPreview'])
+     ->name('pdf.dismissedPreview');
 
 Route::get('/pdf/download', [PdfController::class, 'download'])
      ->name('pdf.download');
@@ -70,7 +70,12 @@ Route::get('/pdf/download', [PdfController::class, 'download'])
 Route::get('/pdf/generate', [PdfController::class, 'generatePdf'])
      ->name('pdf.generate');
 
+//Returned Items 
+Route::get('/reports/returned-items/preview', [PdfController::class, 'returnedItemsPreview'])
+    ->name('pdf.returnedPreview');
 
+Route::get('/reports/returned-items/download', [PdfController::class, 'returnedItemsDownload'])
+    ->name('PDF.returnedDownload');
 
 
 // Profile page
@@ -285,6 +290,10 @@ Route::post('/borrow/bulk-return', [BorrowRecordController::class, 'bulkReturn']
 
 Route::get('/borrow/{borrowRecord}/return', [BorrowRecordController::class, 'showReturnForm'])
     ->name('borrowItems.return_form');
+
+//Note RETURNED iTEMS
+Route::get('/borrow-items/not-returned', [BorrowRecordController::class, 'notReturnedItems'])
+    ->name('pdf.notReturned');
 
 //Session Handling
 Route::post('/set-intake', function (Illuminate\Http\Request $request) { session(['intake' => $request->intake]);
