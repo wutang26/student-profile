@@ -82,7 +82,7 @@
 
 <div class="page-header">
     <h2><i class="bi bi-person-badge"></i> Staff Registration</h2> &nbsp;&nbsp;&nbsp;
-    <p class="subtitle">Register new military school staff or Leader</p>
+    <p class="subtitle">Register new  school staff or Leader</p>
 </div>
 
 <form method="POST" action="{{ route('staff.store') }}" class="form-container">

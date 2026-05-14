@@ -55,7 +55,6 @@ return new class extends Migration
             $table->timestamp('dismissed_at')->nullable();
 
             $table->text('comment')->nullable();
-
             $table->timestamps();
             $table->softDeletes();
                 });
