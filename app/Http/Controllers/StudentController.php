@@ -57,44 +57,7 @@ class StudentController extends Controller
         'totalPlatoons'
     ));
 }
-    // public function index(Request $request)
-    // {
-    //     $students = Student::latest()->paginate(10);
-        
-    //      $query = Student::query();
-
-    // if ($request->search) {
-    //     $query->where('first_name', 'like', '%' . $request->search . '%')
-    //           ->orWhere('last_name', 'like', '%' . $request->search . '%')
-    //           ->orWhere('force_number', 'like', '%' . $request->search . '%')
-    //           ->orWhere('nida', 'like', '%' . $request->search . '%');
-    // }
-
-    // $students = $query->get();
-
-    // // cards data
-    // $totalStudents = Student::count();
-
-    // $companyCounts = [
-    //     'HQ-Coy' => Student::where('company', 'HQ-Coy')->count(),
-    //     'A-Coy' => Student::where('company', 'A-Coy')->count(),
-    //     'B-Coy' => Student::where('company', 'B-Coy')->count(),
-    //     'C-Coy' => Student::where('company', 'C-Coy')->count(),
-    //     'D-Coy' => Student::where('company', 'D-Coy')->count(),
-    // ];
-
-    // $totalPlatoons = Student::distinct('platoon')->count('platoon');
-
-    // return view('students.index', compact(
-    //     'students',
-    //     'totalStudents',
-    //     'companyCounts',
-    //     'totalPlatoons'
-    // ));
-     
-    //     return view('students.index', compact('students'));
-    // }
-
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -256,4 +219,20 @@ public function import(Request $request)
     return back()->with('success', 'Students imported via CSV!');
 }
 
+
+//Student Dismiss
+
+public function dismiss(Request $request, $id)
+{
+    $student = Student::findOrFail($id);
+
+    $student->update([
+        'status' => 'dismissed',
+        'dismiss_reason' => $request->reason,
+        'dismissed_at' => now(),
+    ]);
+
+    return redirect()->route('students.index')
+        ->with('success', 'Student dismissed successfully');
+}
 }

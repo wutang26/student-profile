@@ -213,6 +213,8 @@ Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name
 Route::put('/students/{student}', [StudentController::class, 'update'])->name('students.update');
 
 Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
+//Student Dismiss 
+Route::patch('/students/{id}/dismiss', [StudentController::class, 'dismiss'])->name('students.dismiss');
 
 //Students Upload excel
 Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');

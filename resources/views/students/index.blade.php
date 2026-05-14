@@ -67,6 +67,12 @@
         color:#991b1b;
     }
 
+    .status.dismissed{
+    background:#7f1d1d;   /* dark red */
+    color:#ffffff;        /* white text */
+    font-weight:600;
+}
+
     .action-btns{
         display:flex;
         gap:5px;
@@ -247,32 +253,79 @@
         View
     </a>
 
-     @can('view students')
+    @can('view students')
     <!-- EDIT -->
-        <a href="{{ route('students.edit', $student->id) }}" 
-        class="btn-view" 
+    <a href="{{ route('students.edit', $student->id) }}"
+        class="btn-view"
         style="background:#f59e0b;">
-            Edit
-        </a>
+        Edit
+    </a>
     @endcan
 
- @can('view students')
-    <!-- DELETE -->
-    <form action="{{ route('students.destroy', $student->id) }}" method="POST">
-        @csrf
-        @method('DELETE')
+    @can('view students')
 
-        <button type="submit" 
-            style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:6px;"
-            onclick="return confirm('Delete this student?')">
-            Dismis
-        </button>
-    </form>
-@endcan
+    <!-- DISMISS BUTTON -->
+    <button type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#dismissModal{{ $student->id }}"
+        style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:6px;">
+        Dismiss
+    </button>
+
+    @endcan
 
 </div>
+
+
 </td>
         </tr>
+
+<div class="modal fade" id="dismissModal{{ $student->id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- HEADER -->
+            <div class="modal-header" style="background:#7f1d1d; color:white;">
+                <h5 class="modal-title">Dismiss Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- FORM -->
+            <form action="{{ route('students.dismiss', $student->id) }}" method="POST">
+                @csrf
+                @method('PATCH')
+
+                <div class="modal-body">
+
+                    <p>
+                        You are dismissing:
+                        <strong>{{ $student->first_name }} {{ $student->last_name }}</strong>
+                    </p>
+
+                    <div class="mb-3">
+                        <label class="form-label">Reason for dismissal</label>
+                        <textarea name="reason" class="form-control" required></textarea>
+                    </div>
+
+                </div>
+
+                <!-- FOOTER -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="btn btn-danger">
+                        Confirm Dismiss
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
         @endforeach
     </tbody>
 </table>

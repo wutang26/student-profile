@@ -19,7 +19,7 @@
 <body>
 
 <div class="auth-wrapper"
-     style="background-image: url('{{ asset('assets/img/student.jpg') }}');">
+     style="background-image: url('{{ asset('assets/img/tps02.png') }}');">
 
     <!-- Logo -->
     <div class="logo">

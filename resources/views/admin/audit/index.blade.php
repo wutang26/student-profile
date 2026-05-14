@@ -3,66 +3,117 @@
 @section('content')
 
 <style>
-    /* PAGE TITLE */
-    .page-title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
+/* =========================
+   PAGE HEADER
+========================= */
+.page-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 18px;
+    letter-spacing: 0.3px;
+}
 
-    /* CARD */
-    .card {
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        overflow-x: auto;
-    }
+/* =========================
+   CARD WRAPPER
+========================= */
+.card {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    border: 1px solid #eef2f7;
+}
 
-    /* TABLE */
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 14px;
-    }
+/* =========================
+   TABLE WRAPPER
+========================= */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #334155;
+}
 
-    .table thead {
-        background: #f3f4f6;
-    }
+/* HEADER */
+.table thead {
+    background: linear-gradient(90deg, #1d4ed8, #06b6d4);
+    color: white;
+}
 
-    .table th,
-    .table td {
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid #e5e7eb;
-    }
+.table th {
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
 
-    .table tbody tr:hover {
-        background: #f9fafb;
-    }
+/* BODY */
+.table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eef2f7;
+    vertical-align: middle;
+}
 
-    /* PAGINATION */
-    .pagination {
-        margin-top: 15px;
-        display: flex;
-        justify-content: center;
-        gap: 5px;
-    }
+/* ROW HOVER */
+.table tbody tr {
+    transition: all 0.2s ease;
+}
 
-    .pagination a,
-    .pagination span {
-        padding: 6px 10px;
-        border: 1px solid #d1d5db;
-        border-radius: 5px;
-        text-decoration: none;
-        color: #111827;
-        font-size: 13px;
-    }
+.table tbody tr:hover {
+    background: #f8fafc;
+    transform: scale(1.002);
+}
 
-    .pagination .active {
-        background: #2563eb;
-        color: #fff;
-        border-color: #2563eb;
-    }
+/* =========================
+   BADGE STYLE (optional upgrade for actions)
+========================= */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+/* =========================
+   PAGINATION
+========================= */
+.pagination {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.pagination a,
+.pagination span {
+    padding: 7px 11px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #0f172a;
+    font-size: 13px;
+    background: #fff;
+    transition: 0.2s ease;
+}
+
+/* ACTIVE PAGE */
+.pagination .active {
+    background: linear-gradient(90deg, #1d4ed8, #06b6d4);
+    color: #fff;
+    border: none;
+}
+
+/* HOVER */
+.pagination a:hover {
+    background: #f1f5f9;
+}
 </style>
 
 <h2 class="page-title">Audit Logs</h2>

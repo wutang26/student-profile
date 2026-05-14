@@ -50,6 +50,10 @@ return new class extends Migration
             // System
             $table->string('photo')->nullable();
             $table->enum('status', ['active', 'inactive', 'graduated', 'dismissed'])->default('active');
+            // Dismiss tracking (NEW)
+            $table->text('dismiss_reason')->nullable();
+            $table->timestamp('dismissed_at')->nullable();
+
             $table->text('comment')->nullable();
 
             $table->timestamps();
