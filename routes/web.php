@@ -310,5 +310,9 @@ Route::post('/set-intake', [StudentController::class, 'setIntake'])
 Route::post('/courses/store', [StudentController::class, 'storeCourse'])
     ->name('courses.store');
 
+//Register course
+Route::get('/courses', [StudentController::class, 'coursesPage'])
+    ->name('courses.index');
+
 //Used for AuTH
 require __DIR__.'/auth.php';
