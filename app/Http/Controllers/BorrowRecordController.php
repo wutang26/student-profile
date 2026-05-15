@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BorrowRecord;
 use App\Models\StoreItem;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BorrowRecordController extends Controller
 {  
@@ -174,5 +175,21 @@ public function notReturnedItems()
 
     return view('pdf.not_returned', compact('unreturned_items'));
 }
+
+//Download un returned
+    public function downloadUnreturned()
+    {
+        $unreturned_items = BorrowRecord::with('item')
+            ->where('status', 'borrowed')
+            ->latest()
+            ->get();
+
+        $pdf = Pdf::loadView(
+            'pdf.not_returned',
+            compact('unreturned_items')
+        );
+
+        return $pdf->stream('unreturned-items-report.pdf');
+    }
 
 }

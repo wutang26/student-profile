@@ -295,6 +295,10 @@ Route::get('/borrow/{borrowRecord}/return', [BorrowRecordController::class, 'sho
 Route::get('/borrow-items/not-returned', [BorrowRecordController::class, 'notReturnedItems'])
     ->name('pdf.notReturned');
 
+//Download un returned report
+Route::get('/reports/unreturned/download', [BorrowRecordController::class, 'downloadUnreturned'])
+    ->name('reports.unreturned.download');
+
 //Session Handling
 Route::post('/set-intake', function (Illuminate\Http\Request $request) { session(['intake' => $request->intake]);
     return back();
