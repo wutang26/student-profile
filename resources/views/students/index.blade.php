@@ -139,19 +139,43 @@
         </select>
     </form>
 
+    <!-----Coarse Registrations---->
+  @php
+    $activeIntake = session('intake', '2025/2026');
+
+    $course = \App\Models\Course::where('intake', $activeIntake)->first();
+@endphp
+
+
     <!-- Active Badge -->
-    <div style="margin-top:5px;">
-        <span style="
-            background:#2563eb;
-            color:white;
-            padding:4px 12px;
-            border-radius:20px;
-            font-size:12px;
-            font-weight:600;
-        ">
-            Active Intake: {{ session('intake', '2025/2026') }}
-        </span>
-    </div>
+<div style="margin-top:5px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+
+    <!-- Intake -->
+    <span style="
+        background:#2563eb;
+        color:white;
+        padding:4px 12px;
+        border-radius:20px;
+        font-size:12px;
+        font-weight:600;
+    ">
+        Intake: {{ $activeIntake }}
+    </span>
+
+    <!-- Course -->
+    <span style="
+        background:#059669;
+        color:white;
+        padding:4px 12px;
+        border-radius:20px;
+        font-size:12px;
+        font-weight:600;
+    ">
+        <!--Course:--->
+        {{ $course ? $course->name : 'No Course Assigned' }}
+    </span>
+
+</div>
 
 </div>
 
@@ -189,6 +213,16 @@
 @endcan
 
     <!-- RIGHT: TOTAL COUNT -->
+
+     <!-- SAMPLE CSV DOWNLOAD -->
+    <a href="{{ asset('assets/students_sample.csv') }}" 
+       download
+       class="btn-primary"
+       style="text-decoration:none;">
+        Download Sample CSV
+    </a>
+
+    <!-- RIGHT: TOTAL COUNT -->
     <div style="
         display:flex;
         align-items:center;
@@ -210,6 +244,28 @@
             {{ $students->count() }}
         </span>
     </div>
+
+    <!-- <div style="
+        display:flex;
+        align-items:center;
+        gap:6px;
+        background:#f3f4f6;
+        padding:6px 12px;
+        border-radius:20px;
+        font-weight:600;
+        white-space:nowrap;
+    ">
+        Total:
+        <span style="
+            background:#2563eb;
+            color:#fff;
+            padding:2px 10px;
+            border-radius:20px;
+            font-size:12px;
+        ">
+            {{ $students->count() }}
+        </span>
+    </div> -->
 
 </div>
 <br>

@@ -1,0 +1,6 @@
+first_name,middle_name,last_name,force_number,nida,date_of_birth,gender,company,platoon,phone,email,address,next_of_kin_name,next_of_kin_phone,next_of_kin_relationship,next_of_kin_address,origin_region,origin_district,entry_region
+Peter,John,Moshi,1031,19980111-00011-00021,2/14/1998,Male,HQ-Coy,Platoon 1,0712345678,peter.moshi@gmail.com,Arusha,Mary Moshi,0711111111,Mother,Arusha,Arusha,Arusha Urban,Moshi
+Grace,Anna,Mrema,1032,19970212-00012-00022,6/10/1997,Female,A-Coy,Platoon 2,0723456789,grace.mrema@gmail.com,Moshi,Joseph Mrema,0722222222,Father,Kilimanjaro,Moshi Rural,Moshi,
+David,Paul,Komba,1033,19990313-00013-00023,10/3/1999,Male,B-Coy,Platoon 3,0734567890,david.komba@gmail.com,Dar es Salaam,Rehema Komba,0733333333,Mother,Dar,Dar es Salaam,Ilala,
+Esther,Joyce,Ngowi,1034,19960414-00014-00024,3/22/1996,Female,C-Coy,Platoon 1,0745678901,esther.ngowi@gmail.com,Kilimanjaro,John Ngowi,0744444444,Father,Kilimanjaro,Moshi Urban,Arusha,
+Hassan,Ali,Said,1035,19980515-00015-00025,8/9/1998,Male,D-Coy,Platoon 2,0756789012,hassan.said@gmail.com,Zanzibar,Amina Said,0755555555,Mother,Zanzibar,Urban West,Arusha,

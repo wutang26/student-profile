@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use App\Imports\StudentsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
+use App\Models\Course;
 
 class StudentController extends Controller
 {
@@ -236,4 +237,32 @@ public function dismiss(Request $request, $id)
     return redirect()->route('students.index')
         ->with('success', 'Student dismissed successfully');
 }
+
+//Save intake session
+public function setIntake(Request $request)
+{
+    session([
+        'intake' => $request->intake
+    ]);
+
+    return back();
+}
+
+//Store coarse
+public function storeCourse(Request $request)
+{
+    $request->validate([
+        'name' => 'required',
+        'intake' => 'required|unique:courses,intake',
+    ]);
+
+    Course::create([
+        'name' => $request->name,
+        'intake' => $request->intake,
+    ]);
+
+    return back()->with('success', 'Course created successfully');
+}
+
+
 }

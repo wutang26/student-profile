@@ -304,6 +304,11 @@ Route::post('/set-intake', function (Illuminate\Http\Request $request) { session
     return back();
 })->name('set.intake');
 
+Route::post('/set-intake', [StudentController::class, 'setIntake'])
+    ->name('set.intake');
+
+Route::post('/courses/store', [StudentController::class, 'storeCourse'])
+    ->name('courses.store');
 
 //Used for AuTH
 require __DIR__.'/auth.php';
