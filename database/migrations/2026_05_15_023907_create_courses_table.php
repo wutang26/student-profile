@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-             $table->string('name');
-            // intake linked to this course
-            $table->string('intake')->unique();
+            $table->string('name');
+            $table->string('intake');
             $table->timestamps();
+
+            // prevent duplicate same course in same intake
+            $table->unique(['name', 'intake']);
         });
     }
 

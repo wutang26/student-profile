@@ -49,6 +49,13 @@
         border-radius:6px;
         margin-bottom:15px;
     }
+    .alert-danger{
+    background:#fee2e2;
+    color:#991b1b;
+    padding:10px;
+    border-radius:6px;
+    margin-bottom:15px;
+}
 
     .table{
         width:100%;
@@ -66,18 +73,30 @@
     .table th{
         background:#f3f4f6;
     }
+
 </style>
 
 <div class="card">
 
     <h2 style="margin-bottom:20px;">Register Course</h2>
 
-    @if(session('success'))
-        <div class="alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+   @if(session('success'))
+    <div class="alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
+@if($errors->any())
+    <div class="alert-danger">
+        <ul style="margin:0; padding-left:18px;">
+
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+
+        </ul>
+    </div>
+@endif
     <!-- COURSE FORM -->
     <form method="POST" action="{{ route('courses.store') }}">
         @csrf

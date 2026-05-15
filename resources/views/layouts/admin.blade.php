@@ -107,6 +107,7 @@
 
             <div class="menu-content">
                 <a href="{{ route('admin.audit.index') }}" class="menu-item small">Audits</a>
+                <a href="{{ route('courses.index') }}" class="menu-item small">Courses</a>
                 <a href="{{ route('settings.users.index') }}" class="menu-item small">Users</a>
                 <a href="{{ route('settings.roles.index') }}" class="menu-item small">Roles</a>
                 <a href="{{ route('settings.permissions.index') }}" class="menu-item small">Permissions</a>

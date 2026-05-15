@@ -120,30 +120,68 @@
 
     <div style="text-align:center; margin-bottom:15px;">
 
-    <form method="POST" action="{{ route('set.intake') }}">
-        @csrf
+   <form method="POST" action="{{ route('set.intake') }}">
+    @csrf
 
-        <select name="intake" onchange="this.form.submit()"
+    @php
+        $activeIntake = session('intake', '2025/2026');
+        $activeCourse = session('course_id');
+
+        $courses = \App\Models\Course::where('intake', $activeIntake)->get();
+    @endphp
+
+    <!-- Intake Dropdown -->
+    <select name="intake"
+            onchange="this.form.submit()"
             style="padding:6px 12px; border-radius:6px; border:1px solid #ccc;">
-            
-            <option value="2025/2026" {{ session('intake') == '2025/2026' ? 'selected' : '' }}>
-                2025/2026
+
+        @for($year = 2025; $year <= 2035; $year++)
+
+            @php
+                $value = $year . '/' . ($year + 1);
+            @endphp
+
+            <option value="{{ $value }}"
+                {{ $activeIntake == $value ? 'selected' : '' }}>
+                {{ $value }}
             </option>
 
-            <option value="2026/2027" {{ session('intake') == '2026/2027' ? 'selected' : '' }}>
-                2026/2027
+        @endfor
+
+    </select>
+
+    <!-- Course Dropdown -->
+    <select name="course_id"
+            onchange="this.form.submit()"
+            style="padding:6px 12px; border-radius:6px; border:1px solid #ccc; margin-left:8px;">
+
+        <option value="">-- Select Course --</option>
+
+        @foreach($courses as $course)
+
+            <option value="{{ $course->id }}"
+                {{ $activeCourse == $course->id ? 'selected' : '' }}>
+
+                {{ $course->name }}
+
             </option>
-            <option value="2027/2028" {{ session('intake') == '2027/2028' ? 'selected' : '' }}>
-                2027/2028
-            </option>
-        </select>
-    </form>
+
+        @endforeach
+
+    </select>
+
+</form>
 
     <!-----Coarse Registrations---->
-  @php
+ @php
+
     $activeIntake = session('intake', '2025/2026');
 
-    $course = \App\Models\Course::where('intake', $activeIntake)->first();
+    $course = \App\Models\Course::find(session('course_id'));
+
+    // OLD:
+    // $course = \App\Models\Course::where('intake', $activeIntake)->get();
+
 @endphp
 
 

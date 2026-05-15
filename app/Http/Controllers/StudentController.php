@@ -11,6 +11,7 @@ use App\Imports\StudentsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 use App\Models\Course;
+use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
 {
@@ -242,7 +243,8 @@ public function dismiss(Request $request, $id)
 public function setIntake(Request $request)
 {
     session([
-        'intake' => $request->intake
+        'intake' => $request->intake,
+        'course_id' => $request->course_id,
     ]);
 
     return back();
@@ -252,8 +254,24 @@ public function setIntake(Request $request)
 public function storeCourse(Request $request)
 {
     $request->validate([
-        'name' => 'required',
-        'intake' => 'required|unique:courses,intake',
+
+        'name' => [
+            'required',
+
+            Rule::unique('courses')
+                ->where(function ($query) use ($request) {
+
+                    return $query->where('intake', $request->intake);
+
+                }),
+        ],
+
+        'intake' => 'required',
+
+    ], [
+
+        'name.unique' => 'This course already exists for this intake.',
+
     ]);
 
     Course::create([
@@ -264,5 +282,11 @@ public function storeCourse(Request $request)
     return back()->with('success', 'Course created successfully');
 }
 
+//Course Register
+public function coursesPage()
+{
+    $courses = Course::latest()->get();
 
+    return view('courses.index', compact('courses'));
+}
 }
