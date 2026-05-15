@@ -259,51 +259,40 @@
        style="text-decoration:none;">
         Download Sample CSV
     </a>
+    @php
+    $course = \App\Models\Course::find(session('course_id'));
+@endphp
 
-    <!-- RIGHT: TOTAL COUNT -->
-    <div style="
-        display:flex;
-        align-items:center;
-        gap:6px;
-        background:#f3f4f6;
-        padding:6px 12px;
-        border-radius:20px;
-        font-weight:600;
-        white-space:nowrap;
-    ">
-        Total:
-        <span style="
-            background:#2563eb;
-            color:#fff;
-            padding:2px 10px;
-            border-radius:20px;
-            font-size:12px;
-        ">
-            {{ $students->count() }}
-        </span>
-    </div>
+<div style="
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:#f3f4f6;
+    padding:6px 12px;
+    border-radius:20px;
+    font-weight:600;
+    white-space:nowrap;
+">
+    Total:
 
-    <!-- <div style="
-        display:flex;
-        align-items:center;
-        gap:6px;
-        background:#f3f4f6;
-        padding:6px 12px;
+    <span style="
+        background:#2563eb;
+        color:#fff;
+        padding:2px 10px;
         border-radius:20px;
-        font-weight:600;
-        white-space:nowrap;
+        font-size:12px;
     ">
-        Total:
-        <span style="
-            background:#2563eb;
-            color:#fff;
-            padding:2px 10px;
-            border-radius:20px;
-            font-size:12px;
-        ">
-            {{ $students->count() }}
-        </span>
-    </div> -->
+
+        @if($course)
+            {{-- Course selected → filtered count --}}
+            {{ $totalStudentsFiltered }}
+        @else
+            {{-- No course selected → ALL students --}}
+            {{ $totalStudentsAllIntakes }}
+        @endif
+
+    </span>
+</div>
 
 </div>
 <br>

@@ -1,64 +1,216 @@
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
-        </h2>
+@extends('layouts.admin')
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
-    </header>
+@section('content')
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f6f9;
+}
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('patch')
+.page-wrapper{
+    min-height:80vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:40px 20px;
+}
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+.card{
+    width:100%;
+    max-width:700px;
+    background:#ffffff;
+    border-radius:14px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    border:1px solid #e5e7eb;
+}
+
+.header{
+    margin-bottom:25px;
+}
+
+.title{
+    font-size:22px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:5px;
+}
+
+.subtitle{
+    font-size:13px;
+    color:#6b7280;
+}
+
+.section{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:6px;
+    color:#374151;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #d1d5db;
+    font-size:14px;
+    outline:none;
+    transition:0.2s;
+}
+
+input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,0.15);
+}
+
+.error{
+    font-size:12px;
+    color:#dc2626;
+    margin-top:5px;
+}
+
+.alert-success{
+    background:#ecfdf5;
+    color:#047857;
+    padding:10px 12px;
+    border-radius:8px;
+    border:1px solid #a7f3d0;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.note{
+    font-size:13px;
+    color:#6b7280;
+    margin-top:10px;
+    line-height:1.5;
+}
+
+.btn{
+    background:#2563eb;
+    color:#fff;
+    padding:12px 18px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.2s;
+}
+
+.btn:hover{
+    background:#1d4ed8;
+}
+
+.btn-secondary{
+    background:transparent;
+    border:none;
+    color:#2563eb;
+    cursor:pointer;
+    font-size:13px;
+    text-decoration:underline;
+}
+
+.actions{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:20px;
+    flex-wrap:wrap;
+    gap:10px;
+}
+</style>
+
+<div class="page-wrapper">
+
+    <div class="card">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title">👤 Profile Information</div>
+            <div class="subtitle">Update your account details and email address</div>
         </div>
 
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+        <!-- SUCCESS MESSAGE -->
+        @if(session('status') === 'profile-updated')
+            <div class="alert-success">
+                Profile updated successfully
+            </div>
+        @endif
 
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
+        <!-- VERIFY FORM -->
+        <form id="send-verification" method="POST" action="{{ route('verification.send') }}">
+            @csrf
+        </form>
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
+        <!-- PROFILE FORM -->
+        <form method="POST" action="{{ route('profile.update') }}">
+            @csrf
+            @method('PATCH')
+
+            <!-- NAME -->
+            <div class="section">
+                <label>Name</label>
+                <input type="text" name="name"
+                       value="{{ old('name', $user->name) }}"
+                       required>
+
+                @error('name')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- EMAIL -->
+            <div class="section">
+                <label>Email</label>
+                <input type="email" name="email"
+                       value="{{ old('email', $user->email) }}"
+                       required>
+
+                @error('email')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+
+                @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+                    <div class="note">
+                        ⚠ Your email is not verified.
+
+                        <button form="send-verification" class="btn-secondary">
+                            Resend verification email
                         </button>
-                    </p>
 
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
-                </div>
-            @endif
-        </div>
+                        @if(session('status') === 'verification-link-sent')
+                            <div class="alert-success" style="margin-top:10px;">
+                                Verification link sent successfully
+                            </div>
+                        @endif
+                    </div>
+                @endif
+            </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <!-- ACTIONS -->
+            <div class="actions">
+                <button type="submit" class="btn">
+                    Save Changes
+                </button>
 
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
-    </form>
-</section>
+                @if(session('status') === 'profile-updated')
+                    <span style="font-size:13px;color:#6b7280;">
+                        ✔ Saved
+                    </span>
+                @endif
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@endsection

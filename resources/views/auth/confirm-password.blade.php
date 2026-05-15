@@ -1,27 +1,125 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+@extends('layouts.admin')
+
+@section('content')
+
+<style>
+    .page-wrapper{
+        min-height:70vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:#f4f6f9;
+        padding:30px;
+    }
+
+    .card{
+        width:100%;
+        max-width:480px;
+        background:#fff;
+        border-radius:14px;
+        padding:30px;
+        box-shadow:0 10px 25px rgba(0,0,0,0.08);
+        border:1px solid #eef0f3;
+        text-align:center;
+    }
+
+    .title{
+        font-size:20px;
+        font-weight:700;
+        color:#111827;
+        margin-bottom:8px;
+    }
+
+    .subtitle{
+        font-size:13px;
+        color:#6b7280;
+        margin-bottom:20px;
+        line-height:1.4;
+    }
+
+    label{
+        display:block;
+        text-align:left;
+        font-size:13px;
+        font-weight:600;
+        margin-bottom:6px;
+        color:#374151;
+    }
+
+    input{
+        width:100%;
+        padding:11px 12px;
+        border-radius:8px;
+        border:1px solid #d1d5db;
+        font-size:14px;
+        outline:none;
+        transition:0.2s;
+    }
+
+    input:focus{
+        border-color:#2563eb;
+        box-shadow:0 0 0 3px rgba(37,99,235,0.15);
+    }
+
+    .error{
+        color:#dc2626;
+        font-size:12px;
+        margin-top:5px;
+        text-align:left;
+    }
+
+    .btn{
+        width:100%;
+        margin-top:18px;
+        padding:12px;
+        border:none;
+        border-radius:8px;
+        background:linear-gradient(135deg,#2563eb,#1d4ed8);
+        color:#fff;
+        font-weight:600;
+        cursor:pointer;
+        transition:0.2s;
+    }
+
+    .btn:hover{
+        transform:translateY(-1px);
+        box-shadow:0 8px 18px rgba(37,99,235,0.25);
+    }
+</style>
+
+<div class="page-wrapper">
+
+    <div class="card">
+
+        <div class="title">
+            🔐 Confirm Password
+        </div>
+
+        <div class="subtitle">
+            This is a secure area of the system. Please confirm your password before continuing.
+        </div>
+
+        <form method="POST" action="{{ route('password.confirm') }}">
+            @csrf
+
+            <div style="text-align:left;">
+                <label>Password</label>
+
+                <input type="password" name="password" required autocomplete="current-password">
+
+                @error('password')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <button type="submit" class="btn">
+                Confirm
+            </button>
+
+        </form>
+
     </div>
 
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
+</div>
 
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+@endsection

@@ -35,7 +35,7 @@ class Student extends Model
         'next_of_kin_phone',
         'next_of_kin_relationship',
         'next_of_kin_address',
-
+        'course_id',
         'photo',
         'status',
         'dismiss_reason',
@@ -56,9 +56,10 @@ public function originRegion()
     return $this->belongsTo(Region::class, 'origin_region_id');
 }
 
-//Filter students By Intake
-// public function scopeIntake($query, $intake)
-// {
-//     return $query->where('intake', $intake);
-// }
+//Relate to course
+public function course()
+{
+    return $this->belongsTo(Course::class);
+}
+
 }

@@ -53,7 +53,9 @@ return new class extends Migration
             // Dismiss tracking (NEW)
             $table->text('dismiss_reason')->nullable();
             $table->timestamp('dismissed_at')->nullable();
-
+             // optional foreign key (recommended)
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('set null');
+        
             $table->text('comment')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -23,9 +23,15 @@ class StudentController extends Controller
     $query = Student::query();
 
     // FILTER BY SESSION INTAKE
+    $query = Student::query();
+
     if (session()->has('intake')) {
-        $query->where('intake', session('intake'));
-    }
+            $query->where('intake', session('intake'));
+        }
+
+        if (session()->has('course_id') && session('course_id')) {
+            $query->where('course_id', session('course_id'));
+        }
 
     // SEARCH
     if ($request->search) {
@@ -42,6 +48,12 @@ class StudentController extends Controller
     // Stats (based on filtered intake)
     $totalStudents = $students->count();
 
+    // TOTAL across ALL intakes
+    $totalStudentsAllIntakes = Student::count();
+
+    //  Total Student Filtered
+    $totalStudentsFiltered = $students->count();
+
     $companyCounts = [
         'HQ-Coy' => $students->where('company', 'HQ-Coy')->count(),
         'A-Coy' => $students->where('company', 'A-Coy')->count(),
@@ -56,7 +68,9 @@ class StudentController extends Controller
         'students',
         'totalStudents',
         'companyCounts',
-        'totalPlatoons'
+        'totalPlatoons',
+        'totalStudentsAllIntakes',
+        'totalStudentsFiltered',
     ));
 }
     
@@ -90,6 +104,8 @@ class StudentController extends Controller
 
     // FORCE intake from session
     $data['intake'] = session('intake', '2025/2026');
+
+    $data['course_id'] = session('course_id'); // IMPORTANT
 
     // HANDLE PHOTO UPLOAD
     if ($request->hasFile('photo')) {

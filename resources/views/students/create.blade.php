@@ -17,8 +17,8 @@
         <input type="text" name="last_name" placeholder="Last Name">
 
         <input type="text" name="force_number" placeholder="Force Number" required>
-        <input type="text" name="nida" placeholder="NIDA" required>
-        <input type="date" name="date_of_birth">
+      <input type="text" id="nida" name="nida" placeholder="1234-5678-9012-3456-7890" required>
+     <input type="date" name="date_of_birth">
 
         <select name="gender">
             <option value="">Select Gender</option>
@@ -114,5 +114,12 @@
 </div>
 
 </form>
+
+<script>
+document.getElementById("nida").addEventListener("input", function () {
+    let value = this.value.replace(/\D/g, '').substring(0, 20);
+    this.value = value.replace(/(\d{4})(?=\d)/g, '$1-');
+});
+</script>
 
 @endsection
