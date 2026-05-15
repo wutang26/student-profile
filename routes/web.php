@@ -78,22 +78,7 @@ Route::get('/reports/returned-items/download', [PdfController::class, 'returnedI
     ->name('PDF.returnedDownload');
 
 
-// Profile page
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
-
-    // Show change password form
-    Route::get('/password/change', [PasswordController::class, 'edit'])->name('password.change');
-
-    // Handle password update
-    Route::put('/password/change', [PasswordController::class, 'update'])->name('password.update');
-
-    // Logout (Breeze default)
-    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
 //Welcome page
-
-
-
 Route::get('/', function () {  return redirect()->route('register'); });
 
 
@@ -107,11 +92,35 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
 
 
+//Profile Routes
+Route::middleware('auth')->prefix('profile')->name('profile.')->group(function () {
 
+    // SHOW profile
+    Route::get('/', [ProfileController::class, 'show'])->name('show');
+
+    // EDIT profile
+    Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
+
+    // UPDATE profile
+    Route::patch('/update', [ProfileController::class, 'update'])->name('update');
+
+    // DELETE account
+    Route::delete('/delete', [ProfileController::class, 'destroy'])->name('destroy');
+
+});
+
+//Route for Change Password as Stand alone
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // show page
+    Route::get('/password/change', function () {
+        return view('profile.password-change');
+    })->name('password.change');
+
+    // update password
+    Route::put('/password/change', [PasswordController::class, 'update'])
+        ->name('password.change.update');
+
 });
 
 

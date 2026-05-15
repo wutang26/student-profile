@@ -38,12 +38,13 @@
             </button>
 
             <div class="menu-content">
-                <a href="{{ route('students.index') }}" class="menu-item small">
-                    All Students
-                </a>
-                <a href="{{ route('students.documents.index') }}" class="menu-item small">
-                    Attachments
-                </a>
+            <a href="{{ route('students.index') }}" class="menu-item small">
+                <i class="bi bi-mortarboard"></i> All Students
+            </a>
+
+            <a href="{{ route('students.documents.index') }}" class="menu-item small">
+                <i class="bi bi-paperclip"></i> Attachments
+            </a>
             </div>
         </div>
 
@@ -54,11 +55,11 @@
                 <i class="bi bi-chevron-down icon"></i>
             </button>
 
-            <div class="menu-content">
-                <a href="{{ route('staff.index') }}" class="menu-item small">
-                    All Staff
-                </a>
-            </div>
+        <div class="menu-content">
+              <a href="{{ route('staff.index') }}" class="menu-item small">
+                <i class="bi bi-person-badge"></i> All Staff
+            </a>
+         </div>
         </div>
 
         <!-- ================= STORE ================= -->
@@ -69,17 +70,17 @@
             </button>
 
             <div class="menu-content">
-                <a href="{{ route('storeItems.index') }}" class="menu-item small">
-                    Registered Items
-                </a>
+              <a href="{{ route('storeItems.index') }}" class="menu-item small">
+            <i class="bi bi-box-seam"></i> Registered Items
+           </a>
 
-                <a href="{{ route('borrowItems.index') }}" class="menu-item small">
-                    Borrow Items
-                </a>
+            <a href="{{ route('borrowItems.index') }}" class="menu-item small">
+                <i class="bi bi-arrow-left-right"></i> Borrow Items
+            </a>
 
-                <a href="{{ route('borrowItems.returned') }}" class="menu-item small">
-                    Returned Items
-                </a>
+            <a href="{{ route('borrowItems.returned') }}" class="menu-item small">
+                <i class="bi bi-check2-circle"></i> Returned Items
+            </a>
             </div>
         </div>
 
@@ -91,9 +92,17 @@
             </button>
 
             <div class="menu-content">
-                <a href="{{ route('pdf.dismissedPreview') }}" class="menu-item small">Dismissed Students</a>
-                <a href="{{route('pdf.returnedPreview')}}" class="menu-item small">Returned Items</a>
-                <a href="{{route('pdf.notReturned')}}" class="menu-item small">Un Returned Items</a>
+                <a href="{{ route('pdf.dismissedPreview') }}" class="menu-item small">
+                        <i class="bi bi-person-x"></i> Dismissed Students
+                    </a>
+
+                    <a href="{{ route('pdf.returnedPreview') }}" class="menu-item small">
+                        <i class="bi bi-box-arrow-in-down-left"></i> Returned Items
+                    </a>
+
+                    <a href="{{ route('pdf.notReturned') }}" class="menu-item small">
+                        <i class="bi bi-exclamation-triangle"></i> Un Returned Items
+                    </a>
             </div>
         </div>
 
@@ -106,13 +115,33 @@
             </button>
 
             <div class="menu-content">
-                <a href="{{ route('admin.audit.index') }}" class="menu-item small">Audits</a>
-                <a href="{{ route('courses.index') }}" class="menu-item small">Courses</a>
-                <a href="{{ route('settings.users.index') }}" class="menu-item small">Users</a>
-                <a href="{{ route('settings.roles.index') }}" class="menu-item small">Roles</a>
-                <a href="{{ route('settings.permissions.index') }}" class="menu-item small">Permissions</a>
-                <a href="{{ route('settings.regions.region') }}" class="menu-item small">Regions</a>
-                <a href="{{ route('settings.district') }}" class="menu-item small">Districts</a>
+               <a href="{{ route('admin.audit.index') }}" class="menu-item small">
+                        <i class="bi bi-activity"></i> Audits
+                    </a>
+
+                    <a href="{{ route('courses.index') }}" class="menu-item small">
+                        <i class="bi bi-book"></i> Courses
+                    </a>
+
+                    <a href="{{ route('settings.users.index') }}" class="menu-item small">
+                        <i class="bi bi-people"></i> Users
+                    </a>
+
+                    <a href="{{ route('settings.roles.index') }}" class="menu-item small">
+                        <i class="bi bi-shield-lock"></i> Roles
+                    </a>
+
+                    <a href="{{ route('settings.permissions.index') }}" class="menu-item small">
+                        <i class="bi bi-key"></i> Permissions
+                    </a>
+
+                    <a href="{{ route('settings.regions.region') }}" class="menu-item small">
+                        <i class="bi bi-geo-alt"></i> Regions
+                    </a>
+
+                    <a href="{{ route('settings.district') }}" class="menu-item small">
+                        <i class="bi bi-building"></i> Districts
+                    </a>
             </div>
         </div>
         @endcan

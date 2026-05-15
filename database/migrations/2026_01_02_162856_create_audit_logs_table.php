@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('audit_logs', function (Blueprint $table) {
             $table->id();
 
-        $table->foreignId('performed_by')
-              ->constrained('users')
-              ->cascadeOnDelete();
+        $table->foreignId('performed_by')->nullable()->constrained('users')->nullOnDelete();
 
         $table->string('action'); // assign_role, revoke_permission, etc
         $table->string('target_type'); // User / Role

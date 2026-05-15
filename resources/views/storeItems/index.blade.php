@@ -18,7 +18,9 @@
                         <th>Category</th>
                         <th>Total</th>
                         <th>Available</th>
+                    @can('view students')
                         <th>Actions</th>
+                    @endcan
                     </tr>
                 </thead>
 
@@ -34,12 +36,15 @@
                             </span>
                         </td>
                         <td>
+                            
+                             @can('view students')
                             <a href="{{ route('storeItems.edit', $item) }}" class="btn btn-sm btn-warning">Edit</a>
 
                             <form action="{{ route('storeItems.destroy', $item) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button class="btn btn-sm btn-danger">Delete</button>
                             </form>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

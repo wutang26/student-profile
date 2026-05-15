@@ -251,7 +251,7 @@
 @endcan
 
     <!-- RIGHT: TOTAL COUNT -->
-
+     @can('view students')
      <!-- SAMPLE CSV DOWNLOAD -->
     <a href="{{ asset('assets/students_sample.csv') }}" 
        download
@@ -259,6 +259,8 @@
        style="text-decoration:none;">
         Download Sample CSV
     </a>
+    @endcan
+    
     @php
     $course = \App\Models\Course::find(session('course_id'));
 @endphp
