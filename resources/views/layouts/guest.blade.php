@@ -19,12 +19,14 @@
 <body>
 
 <div class="auth-wrapper"
-     style="background-image: url('{{ asset('assets/img/tps02.png') }}');">
+     style="background-image: url('{{ asset('assets/img/welcome.png') }}');">
 
     <!-- Logo -->
     <div class="logo">
         <a href="/">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="Logo">
+            <img src="{{ asset('assets/img/kilimanjaro.png') }}"   style="width: 120px; height: 120px; object-fit: contain; border-radius: 50%;
+        background: transparent;
+    " alt="Logo">
         </a>
     </div>
 
