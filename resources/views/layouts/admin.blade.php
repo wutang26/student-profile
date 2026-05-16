@@ -15,12 +15,16 @@
 
 <body>
 
+<button class="mobile-toggle" id="mobileToggle">
+    <i class="bi bi-list"></i>
+</button>
+
 <div class="layout">
 
     <!-- SIDEBAR -->
  <aside class="sidebar">
     <div class="sidebar-title">
-        Admin Panel
+        C.R.M.S Panel     <!--Company Resource Management Systerm-->
     </div>
 
     <nav class="menu">
@@ -223,6 +227,14 @@ document.addEventListener('DOMContentLoaded', function () {
         userDropdown.classList.toggle('show');
     });
 
+});
+
+// MOBILE SIDEBAR
+const mobileToggle = document.getElementById('mobileToggle');
+const sidebar = document.querySelector('.sidebar');
+
+mobileToggle.addEventListener('click', function () {
+    sidebar.classList.toggle('show');
 });
 </script>
 

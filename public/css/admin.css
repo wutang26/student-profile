@@ -23,6 +23,15 @@ body {
 /* =========================
    SIDEBAR (PROFESSIONAL FIX)
 ========================= */
+/* .sidebar {
+    width: 260px;
+    background: linear-gradient(180deg, #1d4ed8, #06b6d4);
+    color: white;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+} */
+
 .sidebar {
     width: 260px;
     background: linear-gradient(180deg, #1d4ed8, #06b6d4);
@@ -30,6 +39,14 @@ body {
     padding: 20px 15px;
     display: flex;
     flex-direction: column;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: 0.3s ease;
 }
 
 .sidebar-title {
@@ -121,15 +138,33 @@ body {
 /* =========================
    MAIN AREA
 ========================= */
+/* .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+} */
+
 .main {
     flex: 1;
     display: flex;
     flex-direction: column;
+
+    margin-left: 260px;
+    width: calc(100% - 260px);
 }
 
 /* =========================
    NAVBAR
 ========================= */
+/* .navbar {
+    background: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+} */
+
 .navbar {
     background: white;
     padding: 15px 20px;
@@ -137,6 +172,10 @@ body {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+    position: sticky;
+    top: 0;
+    z-index: 900;
 }
 
 /* =========================
@@ -517,4 +556,59 @@ body {
 .small-text {
     font-size: 12px;
     color: #64748b;
+}
+
+/*  Added at the very bottom */
+/* =========================
+   MOBILE MENU BUTTON
+========================= */
+.mobile-toggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    background: #1d4ed8;
+    color: white;
+    font-size: 22px;
+    z-index: 1200;
+    cursor: pointer;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 992px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+
+    .navbar {
+        padding-left: 70px;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
 }
