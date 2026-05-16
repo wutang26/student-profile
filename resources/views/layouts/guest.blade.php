@@ -19,7 +19,7 @@
 <body>
 
 <div class="auth-wrapper"
-     style="background-image: url('{{ asset('assets/img/welcome.png') }}');">
+     style="background-image: url('{{ asset('assets/img/kuruta.png') }}');">
 
     <!-- Logo -->
     <div class="logo">
