@@ -93,13 +93,64 @@ input:focus{
     border-radius:10px;
     border:1px solid #a7f3d0;
 }
+
+/* HEADER FLEX (NEW) */
+.header-flex{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+/* TEXT AREA */
+.header-text{
+    flex:1;
+}
+
+/* AVATAR WRAPPER */
+.header-avatar{
+    flex-shrink:0;
+}
+
+/* PROFILE IMAGE */
+.avatar{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #e5e7eb;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* MOBILE RESPONSIVE */
+@media(max-width:600px){
+    .header-flex{
+        align-items:flex-start;
+    }
+
+    .avatar{
+        width:42px;
+        height:42px;
+    }
+}
 </style>
 
-<div class="section-header">
-    <div class="section-title">Update Password</div>
-    <div class="section-subtitle">
-        Use a strong, random password to keep your account secure.
+<div class="section-header header-flex">
+
+    <div class="header-text">
+        <div class="section-title">Update Password</div>
+        <div class="section-subtitle">
+            Use a strong, random password to keep your account secure.
+        </div>
     </div>
+
+    <div class="header-avatar">
+        <img src="{{ Auth::user()->profile_photo
+            ? asset(Auth::user()->profile_photo)
+            : asset('images/default-avatar.png') }}"
+            class="avatar">
+    </div>
+
 </div>
 
 <form method="post" action="{{ route('password.update') }}">

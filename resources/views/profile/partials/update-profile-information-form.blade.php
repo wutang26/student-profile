@@ -164,6 +164,44 @@ input:focus{
     color:#4338ca;
     font-weight:600;
 }
+
+.header-flex{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:28px;
+    gap:15px;
+}
+
+.header-text{
+    flex:1;
+}
+
+.header-avatar{
+    flex-shrink:0;
+}
+
+.avatar{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #e5e7eb;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* MOBILE RESPONSIVE */
+@media(max-width:600px){
+    .header-flex{
+        flex-direction:row;
+        align-items:flex-start;
+    }
+
+    .avatar{
+        width:45px;
+        height:45px;
+    }
+}
 </style>
 
 <div class="page-wrapper">
@@ -171,10 +209,22 @@ input:focus{
     <div class="card">
 
         <!-- HEADER -->
-        <div class="header">
-            <div class="title">Profile Information</div>
-            <div class="subtitle">Manage your account details and email settings</div>
-        </div>
+        <!-- HEADER -->
+<div class="header header-flex">
+
+    <div class="header-text">
+        <div class="title">Profile Information</div>
+        <div class="subtitle">Manage your account details and email settings</div>
+    </div>
+
+    <div class="header-avatar">
+        <img src="{{ Auth::user()->profile_photo
+            ? asset(Auth::user()->profile_photo)
+            : asset('images/default-avatar.png') }}"
+            class="avatar">
+    </div>
+
+</div>
 
         <!-- SUCCESS -->
         @if(session('status') === 'profile-updated')

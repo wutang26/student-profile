@@ -106,6 +106,8 @@
             <div class="badge">Settings</div>
         </div>
 
+        
+
         <!-- HEADER -->
         <div class="header">
             <div class="title">Profile Settings</div>

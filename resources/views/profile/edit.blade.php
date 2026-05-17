@@ -57,8 +57,10 @@
 
 <div class="page-wrap">
 
+<!-----Rember all pages are inside partials--->
     <div class="container">
 
+   
         <!-- HEADER -->
         <div class="page-title">Profile Settings</div>
         <div class="page-subtitle">
