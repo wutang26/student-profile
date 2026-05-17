@@ -29,7 +29,7 @@
     <!-- SIDEBAR -->
  <aside class="sidebar">
     <div class="sidebar-title">
-        Company Management Portal   <!--Company Resource Management Systerm-->
+        Company Mng Portal   <!--Company Resource Management Systerm-->
     </div>
 
     <nav class="menu">
