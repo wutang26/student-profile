@@ -6,51 +6,71 @@
 <title>Students Dashboard</title>
 
 <style>
-/* ===== GLOBAL ===== */
-body{
-    margin:0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-    color:#1f2937;
+/* =========================
+   ROOT DESIGN SYSTEM
+========================= */
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --accent:#06b6d4;
+    --bg:#f1f5f9;
+    --card:#ffffff;
+    --text:#1f2937;
+    --muted:#64748b;
+    --shadow:0 10px 25px rgba(0,0,0,0.06);
 }
 
-/* ===== CONTAINER ===== */
+/* =========================
+   GLOBAL
+========================= */
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* =========================
+   CONTAINER
+========================= */
 .container{
     max-width:1150px;
     margin:auto;
     padding:30px;
 }
 
-/* ===== HEADER ===== */
+/* =========================
+   HEADER
+========================= */
 .title{
-    font-size:30px;
+    font-size:28px;
     font-weight:800;
-    letter-spacing:-0.5px;
 }
 
 .subtitle{
     font-size:13px;
-    color:#64748b;
-    margin-top:4px;
+    color:var(--muted);
     margin-bottom:25px;
 }
 
-/* ===== TOTAL CARD ===== */
+/* =========================
+   TOTAL CARD
+========================= */
 .total{
-    background: linear-gradient(135deg, #2563eb, #06b6d4);
+    background: linear-gradient(135deg, var(--primary), var(--accent));
     color:white;
-    padding:22px 25px;
-    border-radius:18px;
-    font-size:18px;
+    padding:20px;
+    border-radius:16px;
     font-weight:700;
-    margin-bottom:25px;
-    box-shadow:0 12px 30px rgba(37,99,235,0.25);
     display:flex;
     justify-content:space-between;
-    align-items:center;
+    box-shadow:0 12px 30px rgba(37,99,235,0.25);
+    margin-bottom:25px;
 }
 
-/* ===== GRID ===== */
+/* =========================
+   GRID
+========================= */
 .grid{
     display:grid;
     grid-template-columns: repeat(4, 1fr);
@@ -58,17 +78,24 @@ body{
     margin-bottom:25px;
 }
 
-/* ===== CARDS ===== */
+/* =========================
+   CARD (MODERN GLASS STYLE)
+========================= */
 .card{
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
     border:1px solid rgba(226,232,240,0.8);
-    border-radius:18px;
-    padding:22px;
+    border-radius:16px;
+    padding:20px;
     text-align:center;
-    box-shadow:0 8px 20px rgba(0,0,0,0.05);
-    transition:0.25s ease;
+    box-shadow: var(--shadow);
+    transition:0.25s;
     position:relative;
-    overflow:hidden;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 40px rgba(0,0,0,0.12);
 }
 
 .card::before{
@@ -77,46 +104,46 @@ body{
     top:0;
     left:0;
     width:100%;
-    height:4px;
-    background: linear-gradient(90deg, #3b82f6, #06b6d4);
+    height:3px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius:16px 16px 0 0;
 }
 
-.card:hover{
-    transform: translateY(-6px);
-    box-shadow:0 15px 35px rgba(0,0,0,0.10);
-}
-
-/* COMPANY */
+/* =========================
+   TEXT INSIDE CARD
+========================= */
 .company{
-    font-size:13px;
+    font-size:12px;
+    color:var(--muted);
     font-weight:700;
-    color:#64748b;
-    margin-bottom:10px;
-    letter-spacing:0.5px;
+    margin-bottom:8px;
 }
 
-/* COUNT */
 .count{
-    font-size:34px;
+    font-size:32px;
     font-weight:900;
-    color:#1d4ed8;
+    color:var(--primary-dark);
 }
 
-/* ===== CHART ===== */
+/* =========================
+   CHART BOX
+========================= */
 .chart-box{
-    background:#fff;
-    border-radius:18px;
+    background: var(--card);
+    border-radius:16px;
     padding:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+    box-shadow: var(--shadow);
 }
 
-/* ===== RESPONSIVE ===== */
+/* =========================
+   RESPONSIVE
+========================= */
 @media(max-width:900px){
     .grid{grid-template-columns: repeat(2,1fr);}
 }
 
 @media(max-width:500px){
-    .grid{grid-template-columns: 1fr;}
+    .grid{grid-template-columns:1fr;}
 }
 </style>
 </head>

@@ -122,4 +122,108 @@
 
 </div>
 
+<style>
+    /* =========================
+   BADGE WRAPPER (PERMISSIONS)
+========================= */
+.badge-wrap{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* individual permission badge */
+.badge{
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+}
+
+/* muted text */
+.text-muted{
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+/* =========================
+   STATUS BADGE IMPROVEMENT
+========================= */
+.status{
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ACTIVE */
+.status.active{
+    background: #dcfce7;
+    color: #166534;
+}
+
+/* INACTIVE */
+.status.inactive{
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* PENDING (optional if used) */
+.status.pending{
+    background: #fef9c3;
+    color: #92400e;
+}
+
+/* =========================
+   ACTION COLUMN FIX
+========================= */
+.inline-form{
+    display: inline;
+}
+
+/* spacing between edit/delete */
+.table td:last-child{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* =========================
+   CARD GRID FIX (optional polish)
+========================= */
+.card-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.btn-edit{
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px){
+    .card-grid{
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 @endsection

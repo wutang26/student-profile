@@ -172,9 +172,9 @@
 
             <div class="user-menu">
                 <button id="user-menu-button" class="user-btn">
-                    <img src="{{ Auth::user()->profile_photo_url }}" class="avatar">
+                  <img src="{{ Auth::user()->profile_photo ? asset(Auth::user()->profile_photo) : asset('images/default-avatar.png') }}" class="avatar">
                     <span>{{ Auth::user()->name }}</span>
-                    <i class="bi bi-chevron-down"></i>
+                    <span class="dropdown-arrow">▼</span>
                 </button>
 
                 <div id="user-menu-dropdown" class="user-dropdown hidden">

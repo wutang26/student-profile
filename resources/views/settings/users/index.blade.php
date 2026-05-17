@@ -14,17 +14,17 @@
 <div class="card-grid">
 
     <div class="card">
+        <h2>Available Users</h2>
+        <p>{{ $users->count() }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Active Users</h2>
+        <p>{{ $users->count() }}</p>
+    </div>
+
+    <div class="card">
         <h2>Total Users</h2>
-        <p>{{ $users->count() }}</p>
-    </div>
-
-    <div class="card">
-        <h2>Active Loans</h2>
-        <p>{{ $users->count() }}</p>
-    </div>
-
-    <div class="card">
-        <h2>Total Disbursed</h2>
         <p>{{ $users->count() }}</p>
     </div>
 
@@ -137,5 +137,69 @@
     </table>
 
 </div>
+
+<style>
+        /* =========================
+   ACTION COLUMN LAYOUT
+========================= */
+.action-col{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+/* =========================
+   EDIT BUTTON (CLEAN BLUE)
+========================= */
+.btn-edit{
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease;
+    box-shadow: 0 2px 6px rgba(29, 78, 216, 0.2);
+}
+
+.btn-edit:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
+}
+
+/* =========================
+   DELETE BUTTON (DANGER RED)
+========================= */
+.btn-delete{
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-delete:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+/* =========================
+   INLINE FORM FIX
+========================= */
+.inline-form{
+    display: inline;
+}
+</style>
 
 @endsection

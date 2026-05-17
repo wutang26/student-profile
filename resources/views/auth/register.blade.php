@@ -1,6 +1,6 @@
 <x-guest-layout>
 
-    <form method="POST" action="{{ route('register') }}" class="auth-form">
+    <form method="POST" action="{{ route('register') }}" class="auth-form" enctype="multipart/form-data">
         @csrf
 
         <!-- Name -->
@@ -28,6 +28,19 @@
             @error('email')
                 <div class="error">{{ $message }}</div>
             @enderror
+        </div>
+
+         <div class="form-group">
+            <label for="profile_photo">Profile Picture</label>
+            <input id="name"
+                   type="file"
+                   name="profile_photo"
+                   value="{{ old('profile_photo') }}" class="form-control" accept="image/*"
+                   required
+                   autofocus>
+          @error('profile_photo')
+            <div class="error">{{ $message }}</div>
+        @enderror
         </div>
 
         <!-- Password -->

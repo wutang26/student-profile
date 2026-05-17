@@ -115,5 +115,119 @@
     </table>
 
 </div>
+<style>
+        /* =========================
+   SUMMARY CARD GRID FIX
+========================= */
+.card-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
 
+/* =========================
+   STATUS BADGES
+========================= */
+.status{
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ACTIVE */
+.status.active{
+    background: #dcfce7;
+    color: #166534;
+}
+
+/* INACTIVE / OTHERS */
+.status.inactive,
+.status.pending,
+.status.other{
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* =========================
+   ACTION COLUMN FIX
+========================= */
+.action-col{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+/* INLINE FORM */
+.inline-form{
+    display: inline;
+}
+
+/* =========================
+   BUTTON POLISH (EDIT / DELETE ALIGNMENT)
+========================= */
+.btn-delete{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-edit{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s ease;
+
+    /* SAME STYLE SYSTEM AS DELETE */
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(29, 78, 216, 0.25);
+}
+
+/* =========================
+   TABLE IMPROVEMENT (SMOOTH LOOK)
+========================= */
+.table-wrapper{
+    overflow-x: auto;
+}
+
+/* hover effect improvement */
+.table tbody tr:hover{
+    background: #f8fafc;
+    transition: 0.2s;
+}
+
+/* =========================
+   CARD STYLING CONSISTENCY
+========================= */
+.card{
+    background: #fff;
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid #eef2f7;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+}
+
+/* =========================
+   RESPONSIVE FIX
+========================= */
+@media (max-width: 768px){
+    .card-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .action-col{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+</style>
 @endsection

@@ -97,4 +97,99 @@
 
 </div>
 
+<style>
+    /* =========================
+   BACK LINK
+========================= */
+.back-link{
+    margin-bottom: 15px;
+}
+
+.back-link a{
+    text-decoration: none;
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.back-link a:hover{
+    text-decoration: underline;
+}
+
+/* =========================
+   FORM TITLE
+========================= */
+.form-title{
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #0f172a;
+}
+
+/* =========================
+   FORM GRID
+========================= */
+.form-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 15px;
+}
+
+/* =========================
+   FORM GROUP
+========================= */
+.form-group{
+    display: flex;
+    flex-direction: column;
+}
+
+/* LABEL */
+.form-group label{
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #334155;
+}
+
+/* INPUTS */
+.form-group input,
+.form-group select{
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+    background: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+.section-title{
+    font-size: 16px;
+    font-weight: 700;
+    margin: 20px 0 10px;
+    color: #1e293b;
+    border-left: 4px solid #2563eb;
+    padding-left: 10px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px){
+    .form-grid{
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
 @endsection

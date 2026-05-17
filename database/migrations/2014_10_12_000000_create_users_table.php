@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('usertype')->default('user');
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('profile_photo')->nullable();
             $table->enum('status', ['active', 'inactive', 'pending'])->default('pending');
             $table->string('password');
             $table->rememberToken();
