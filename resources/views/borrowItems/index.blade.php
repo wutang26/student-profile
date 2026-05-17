@@ -1,87 +1,123 @@
 @extends('layouts.admin')
 
 @section('content')
+
 <style>
+/* PAGE WRAPPER */
+.page-wrap {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* HEADER */
 .header-flex {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-    background: linear-gradient(135deg, #ffffff, #f9fafb);
-    padding: 18px 20px;
+    gap: 20px;
+    background: linear-gradient(135deg, #fff, #f9fafb);
+    padding: 18px;
     border-radius: 14px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.06);
     border: 1px solid #f1f1f1;
 }
 
-/* TITLE */
 .header-flex h4 {
-    font-weight: 700;
+    margin: 0;
+    font-size: 18px;
     color: #1f2937;
 }
 
-/* SEARCH BOX */
+/* SEARCH */
 .search-box {
-    margin-top: 12px;
     display: flex;
-    gap: 10px;
+    gap: 8px;
+    margin-top: 10px;
 }
 
 .search-box input {
-    border-radius: 10px;
+    padding: 10px;
     border: 1px solid #e5e7eb;
-    padding: 10px 12px;
-    transition: 0.2s;
-    box-shadow: none;
+    border-radius: 10px;
+    width: 260px;
+    outline: none;
 }
 
 .search-box input:focus {
     border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
 }
 
-/* RIGHT BUTTONS */
+/* BUTTONS */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    gap: 6px;
+}
+
+/* COLORS */
+.btn-primary { background: #3b82f6; color: #fff; }
+.btn-success { background: #16a34a; color: #fff; }
+.btn-warning { background: #f59e0b; color: #fff; }
+
+/* HEADER ACTIONS */
 .header-actions {
     display: flex;
-    gap: 12px;
+    gap: 10px;
+    align-items: start;
 }
 
-/* MODERN BUTTON BASE */
-.header-actions .btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+/* CARD */
+.card {
+    background: #fff;
+    margin-top: 15px;
     border-radius: 12px;
-    font-weight: 600;
-    padding: 10px 14px;
-    transition: 0.25s ease;
-    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-/* RECEIVE BUTTON (GREEN GRADIENT) */
-.btn-receive {
-    background: linear-gradient(135deg, #16a34a, #22c55e);
-    color: white;
-    box-shadow: 0 4px 12px rgba(34,197,94,0.25);
+.card-body {
+    padding: 15px;
 }
 
-.btn-receive:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(34,197,94,0.35);
+/* TABLE */
+.table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-/* BORROW BUTTON (BLUE GRADIENT) */
-.btn-borrow {
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
-    color: white;
-    box-shadow: 0 4px 12px rgba(59,130,246,0.25);
-    text-decoration:none;
+.table th {
+    background: #f1f5f9;
+    padding: 12px;
+    text-align: left;
+    font-size: 13px;
+    color: #334155;
 }
 
-.btn-borrow:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(59,130,246,0.35);
+.table td {
+    padding: 12px;
+    border-top: 1px solid #e2e8f0;
+    font-size: 14px;
 }
+
+.table tr:hover {
+    background: #f9fafb;
+}
+
+/* BADGE */
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #fff;
+}
+
+.badge-success { background: #16a34a; }
+.badge-warning { background: #f59e0b; }
 
 /* RECEIVE MODE */
 .receive-col {
@@ -92,69 +128,66 @@
     display: table-cell;
 }
 
-/* BULK ACTION */
+/* BULK ACTIONS */
 #bulkActions {
     display: none;
+    justify-content: flex-end;
+    margin-top: 12px;
 }
 
 .receive-active #bulkActions {
     display: flex;
 }
 
-/* TABLE HOVER */
-table tbody tr:hover {
-    background: #f9fafb;
+/* CHECKBOX */
+input[type="checkbox"] {
+    transform: scale(1.1);
 }
 </style>
 
-<div class="container-fluid">
+<div class="page-wrap">
 
     <!-- HEADER -->
-    <div class="header-flex mb-3">
+    <div class="header-flex">
 
-        <!-- LEFT -->
         <div>
-            <h4 class="mb-0">📋 Borrowed Items</h4>
-            <small class="text-muted">Manage and track borrowed store items</small>
+            <h4>📋 Borrowed Items</h4>
+            <small>Manage and track borrowed store items</small>
 
-            <!-- SEARCH -->
             <form method="GET" action="{{ route('borrowItems.index') }}" class="search-box">
-                <input type="text" name="search" class="form-control"
+                <input type="text" name="search"
                        placeholder="Search borrower, item, company..."
                        value="{{ request('search') }}">
-               <button class="btn btn-primary" style="border-radius:10px;">
-                <i class="bi bi-search"></i>
-            </button>
+
+                <button class="btn btn-primary">🔍</button>
             </form>
         </div>
 
-        <!-- RIGHT -->
         <div class="header-actions">
 
-@can('view students')
-    <button type="button" id="toggleReceive" class="btn btn-receive">
-        <i class="bi bi-arrow-down-circle"></i>
-        Receive Items
-    </button>
-@endcan
+            @can('view students')
+            <button type="button" id="toggleReceive" class="btn btn-success">
+                📥 Receive Items
+            </button>
+            @endcan
 
-    <a href="{{ route('borrowItems.create') }}" class="btn btn-borrow">
-        <i class="bi bi-plus-circle"></i>
-        Borrow Form
-    </a>
+            <a href="{{ route('borrowItems.create') }}" class="btn btn-primary">
+                ➕ Borrow Form
+            </a>
 
-</div>
+        </div>
 
     </div>
 
-    <!-- BULK FORM -->
+    <!-- TABLE CARD -->
     <form method="POST" action="{{ route('borrowItems.bulkReturn') }}" id="receiveForm">
         @csrf
 
-        <div class="card shadow-sm">
+        <div class="card">
             <div class="card-body">
 
-                <table class="table table-hover align-middle">
+                <table class="table">
+
                     <thead>
                         <tr>
                             <th class="receive-col">
@@ -162,18 +195,18 @@ table tbody tr:hover {
                             </th>
                             <th>Force No</th>
                             <th>Borrower</th>
-                            <th>Item(s) Name</th>
+                            <th>Item</th>
                             <th>Qty</th>
                             <th>Company</th>
                             <th>Date</th>
                             <th>Status</th>
-                            <!-- <th>Returned</th>   //Make this visible once user click receive button -->
                         </tr>
                     </thead>
 
                     <tbody>
                         @foreach($borrows as $b)
                         <tr>
+
                             <td class="receive-col">
                                 @if($b->status != 'returned')
                                     <input type="checkbox" name="ids[]" value="{{ $b->id }}">
@@ -189,21 +222,21 @@ table tbody tr:hover {
 
                             <td>
                                 @if($b->status == 'returned')
-                                    <span class="badge bg-success">Returned</span>
+                                    <span class="badge badge-success">Returned</span>
                                 @else
-                                    <span class="badge bg-warning">Borrowed</span>
+                                    <span class="badge badge-warning">Borrowed</span>
                                 @endif
                             </td>
+
                         </tr>
                         @endforeach
                     </tbody>
 
                 </table>
 
-                <!-- BULK ACTION -->
-                <div id="bulkActions" class="justify-content-end mt-3">
+                <div id="bulkActions">
                     <button class="btn btn-success">
-                        <i class="bi bi-check-circle"></i> Mark Selected as Returned
+                        ✔ Mark Selected as Returned
                     </button>
                 </div>
 
@@ -215,22 +248,17 @@ table tbody tr:hover {
 </div>
 
 <script>
-// TOGGLE RECEIVE MODE
 let receiveMode = false;
 
 document.getElementById('toggleReceive').addEventListener('click', function () {
-
     receiveMode = !receiveMode;
-
     document.body.classList.toggle('receive-active');
 
-    // change button text
     this.innerHTML = receiveMode
-        ? '<i class="bi bi-x-circle"></i> Cancel Receive'
-        : '<i class="bi bi-arrow-down-circle"></i> Receive Items';
+        ? '❌ Cancel Receive'
+        : '📥 Receive Items';
 });
 
-// SELECT ALL
 function toggleAll(source) {
     let checkboxes = document.querySelectorAll('input[name="ids[]"]');
     checkboxes.forEach(cb => cb.checked = source.checked);

@@ -8,9 +8,14 @@
 
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!--- Offline Bootstrap --->
+
+    <link href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
 </head>
 
 <body>
@@ -31,23 +36,23 @@
 
         <!-- DASHBOARD -->
         <a href="{{ route('dashboard') }}" class="menu-item">
-            <i class="bi bi-speedometer2"></i> Dashboard
+           <span class="menu-icon">📊</span>Dashboard
         </a>
 
         <!-- ================= STUDENTS ================= -->
         <div class="menu-group">
             <button class="menu-toggle">
-                <span><i class="bi bi-people"></i> Students</span>
-                <i class="bi bi-chevron-down icon"></i>
+                <span><span class="menu-icon">🎓</span>Students</span>
+                <span class="dropdown-arrow">▼</span>
             </button>
 
             <div class="menu-content">
             <a href="{{ route('students.index') }}" class="menu-item small">
-                <i class="bi bi-mortarboard"></i> All Students
+              <span class="menu-icon">✍️</span> All Students
             </a>
 
             <a href="{{ route('students.documents.index') }}" class="menu-item small">
-                <i class="bi bi-paperclip"></i> Attachments
+                <span class="menu-icon">📎</span>Attachments
             </a>
             </div>
         </div>
@@ -55,13 +60,13 @@
         <!-- ================= STAFF ================= -->
         <div class="menu-group">
             <button class="menu-toggle">
-                <span><i class="bi bi-person-badge"></i> Staff</span>
-                <i class="bi bi-chevron-down icon"></i>
+                <span><span class="menu-icon">👮</span> Staff</span>
+                <span class="dropdown-arrow">▼</span>
             </button>
 
         <div class="menu-content">
               <a href="{{ route('staff.index') }}" class="menu-item small">
-                <i class="bi bi-person-badge"></i> All Staff
+                <span class="menu-icon">👔</span> All Staff
             </a>
          </div>
         </div>
@@ -69,21 +74,21 @@
         <!-- ================= STORE ================= -->
         <div class="menu-group">
             <button class="menu-toggle">
-                <span><i class="bi bi-boxes"></i> Store Management</span>
-                <i class="bi bi-chevron-down icon"></i>
+                <span><span class="menu-icon">📦</span>Store Management</span>
+                <span class="dropdown-arrow">▼</span>
             </button>
 
             <div class="menu-content">
               <a href="{{ route('storeItems.index') }}" class="menu-item small">
-            <i class="bi bi-box-seam"></i> Registered Items
+            <span class="menu-icon">🗃️</span> Registered Items
            </a>
 
             <a href="{{ route('borrowItems.index') }}" class="menu-item small">
-                <i class="bi bi-arrow-left-right"></i> Borrow Items
+            <span class="menu-icon">🔄</span> Borrow Items
             </a>
 
             <a href="{{ route('borrowItems.returned') }}" class="menu-item small">
-                <i class="bi bi-check2-circle"></i> Returned Items
+                <span class="menu-icon">✅</span>Returned Items
             </a>
             </div>
         </div>
@@ -91,21 +96,21 @@
         <!-- ================= REPORTS ================= -->
         <div class="menu-group">
             <button class="menu-toggle">
-                <span><i class="bi bi-bar-chart"></i> Reports</span>
-                <i class="bi bi-chevron-down icon"></i>
+                <span><span class="menu-icon">📑</span>Reports</span>
+                <span class="dropdown-arrow">▼</span>
             </button>
 
             <div class="menu-content">
                 <a href="{{ route('pdf.dismissedPreview') }}" class="menu-item small">
-                        <i class="bi bi-person-x"></i> Dismissed Students
+                        <span class="menu-icon">🚫</span> Dismissed Students
                     </a>
 
                     <a href="{{ route('pdf.returnedPreview') }}" class="menu-item small">
-                        <i class="bi bi-box-arrow-in-down-left"></i> Returned Items
+                        <span class="menu-icon">✅</span>Returned Items
                     </a>
 
                     <a href="{{ route('pdf.notReturned') }}" class="menu-item small">
-                        <i class="bi bi-exclamation-triangle"></i> Un Returned Items
+                      <span class="menu-icon">⚠️</span> Un Returned Items
                     </a>
             </div>
         </div>
@@ -114,37 +119,37 @@
         @can('manage users')
         <div class="menu-group">
             <button class="menu-toggle">
-                <span><i class="bi bi-gear"></i> Settings</span>
-                <i class="bi bi-chevron-down icon"></i>
+                <span><span class="menu-icon">⚙️</span>Settings</span>
+                <span class="dropdown-arrow">▼</span>
             </button>
 
             <div class="menu-content">
                <a href="{{ route('admin.audit.index') }}" class="menu-item small">
-                        <i class="bi bi-activity"></i> Audits
+                     <span class="menu-icon">📡</span> Audits
                     </a>
 
                     <a href="{{ route('courses.index') }}" class="menu-item small">
-                        <i class="bi bi-book"></i> Courses
+                       <span class="menu-icon">📖</span> Courses
                     </a>
 
                     <a href="{{ route('settings.users.index') }}" class="menu-item small">
-                        <i class="bi bi-people"></i> Users
+                       <span class="menu-icon">👥</span>Users
                     </a>
 
                     <a href="{{ route('settings.roles.index') }}" class="menu-item small">
-                        <i class="bi bi-shield-lock"></i> Roles
+                        <span class="menu-icon">🛡️</span>Roles
                     </a>
 
                     <a href="{{ route('settings.permissions.index') }}" class="menu-item small">
-                        <i class="bi bi-key"></i> Permissions
+                       <span class="menu-icon">🔑</span>Permissions
                     </a>
 
                     <a href="{{ route('settings.regions.region') }}" class="menu-item small">
-                        <i class="bi bi-geo-alt"></i> Regions
+                        <span class="menu-icon">📍</span>Regions
                     </a>
 
                     <a href="{{ route('settings.district') }}" class="menu-item small">
-                        <i class="bi bi-building"></i> Districts
+                        <span class="menu-icon">🏢</span>Districts
                     </a>
             </div>
         </div>
@@ -237,6 +242,11 @@ mobileToggle.addEventListener('click', function () {
     sidebar.classList.toggle('show');
 });
 </script>
+
+<script>
+console.log("Bootstrap Loaded:", typeof bootstrap !== 'undefined');
+</script>
+
 
 </body>
 </html>

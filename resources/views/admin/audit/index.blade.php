@@ -3,92 +3,76 @@
 @section('content')
 
 <style>
-/* =========================
-   PAGE HEADER
-========================= */
-.page-title {
-    font-size: 26px;
-    font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 18px;
-    letter-spacing: 0.3px;
+/* PAGE WRAPPER */
+.page-wrap {
+    padding: 20px;
+    font-family: Arial, sans-serif;
 }
 
-/* =========================
-   CARD WRAPPER
-========================= */
+/* TITLE */
+.page-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #0f172a;
+}
+
+/* CARD */
 .card {
-    background: #ffffff;
-    border-radius: 14px;
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(15,23,42,0.06);
     overflow: hidden;
     border: 1px solid #eef2f7;
 }
 
-/* =========================
-   TABLE WRAPPER
-========================= */
+/* TABLE */
 .table {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
-    color: #334155;
 }
 
-/* HEADER */
 .table thead {
     background: linear-gradient(90deg, #1d4ed8, #06b6d4);
-    color: white;
+    color: #fff;
 }
 
 .table th {
-    padding: 14px 16px;
+    padding: 14px;
     text-align: left;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 0.4px;
+    font-size: 12px;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-/* BODY */
 .table td {
-    padding: 14px 16px;
+    padding: 14px;
     border-bottom: 1px solid #eef2f7;
-    vertical-align: middle;
-}
-
-/* ROW HOVER */
-.table tbody tr {
-    transition: all 0.2s ease;
+    color: #334155;
 }
 
 .table tbody tr:hover {
     background: #f8fafc;
-    transform: scale(1.002);
 }
 
-/* =========================
-   BADGE STYLE (optional upgrade for actions)
-========================= */
+/* BADGE */
 .badge {
     display: inline-block;
     padding: 4px 10px;
     border-radius: 999px;
     font-size: 12px;
-    font-weight: 600;
     background: #e0f2fe;
     color: #0369a1;
 }
 
-/* =========================
-   PAGINATION
-========================= */
+/* PAGINATION (CUSTOM OFFLINE) */
 .pagination {
     margin-top: 18px;
     display: flex;
     justify-content: center;
-    gap: 6px;
     flex-wrap: wrap;
+    gap: 6px;
 }
 
 .pagination a,
@@ -97,14 +81,13 @@
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     text-decoration: none;
-    color: #0f172a;
     font-size: 13px;
+    color: #0f172a;
     background: #fff;
-    transition: 0.2s ease;
 }
 
 /* ACTIVE PAGE */
-.pagination .active {
+.pagination .active span {
     background: linear-gradient(90deg, #1d4ed8, #06b6d4);
     color: #fff;
     border: none;
@@ -114,40 +97,79 @@
 .pagination a:hover {
     background: #f1f5f9;
 }
+.table thead {
+    background: #1e3a8a; /* solid professional blue */
+}
+
+.table th {
+    padding: 14px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #ffffff;
+    border-right: 1px solid rgba(255,255,255,0.15);
+}
+
+/* last column cleaner */
+.table th:last-child {
+    border-right: none;
+}
+.table tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.table tbody tr:hover {
+    background: #e0f2fe;
+}
 </style>
 
-<h2 class="page-title">Audit Logs</h2>
+<div class="page-wrap">
 
-<div class="card">
+    <!-- TITLE -->
+    <h2 class="page-title">Audit Logs</h2>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Performed By</th>
-                <th>Action</th>
-                <th>Description</th>
-                <th>Time</th>
-            </tr>
-        </thead>
+    <!-- CARD -->
+    <div class="card">
 
-        <tbody>
-            @foreach($logs as $log)
+        <table class="table">
+
+            <thead>
                 <tr>
-                   <td>{{ $log->user->name ?? 'System' }}</td>
+                    <th>Performed By</th>
+                    <th>Action</th>
+                    <th>Description</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @forelse($logs as $log)
+                <tr>
+                    <td>{{ $log->user->name ?? 'System' }}</td>
                     <td>{{ $log->action }}</td>
                     <td>{{ $log->description }}</td>
                     <td>{{ $log->created_at->diffForHumans() }}</td>
                 </tr>
-            @endforeach
-        </tbody>
+                @empty
+                <tr>
+                    <td colspan="4" style="text-align:center; padding:20px; color:#94a3b8;">
+                        No audit logs found
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
 
-    </table>
+        </table>
 
-</div>
+    </div>
 
-<!-- PAGINATION -->
-<div class="pagination">
-    {{ $logs->links() }}
+    <!-- PAGINATION -->
+    <div class="pagination">
+        {{ $logs->links() }}
+    </div>
+
 </div>
 
 @endsection

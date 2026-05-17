@@ -611,4 +611,32 @@ body {
     .table-wrapper {
         overflow-x: auto;
     }
+
+
+    .menu-icon{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:22px;
+    margin-right:10px;
+    font-size:16px;
+}
+
+.menu-item,
+.menu-toggle span{
+    display:flex;
+    align-items:center;
+}
+
+.dropdown-arrow{
+    margin-left:auto;
+    transition:0.3s ease;
+    font-size:11px;
+    font-weight:bold;
+    color:#d1d5db;
+}
+
+.menu-group.open .dropdown-arrow{
+    transform:rotate(180deg);
+}
 }

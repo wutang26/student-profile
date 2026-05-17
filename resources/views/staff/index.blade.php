@@ -77,18 +77,41 @@
 .role-company_sergeant_major { background: #14b8a6; }
 
 /* ACTION BUTTONS */
-.actions a,
-.actions button {
-    border: none;
-    padding: 6px 8px;
-    margin-right: 5px;
-    border-radius: 6px;
-    cursor: pointer;
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.btn-view { background: #0ea5e9; color: white; }
-.btn-edit { background: #f59e0b; color: white; }
-.btn-delete { background: #ef4444; color: white; }
+/* reset default link styles */
+.actions a {
+    text-decoration: none;
+}
+
+/* unified button style */
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+}
+
+/* colors */
+.btn-view { background: #0ea5e9; }
+.btn-edit { background: #f59e0b; }
+.btn-delete { background: #ef4444; }
+
+/* remove default button styling */
+.actions button {
+    font: inherit;
+}
+
 
 /* EMPTY */
 .empty {
@@ -195,24 +218,30 @@
                     <small>{{ $staff->phone }}</small>
                 </td>
 
-                <td class="actions">
-                    <a href="{{ route('staff.show', $staff->id) }}" class="btn-view"><i class="bi bi-eye"></i></a>
+   <td class="actions">
 
-               @can('view students')
-                    <a href="{{ route('staff.edit', $staff->id) }}" class="btn-edit"><i class="bi bi-pencil"></i></a>
+    <a href="{{ route('staff.show', $staff->id) }}" class="btn-action btn-view">
+        👁
+    </a>
 
-         
-                <form action="{{ route('staff.destroy', $staff->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
+    @can('view students')
 
-                    <button type="submit" class="btn-delete"
-                        onclick="return confirm('Are you sure you want to delete this staff?')">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </form>
-            @endcan
-                </td>
+        <a href="{{ route('staff.edit', $staff->id) }}" class="btn-action btn-edit">
+            ✏
+        </a>
+
+        <form action="{{ route('staff.destroy', $staff->id) }}" method="POST" onsubmit="return confirm('Delete this staff?')">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" class="btn-action btn-delete">
+                🗑
+            </button>
+        </form>
+
+    @endcan
+
+</td>
             </tr>
             @empty
             <tr>

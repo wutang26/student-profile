@@ -41,8 +41,8 @@ public function boot()
         }
     });
 
-    //For Bootstrap Pagination
-       Paginator::useBootstrap();
+    // //For Bootstrap Pagination
+    Paginator::defaultView('pagination::simple-default');
 }
 
 

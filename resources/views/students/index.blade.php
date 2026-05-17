@@ -98,6 +98,123 @@
         margin-top:10px;
         box-shadow:0 2px 8px rgba(0,0,0,0.08);
     }
+
+    .dismiss-btn{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:6px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:13px;
+    transition:0.3s;
+}
+
+.dismiss-btn:hover{
+    background:#b91c1c;
+}
+
+/* MODAL BACKDROP */
+.custom-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    z-index:9999;
+    justify-content:center;
+    align-items:center;
+    padding:15px;
+}
+
+/* MODAL BOX */
+.custom-modal-content{
+    background:white;
+    width:100%;
+    max-width:450px;
+    border-radius:16px;
+    overflow:hidden;
+    animation:popup 0.25s ease;
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+}
+
+/* ANIMATION */
+@keyframes popup{
+    from{
+        opacity:0;
+        transform:scale(0.9);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* HEADER */
+.custom-modal-header{
+    background:#7f1d1d;
+    color:white;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.custom-modal-header h3{
+    margin:0;
+    font-size:18px;
+}
+
+/* BODY */
+.custom-modal-body{
+    padding:20px;
+}
+
+/* TEXTAREA */
+.custom-modal-body textarea{
+    width:100%;
+    min-height:100px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:10px;
+    resize:none;
+    font-size:14px;
+    margin-top:8px;
+}
+
+/* FOOTER */
+.custom-modal-footer{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    padding:15px 20px;
+    border-top:1px solid #eee;
+}
+
+/* BUTTONS */
+.modal-cancel{
+    background:#e5e7eb;
+    border:none;
+    padding:8px 14px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.modal-confirm{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.close-modal{
+    background:none;
+    border:none;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+}
 </style>
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
     
@@ -350,12 +467,11 @@
     @can('view students')
 
     <!-- DISMISS BUTTON -->
-    <button type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#dismissModal{{ $student->id }}"
-        style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:6px;">
-        Dismiss
-    </button>
+   <button type="button"
+        class="dismiss-btn"
+        onclick="openDismissModal('{{ $student->id }}')">
+    Dismiss
+</button>
 
     @endcan
 
@@ -364,56 +480,100 @@
 
 </td>
         </tr>
+<!-- CUSTOM MODAL -->
+<div class="custom-modal" id="dismissModal{{ $student->id }}">
 
-<div class="modal fade" id="dismissModal{{ $student->id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+    <div class="custom-modal-content">
 
-            <!-- HEADER -->
-            <div class="modal-header" style="background:#7f1d1d; color:white;">
-                <h5 class="modal-title">Dismiss Student</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <!-- HEADER -->
+        <div class="custom-modal-header">
+            <h3>Dismiss Student</h3>
+
+            <button type="button"
+                    class="close-modal"
+                    onclick="closeDismissModal('{{ $student->id }}')">
+                &times;
+            </button>
+        </div>
+
+        <!-- FORM -->
+        <form action="{{ route('students.dismiss', $student->id) }}"
+              method="POST">
+
+            @csrf
+            @method('PATCH')
+
+            <!-- BODY -->
+            <div class="custom-modal-body">
+
+                <p>
+                    You are dismissing:
+                    <strong>
+                        {{ $student->first_name }}
+                        {{ $student->last_name }}
+                    </strong>
+                </p> <br>
+
+                <label>
+                    Reason for dismissal
+                </label>
+
+                <textarea name="reason" required placeholder="Utovu wa Nidhamu"></textarea>
+
             </div>
 
-            <!-- FORM -->
-            <form action="{{ route('students.dismiss', $student->id) }}" method="POST">
-                @csrf
-                @method('PATCH')
+            <!-- FOOTER -->
+            <div class="custom-modal-footer">
 
-                <div class="modal-body">
+                <button type="button"
+                        class="modal-cancel"
+                        onclick="closeDismissModal('{{ $student->id }}')">
 
-                    <p>
-                        You are dismissing:
-                        <strong>{{ $student->first_name }} {{ $student->last_name }}</strong>
-                    </p>
+                    Cancel
+                </button>
 
-                    <div class="mb-3">
-                        <label class="form-label">Reason for dismissal</label>
-                        <textarea name="reason" class="form-control" required></textarea>
-                    </div>
+                <button type="submit"
+                        class="modal-confirm">
 
-                </div>
+                    Confirm Dismiss
+                </button>
 
-                <!-- FOOTER -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Cancel
-                    </button>
+            </div>
 
-                    <button type="submit" class="btn btn-danger">
-                        Confirm Dismiss
-                    </button>
-                </div>
+        </form>
 
-            </form>
-
-        </div>
     </div>
+
 </div>
 
         @endforeach
     </tbody>
 </table>
 </div>
+
+<script>
+
+function openDismissModal(id) {
+    document.getElementById('dismissModal' + id).style.display = 'flex';
+}
+
+function closeDismissModal(id) {
+    document.getElementById('dismissModal' + id).style.display = 'none';
+}
+
+/* CLOSE WHEN CLICKING OUTSIDE */
+window.onclick = function(event) {
+
+    document.querySelectorAll('.custom-modal').forEach(modal => {
+
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+
+    });
+
+}
+
+</script>
 
 @endsection

@@ -22,3 +22,23 @@ A web-based system for managing Students, repayments, and user roles.
 - Email: elonnim@outlook.com
 - Phone: 0746856656
 - We welcome any inquiries.
+
+
+##FIx Offline css not working to this pages
+dismissal student form do not work offline
+
+index of register items 
+
+audit
+
+register user
+
+
+edit user
+
+rgister role 
+
+edit role
+
+edit permission
+
