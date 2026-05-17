@@ -100,10 +100,15 @@ input:focus{
     <div class="card">
 
         <div class="title">Change Password</div>
-        <div class="subtitle">Update your password to keep your account secure</div>
+        <div class="subtitle">Update your password to keep your account secure
+            
+        </div>
 
         @if(session('status') === 'password-updated')
-            <div class="success">✔ Password updated successfully</div>
+            <div class="success">✔ Password updated successfully
+
+
+            </div>
         @endif
 
         <form method="POST" action="{{ route('password.change.update') }}">

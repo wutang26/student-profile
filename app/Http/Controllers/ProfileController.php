@@ -59,10 +59,4 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-     // Show profile page
-    // public function show()
-    // {
-    //     $members = Member::all();
-    //     return view('profile.show', compact('members'));
-    // }
 }
