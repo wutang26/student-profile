@@ -29,7 +29,7 @@
     <!-- SIDEBAR -->
  <aside class="sidebar">
     <div class="sidebar-title">
-        C.R.M.S Panel     <!--Company Resource Management Systerm-->
+        Company Management Portal   <!--Company Resource Management Systerm-->
     </div>
 
     <nav class="menu">
@@ -67,6 +67,9 @@
         <div class="menu-content">
               <a href="{{ route('staff.index') }}" class="menu-item small">
                 <span class="menu-icon">👔</span> All Staff
+            </a>
+             <a href="#" class="menu-item small">
+               <span class="menu-icon">🏛️</span> Organization Structure
             </a>
          </div>
         </div>
