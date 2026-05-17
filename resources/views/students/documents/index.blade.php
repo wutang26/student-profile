@@ -177,9 +177,9 @@
                 class="search-box"
             >
 
-            <button type="submit" class="btn-primary">
-                <i class="bi bi-search"></i>
-            </button>
+           <button type="submit" class="btn-primary">
+            Search
+        </button>
         </form>
     </div>
 

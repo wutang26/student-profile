@@ -20,17 +20,7 @@ body {
     min-height: 100vh;
 }
 
-/* =========================
-   SIDEBAR (PROFESSIONAL FIX)
-========================= */
-/* .sidebar {
-    width: 260px;
-    background: linear-gradient(180deg, #1d4ed8, #06b6d4);
-    color: white;
-    padding: 20px 15px;
-    display: flex;
-    flex-direction: column;
-} */
+
 
 .sidebar {
     width: 260px;
@@ -138,12 +128,6 @@ body {
 /* =========================
    MAIN AREA
 ========================= */
-/* .main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-} */
-
 .main {
     flex: 1;
     display: flex;
@@ -156,15 +140,6 @@ body {
 /* =========================
    NAVBAR
 ========================= */
-/* .navbar {
-    background: white;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-} */
-
 .navbar {
     background: white;
     padding: 15px 20px;
@@ -661,4 +636,5 @@ body {
     text-align: center;
     margin-bottom: 20px;
 }
+
 }

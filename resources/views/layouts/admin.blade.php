@@ -19,7 +19,7 @@
 <body>
 
 <button class="mobile-toggle" id="mobileToggle">
-    <i class="bi bi-list"></i>
+    ☰
 </button>
 
 <div class="layout">
